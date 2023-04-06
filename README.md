@@ -1,2 +1,2 @@
-# php-mariadb-ninja
-php and mariadb for ninja
+# php-ninja
+php for ninja
