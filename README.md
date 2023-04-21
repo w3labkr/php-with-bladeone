@@ -1,6 +1,6 @@
 # php-ninja
 
-php starter project skeleton
+The PHP Micro Framework.
 
 ## Table of Contents
 

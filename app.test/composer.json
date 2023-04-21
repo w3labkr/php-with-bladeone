@@ -1,5 +1,11 @@
 {
+    "name": "w3labkr/php-ninja",
+    "type": "project",
+    "description": "The PHP Micro Framework.",
+    "keywords": ["php", "framework", "micro"],
+    "license": "MIT",
     "require": {
+        "php": "^7.4|^8.0",
         "bramus/router": "~1.6",
         "catfan/medoo": "^2.1",
         "guzzlehttp/guzzle": "^7.5",
