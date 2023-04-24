@@ -2,8 +2,6 @@
 
 namespace App\Controllers;
 
-use \App\Helpers\Http;
-
 class Sign
 {
     public function index()
@@ -14,34 +12,26 @@ class Sign
 
     public function signin()
     {
-        // $data = new \App\Models\SignModel();
-        // $status = 200;
-
-        // $this->template->render_page('/sign/signin.php', [
-        //     'status' => $status,
-        //     'message' => Http::status_message($status),
-        //     'data' => $data->show_databases()
-        // ]);
-        echo 'signin';
+        echo view("sign.signin", array("variable1" => "value1"));
     }
 
     public function signout()
     {
-        // $this->template->render_page('/sign/signout.php');
+        echo view("sign.signout", array("variable1" => "value1"));
     }
 
     public function signup()
     {
-        // $this->template->render_page('/sign/signup.php');
+        echo view("sign.signup", array("variable1" => "value1"));
     }
 
     public function welcome()
     {
-        // $this->template->render_page('/sign/welcome.php');
+        echo view("sign.welcome", array("variable1" => "value1"));
     }
 
     public function farewell()
     {
-        // $this->template->render_page('/sign/farewell.php');
+        echo view("sign.farewell", array("variable1" => "value1"));
     }
 }

@@ -2,16 +2,16 @@
 
 namespace App\Controllers;
 
-class Api
+class Users
 {
     public function index()
     {
-        header('location: /api/v1');
+        header('location: /users');
         exit();
     }
 
     public function v1()
     {
-        echo view("api.v1.index", array("variable1" => "value1"));
+        echo view("users.index", array("variable1" => "value1"));
     }
 }

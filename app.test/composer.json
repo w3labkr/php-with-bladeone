@@ -5,11 +5,15 @@
     "keywords": ["php", "framework", "micro"],
     "license": "MIT",
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^8.0",
         "bramus/router": "~1.6",
         "catfan/medoo": "^2.1",
+        "eftec/bladeone": "^4.8",
+        "fakerphp/faker": "^1.21",
         "guzzlehttp/guzzle": "^7.5",
         "monolog/monolog": "^2.9",
+        "nesbot/carbon": "^2.66",
+        "peppeocchi/php-cron-scheduler": "^4.0",
         "phpmailer/phpmailer": "^6.8"
     },
     "config": {
@@ -19,7 +23,12 @@
 	},
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
-        }
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        },
+        "files": [
+            "app/helpers.php"
+        ]
     }
 }

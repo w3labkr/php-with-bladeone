@@ -8,6 +8,7 @@ The PHP Micro Framework.
   - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
     - [Laradock](#laradock)
+    - [PHP Version Change](#php-version-change)
     - [Recommended Package](#recommended-package)
   - [Useful Commands](#useful-commands)
     - [COMPOSER](#composer)
@@ -46,7 +47,7 @@ $ vi /c/Windows/System32/drivers/etc/hosts
 라라독 실행하기
 
 ```shell
-docker-compose up -d apache2 mysql phpmyadmin redis workspace
+docker-compose up -d apache2 mysql redis workspace
 ```
 
 의존성 패키지 설치하기
@@ -62,10 +63,28 @@ cd app.test && composer install
 브라우저 접속하기
 
 - URL: <http://app.test/>
-- phpMyAdmin: <http://app.test:8081>
-  - server : mysql
-  - username : root
-  - password : root
+
+### PHP Version Change
+
+Edit `.env` file
+
+```ini
+PHP_VERSION=
+```
+
+```shell
+docker-compose build php-fpm
+docker-compose build workspace
+```
+
+```shell
+docker-compose down
+docker-compose up -d apache2 mysql redis workspace
+```
+
+```php
+phpinfo();
+```
 
 ### Recommended Package
 
@@ -146,6 +165,34 @@ cd app.test && composer install
   composer require monolog/monolog
   ```
 
+- [eftec/bladeone](https://github.com/EFTEC/BladeOne)  
+  The standalone version Blade Template Engine without Laravel in a single php file and without dependencies
+
+  ```shell
+  composer require eftec/bladeone
+  ```
+
+- [mjaschen/phpgeo](https://github.com/mjaschen/phpgeo)  
+  Simple Yet Powerful Geo Library for PHP
+
+  ```shell
+  composer require mjaschen/phpgeo
+  ```
+
+- [cboden/Ratchet](https://github.com/ratchetphp/Ratchet)  
+  Asynchronous WebSocket server
+
+  ```shell
+  composer require cboden/ratchet
+  ```
+
+- [ratchet/pawl](https://github.com/ratchetphp/Pawl)  
+  Asynchronous WebSocket client
+
+  ```shell
+  composer require ratchet/pawl
+  ```
+
 ## Useful Commands
 
 ### COMPOSER
@@ -164,6 +211,12 @@ COMPOSER 업데이트
 
 ```shell
 composer clear-cache && composer update && composer dump-autoload
+```
+
+AUTOLOAD 업데이트
+
+```shell
+composer clear-cache && composer dump-autoload
 ```
 
 ### DOCKER
