@@ -150,6 +150,14 @@ phpinfo();
 
 ### Recommended Package
 
+```shell
+docker-compose exec --user=laradock workspace bash
+```
+
+```shell
+cd app.test
+```
+
 - [vlucas/phpdotenv](https://github.com/vlucas/phpdotenv)  
   Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.
 

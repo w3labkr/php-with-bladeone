@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * PHP Cron Scheduler
+ * 
+ * This is a framework agnostic cron jobs scheduler that can be easily integrated with your project or run as a standalone command scheduler.
+ * 
+ * @link https://github.com/peppeocchi/php-cron-scheduler
+ * 
+ * @license MIT License
+ */
+
 use GO\Scheduler;
 
 // Create a new scheduler

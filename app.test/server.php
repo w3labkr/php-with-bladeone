@@ -19,5 +19,5 @@ if (config('app.debug')) {
     ini_set('display_errors', 0);
 }
 
-// Sends your logs to files, sockets, inboxes, databases and various web services
-// require_once __DIR__ . '/app/ThirdParty/logger.php';
+// Monolog - Logging for PHP
+require_once __DIR__ . '/app/ThirdParty/logger.php';

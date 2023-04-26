@@ -1,4 +1,15 @@
 <?php
+
+/**
+ * PHPMailer – A full-featured email creation and transfer class for PHP
+ * 
+ * The classic email sending library for PHP
+ * 
+ * @link https://github.com/PHPMailer/PHPMailer
+ * 
+ * @license GNU Lesser General Public License v2.1
+ */
+
 //Import PHPMailer classes into the global namespace
 //These must be at the top of your script, not inside a function
 use PHPMailer\PHPMailer\PHPMailer;

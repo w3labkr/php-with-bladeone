@@ -1,7 +1,21 @@
 <?php
 
+/**
+ * Monolog - Logging for PHP
+ * 
+ * Monolog sends your logs to files, sockets, inboxes, databases and various web services.
+ * 
+ * @link https://github.com/Seldaek/monolog
+ * 
+ * @license MIT License
+ */
+
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+
+// create a log channel
+$log = new Logger('Application');
+$log->pushHandler(new StreamHandler(LOG_PATH . '/application.log', Logger::DEBUG));
 
 /**
  * Log Levels
@@ -15,9 +29,5 @@ use Monolog\Handler\StreamHandler;
  * EMERGENCY (600): Emergency: system is unusable.
  */
 
-// create a log channel
-$log = new Logger('App');
-$log->pushHandler(new StreamHandler(LOG_PATH . '/app.log', Logger::DEBUG));
-
 // add records to the log
-$log->info('My logger is now ready');
+$log->info('Logger is now ready');
