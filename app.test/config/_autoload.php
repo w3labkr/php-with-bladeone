@@ -9,8 +9,7 @@ spl_autoload_register(function($class) {
     
     $className = substr($class, strlen($namespace));
     $classPath = str_replace('\\', '/', $className) . '.php';
-
-    $filePath = APP_PATH .'/'. $classPath;
+    $filePath = dirname(__DIR__) .'/'. $classPath;
 
     if (file_exists($filePath)) {
         include $filePath;

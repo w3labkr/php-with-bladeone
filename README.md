@@ -150,6 +150,13 @@ phpinfo();
 
 ### Recommended Package
 
+- [vlucas/phpdotenv](https://github.com/vlucas/phpdotenv)  
+  Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.
+
+  ```shell
+  composer require vlucas/phpdotenv
+  ```
+
 - [bramus/router](https://github.com/bramus/router)  
   A lightweight and simple object oriented PHP Router
 

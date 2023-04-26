@@ -3,9 +3,9 @@
 if (!function_exists('env')) {
     function env(string $key, $default = null)
     {
-        $value = getenv($key);
+        $value = $_ENV[$key] ?? '';
 
-        if ($value === false) {
+        if ($value == false) {
             return $default;
         }
 

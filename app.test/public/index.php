@@ -7,7 +7,6 @@ require __DIR__ . '/../vendor/autoload.php';
 
 // bootstrap
 require_once __DIR__ . '/../server.php';
-require_once __DIR__ . '/../config/constants.php';
 
 // Create Router instance
 $router = new \Bramus\Router\Router();
