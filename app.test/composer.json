@@ -1,8 +1,8 @@
 {
     "name": "w3labkr/php-ninja",
     "type": "project",
-    "description": "The PHP Micro Framework.",
-    "keywords": ["php", "framework", "micro"],
+    "description": "PHP mvc pattern without framework",
+    "keywords": ["php", "mvc", "pattern", "without", "framework"],
     "license": "MIT",
     "require": {
         "php": "^8.0",
