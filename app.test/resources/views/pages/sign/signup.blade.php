@@ -21,7 +21,7 @@
 
             <div class="entry-content">
                 @php
-                $faker = Faker\Factory::create();
+                $faker = Faker\Factory::create('ko_KR');
                 $faker->seed(1234);
                 @endphp
 
@@ -29,15 +29,15 @@
                     <table>
                         <tr>
                             <td>Username:</td>
-                            <td><input type="text" name="username" value="<?= htmlspecialchars($faker->name()); ?>" placeholder="Username" /></td>
+                            <td><input type="text" name="username" value="<?= htmlentities($faker->name()); ?>" placeholder="Username" /></td>
                         </tr>
                         <tr>
                             <td>Email:</td>
-                            <td><input type="text" name="email" value="<?= htmlspecialchars($faker->unique()->safeEmail()); ?>" placeholder="Email" /></td>
+                            <td><input type="text" name="email" value="<?= htmlentities($faker->unique()->safeEmail()); ?>" placeholder="Email" /></td>
                         </tr>
                         <tr>
                             <td>Password:</td>
-                            <td><input type="password" name="password" value="<?= htmlspecialchars($faker->password(6,20)); ?>" placeholder="Password" /></td>
+                            <td><input type="password" name="password" value="<?= htmlentities($faker->password(6,20)); ?>" placeholder="Password" /></td>
                         </tr>
                         <tr>
                             <td>Confirm Password:</td>

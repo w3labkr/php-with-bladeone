@@ -4,6 +4,15 @@ namespace App\Models;
 
 class UserFaker extends Model
 {
+
+    public function test()
+    {
+        $faker = \Faker\Factory::create(config('app.faker_locale'));
+        $str = substr(str_replace('-', '', $faker->uuid()), 1, 20);
+
+        var_dump($str);
+    }
+
     public function createTable(): UserFaker
     {
         $this->_connect->exec(file_get_contents(SQL_PATH . '/createUserTable.sql'));

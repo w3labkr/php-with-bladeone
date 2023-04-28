@@ -3,61 +3,14 @@
 if (!function_exists('env')) {
     function env(string $key, $default = null)
     {
-        $value = $_ENV[$key] ?? '';
-
-        if ($value == false) {
-            return $default;
-        }
-
-        switch (strtolower($value)) {
-            case 'true':
-            case '(true)':
-                return true;
-
-            case 'false':
-            case '(false)':
-                return false;
-
-            case 'empty':
-            case '(empty)':
-                return '';
-
-            case 'null':
-            case '(null)':
-                return;
-        }
-
-        if (str_starts_with($value, '"') && str_ends_with($value, '"')) {
-            return substr($value, 1, -1);
-        }
-
-        return $value;
+        return \App\Helpers\Env::getenv($key, $default);
     }
 }
 
 if (!function_exists('config')) {
-    function config(string $string)
+    function config(string $string): string | array
     {
-        $lst = explode('.', $string);
-
-        $fileName = $lst[0];
-        $filePath = CONFIG_PATH . "/{$fileName}.php";
-
-        if (!file_exists($filePath)) {
-            return null;
-        }
-
-        array_shift($lst);
-
-        $deepArray = include $filePath;
-        $getArrayPath = function (array $array, array $initial) {
-            $callback = function (array $xs, $x) {
-                return (array_key_exists($x, $xs)) ? $xs[$x] : null;
-            };
-            return array_reduce($array, $callback, $initial);
-        };
-
-        return $getArrayPath($lst, $deepArray);
+        return \App\Helpers\Env::getconfig($string);
     }
 }
 
@@ -69,16 +22,23 @@ if (!function_exists('view')) {
     }
 }
 
-if (!function_exists('encrypt')) {
-    function encrypt()
+if (!function_exists('str_random')) {
+    function str_random(int $length = 10): string
     {
+        return \App\Helpers\Str::random($length);
+    }
+}
 
+if (!function_exists('encrypt')) {
+    function encrypt(string $data): string
+    {
+        return \App\Helpers\Crypt::encrypt($data);
     }
 }
 
 if (!function_exists('decrypt')) {
-    function decrypt()
+    function decrypt(string $data): string
     {
-        
+        return \App\Helpers\Crypt::decrypt($data);
     }
 }

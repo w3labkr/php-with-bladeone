@@ -120,6 +120,8 @@ return [
 
     'key' => env('APP_KEY'),
 
+    'salt' => env('APP_SALT'),
+
     'cipher' => 'AES-256-CBC',
 
     /*

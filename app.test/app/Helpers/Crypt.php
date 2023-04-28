@@ -4,34 +4,21 @@ namespace App\Helpers;
 
 class Crypt
 {
-   
-    public static function encrypt($str, $secret_key = 'secret key', $secret_iv = 'secret iv')
+    public static function encrypt(string $data): string
     {
-        $key = hash('sha256', $secret_key);
-        $iv = substr(hash('sha256', $secret_iv), 0, 32);
+        $passphrase = hash('sha256', config('app.key'));
+        $cipher_algo = config('app.cipher');
+        $iv = substr(hash('sha256', config('app.salt')), 0, 16);
 
-        return str_replace(
-            "=",
-            "",
-            base64_encode(
-                openssl_encrypt($str, "AES-256-CBC", $key, 0, $iv)
-            )
-        );
+        return base64_encode(openssl_encrypt($data, $cipher_algo, $passphrase, 0, $iv));
     }
 
-
-    public static function decrypt($str, $secret_key = 'secret key', $secret_iv = 'secret iv')
+    public static function decrypt(string $data): string
     {
-        $key = hash('sha256', $secret_key);
-        $iv = substr(hash('sha256', $secret_iv), 0, 32);
+        $passphrase = hash('sha256', config('app.key'));
+        $cipher_algo = config('app.cipher');
+        $iv = substr(hash('sha256', config('app.salt')), 0, 16);
 
-        return openssl_decrypt(
-            base64_decode($str),
-            "AES-256-CBC",
-            $key,
-            0,
-            $iv
-        );
+        return openssl_decrypt(base64_decode($data), $cipher_algo, $passphrase, 0, $iv);
     }
-
 }

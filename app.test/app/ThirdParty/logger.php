@@ -13,7 +13,7 @@
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
-// create a log channel
+// Create a log channel
 $log = new Logger('Application');
 $log->pushHandler(new StreamHandler(LOG_PATH . '/application.log', Logger::DEBUG));
 
@@ -29,5 +29,5 @@ $log->pushHandler(new StreamHandler(LOG_PATH . '/application.log', Logger::DEBUG
  * EMERGENCY (600): Emergency: system is unusable.
  */
 
-// add records to the log
+// Add records to the log
 $log->info('Logger is now ready');
