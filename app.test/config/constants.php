@@ -15,10 +15,19 @@ define('STORAGE_PATH', APP_BASE_PATH . '/storage');
 define('TEST_PATH', APP_BASE_PATH . '/tests');
 define('VENDOR_PATH', APP_BASE_PATH . '/vendor');
 
+// DATA_PATH
+define('SQL_PATH', DATA_PATH . '/sql');
+
 // RESOURCE_PATH
 define('LANGUAGE_PATH', RESOURCE_PATH . '/language');
 define('VIEW_PATH', RESOURCE_PATH . '/views');
 
 // STORAGE_PATH
-define('CACHE_PATH', STORAGE_PATH . '/cache');
 define('LOG_PATH', STORAGE_PATH . '/logs');
+define('FRAMEWORK_PATH', STORAGE_PATH . '/framework');
+
+// FRAMEWORK_PATH
+define('CACHE_PATH', FRAMEWORK_PATH . '/cache');
+define('SESSION_PATH', FRAMEWORK_PATH . '/sessions');
+define('TESTING_PATH', FRAMEWORK_PATH . '/testing');
+define('VIEW_CACHE_PATH', FRAMEWORK_PATH . '/views');

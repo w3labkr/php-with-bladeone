@@ -4,25 +4,21 @@ namespace App\Models;
 
 class Model
 {
-    protected $db;
+    protected $_connect;
 
     public function __construct()
     {
-        $this->connection();
+        try {
+            $config = config('database.connections.mysql');
+            $this->_connect = new \PDO("mysql:host={$config['host']};port={$config['port']};dbname={$config['database']};charset={$config['charset']}", $config['username'], $config['password']);
+            $this->_connect->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        } catch (\PDOException $e) {
+            throw $e;
+        }
     }
-    
-    public function connection() {
-        $config = config('database.connections.mysql');
 
-        $this->db = new \Medoo\Medoo([
-            'type' => 'mysql',
-            'host' => $config['host'],
-            'database' => $config['database'],
-            'username' => $config['username'],
-            'password' => $config['password'],
-            'charset' => $config['charset'],
-            'collation' => $config['collation'],
-            'port' => $config['port'],
-        ]);
+    public function __destruct()
+    {
+        $this->_connect = null;
     }
 }

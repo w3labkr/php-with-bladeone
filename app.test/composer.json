@@ -12,7 +12,6 @@
         "fakerphp/faker": "^1.21",
         "guzzlehttp/guzzle": "^7.5",
         "monolog/monolog": "^2.9",
-        "nesbot/carbon": "^2.66",
         "peppeocchi/php-cron-scheduler": "^4.0",
         "phpmailer/phpmailer": "^6.8",
         "vlucas/phpdotenv": "^5.5"

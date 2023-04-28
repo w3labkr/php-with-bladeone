@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "shufo.vscode-blade-formatter",
+        "editorconfig.editorconfig",
+        "mikestead.dotenv",
+        "cjhowe7.laravel-blade"
+    ]
+}

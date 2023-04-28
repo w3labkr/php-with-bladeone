@@ -16,7 +16,12 @@
 ###     mysql -u root -p < /docker-entrypoint-initdb.d/createdb.sql
 ###
 
-CREATE DATABASE IF NOT EXISTS `app` CHARACTER SET utf8mb4 COLLATE 'utf8mb4_unicode_ci' ;
-GRANT ALL ON `app`.* TO 'default'@'%' ;
+CREATE DATABASE IF NOT EXISTS `laradock` CHARACTER SET utf8mb4 COLLATE 'utf8mb4_unicode_ci' ;
+
+CREATE USER `laradock`@'localhost' IDENTIFIED BY 'secret' PASSWORD EXPIRE NEVER;
+GRANT ALL PRIVILEGES ON *.* TO `laradock`@'localhost';
+
+CREATE USER `laradock`@'%' IDENTIFIED BY 'secret' PASSWORD EXPIRE NEVER;
+GRANT ALL PRIVILEGES ON *.* TO `laradock`@'%';
 
 FLUSH PRIVILEGES;

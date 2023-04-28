@@ -9,8 +9,7 @@ return function (Router $router) {
 
     // Define routes
     $router->mount("/admin", function () use ($router) {
-        $router->get('/', function () {
-            echo 'Admin Page';
-        });
+        $router->get('/', '\App\Controllers\Admin@index');
+        $router->get('/dashboard', '\App\Controllers\Admin@dashboard');
     });
 };

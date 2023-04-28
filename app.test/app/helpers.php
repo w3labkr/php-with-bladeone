@@ -26,7 +26,7 @@ if (!function_exists('env')) {
             case '(null)':
                 return;
         }
-        
+
         if (str_starts_with($value, '"') && str_ends_with($value, '"')) {
             return substr($value, 1, -1);
         }
@@ -44,7 +44,7 @@ if (!function_exists('config')) {
         $filePath = CONFIG_PATH . "/{$fileName}.php";
 
         if (!file_exists($filePath)) {
-            return NULL;
+            return null;
         }
 
         array_shift($lst);
@@ -52,7 +52,7 @@ if (!function_exists('config')) {
         $deepArray = include $filePath;
         $getArrayPath = function (array $array, array $initial) {
             $callback = function (array $xs, $x) {
-                return (array_key_exists($x, $xs)) ? $xs[$x] : NULL;
+                return (array_key_exists($x, $xs)) ? $xs[$x] : null;
             };
             return array_reduce($array, $callback, $initial);
         };
@@ -64,7 +64,21 @@ if (!function_exists('config')) {
 if (!function_exists('view')) {
     function view(string $template, array $data = [])
     {
-        $blade = new \eftec\bladeone\BladeOne(VIEW_PATH, CACHE_PATH, \eftec\bladeone\BladeOne::MODE_DEBUG);
+        $blade = new \eftec\bladeone\BladeOne(VIEW_PATH, VIEW_CACHE_PATH, \eftec\bladeone\BladeOne::MODE_DEBUG);
         return $blade->run($template, $data);
+    }
+}
+
+if (!function_exists('encrypt')) {
+    function encrypt()
+    {
+
+    }
+}
+
+if (!function_exists('decrypt')) {
+    function decrypt()
+    {
+        
     }
 }

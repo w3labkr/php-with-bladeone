@@ -6,12 +6,12 @@ class Admin
 {
     public function index()
     {
-        header('location: /admin');
+        header('location: /admin/dashboard');
         exit();
     }
 
-    public function v1()
+    public function dashboard()
     {
-        echo view("admin.index", array("variable1" => "value1"));
+        echo view("pages.admin.dashboard");
     }
 }

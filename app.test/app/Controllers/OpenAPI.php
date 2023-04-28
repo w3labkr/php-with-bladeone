@@ -12,9 +12,10 @@ class OpenAPI
 
     public function v1()
     {
-        $model = new \App\Models\OpenAPI();
-        $data = $model->getDatabases();
-
-        echo view("openapi.v1.index", $data);
+        echo view("pages.openapi.v1.index", [
+            'state' => 'success',
+            'message' => 'message',
+            'data' => []
+        ]);
     }
 }
