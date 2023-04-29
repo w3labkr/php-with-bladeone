@@ -9,5 +9,5 @@ return function (Router $router) {
     });
 
     // Define routes
-    $router->get('/', '\App\Controllers\Home@index');
+    $router->get('/', '\App\Controllers\Home@get');
 };

@@ -1,18 +1,21 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Sign;
 
+use App\Controllers\Controller;
 use App\Interfaces\Controller as ControllerInterface;
 
-class Home extends Controller implements ControllerInterface
+class ResetPassword extends Controller implements ControllerInterface
 {
     public function get()
     {
-        echo $this->view('pages.home');
+        echo $this->view('pages.sign.reset-password');
     }
 
     public function post()
     {
+        header('location: /sign/signin');
+        exit;
     }
 
     public function put()

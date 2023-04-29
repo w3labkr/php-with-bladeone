@@ -15,7 +15,7 @@ return function (Router $router) {
             }
         });
 
-        $router->get('/', '\App\Controllers\OpenAPI@index');
-        $router->get('/v1', '\App\Controllers\OpenAPI@v1');
+        $router->get('/', '\App\Controllers\OpenAPI\Index@get');
+        $router->get('/v1', '\App\Controllers\OpenAPI\V1\Index@get');
     });
 };

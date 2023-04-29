@@ -1,7 +1,7 @@
 <?php
 
 if (!function_exists('env')) {
-    function env(string $key, $default = null)
+    function env(string $key, $default = null): string|bool|null
     {
         return \App\Helpers\Env::getenv($key, $default);
     }
@@ -11,15 +11,6 @@ if (!function_exists('config')) {
     function config(string $string): string|array
     {
         return \App\Helpers\Env::getconfig($string);
-    }
-}
-
-if (!function_exists('view')) {
-    function view(string $template, array $data = [])
-    {
-        $blade = new \eftec\bladeone\BladeOne(VIEW_PATH, VIEW_CACHE_PATH, \eftec\bladeone\BladeOne::MODE_DEBUG);
-
-        return $blade->run($template, $data);
     }
 }
 

@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Admin;
 
+use App\Controllers\Controller;
 use App\Interfaces\Controller as ControllerInterface;
 
-class Home extends Controller implements ControllerInterface
+class Dashboard extends Controller implements ControllerInterface
 {
     public function get()
     {
-        echo $this->view('pages.home');
+        echo $this->view('pages.admin.dashboard');
     }
 
     public function post()

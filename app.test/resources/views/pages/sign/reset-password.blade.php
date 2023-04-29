@@ -5,10 +5,10 @@
 @endpush
 
 @push('styles')
-<link rel="stylesheet" href="/assets/css/sign/signin.css" />
+{{-- <link rel="stylesheet" href="/assets/css/sign/style.css" /> --}}
 @endpush
 
-@section('title', 'Signin')
+@section('title', 'Reset password')
 @section('description', 'description')
 @section('keywords', 'keywords')
 
@@ -17,31 +17,30 @@
     <div class="container">
         <div class="wrap">
 
-            <h1 class="entry-title">Signin</h1>
+            <h1 class="entry-title">Reset password</h1>
+
+            <p class="entry-summary">
+                We have sent a password reset code by email to a***@g***. Enter it below to reset your password.
+            </p>
 
             <div class="entry-content">
-                <form method="POST" action="signin">
+                <form method="POST" action="reset-password">
                     <table>
                         <tr>
-                            <td>Username:</td>
-                            <td><input type="text" name="username" /></td>
+                            <td>Code:</td>
+                            <td><input type="text" name="code" /></td>
                         </tr>
                         <tr>
-                            <td>Password:</td>
+                            <td>New Password:</td>
                             <td><input type="password" name="password" /></td>
                         </tr>
                         <tr>
-                            <td><label><input type="checkbox" /> Remember Me</label></td>
-                            <td><a href="forgot-password">Forgot your password?</a></td>
+                            <td>Enter New Password Again:</td>
+                            <td><input type="password" /></td>
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <button type="submit">Sign in</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                Need an account? <a href="signup">Sign up</a>
+                                <button type="submit">Change Password</button>
                             </td>
                         </tr>
                     </table>
@@ -54,5 +53,5 @@
 @endsection
 
 @push('scripts')
-<script src="/assets/js/sign/signin.js"></script>
+{{-- <script src="/assets/js/sign/script.js"></script> --}}
 @endpush

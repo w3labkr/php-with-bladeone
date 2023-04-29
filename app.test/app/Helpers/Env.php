@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 class Env
 {
-    public static function getenv(string $key, $default = null)
+    public static function getenv(string $key, $default = null): string|bool|null
     {
         $value = $_ENV[$key] ?? '';
 
@@ -27,7 +27,7 @@ class Env
 
             case 'null':
             case '(null)':
-                return;
+                return null;
         }
 
         if (str_starts_with($value, '"') && str_ends_with($value, '"')) {

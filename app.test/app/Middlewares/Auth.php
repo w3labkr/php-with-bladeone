@@ -4,7 +4,7 @@ namespace App\Middlewares;
 
 class Auth
 {
-    public function isSignIn()
+    public function isSignin()
     {
         if (!isset($_SESSION['user'])) {
             header('location: /sign/signin');

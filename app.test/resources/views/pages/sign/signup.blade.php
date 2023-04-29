@@ -13,7 +13,7 @@
 @section('keywords', 'keywords')
 
 @section('primary')
-<article class="page hentry">
+<div class="page hentry">
     <div class="container">
         <div class="wrap">
 
@@ -25,23 +25,22 @@
                 $faker->seed(1234);
                 @endphp
 
-                <form method="POST" action="/sign/signup">
+                <form method="POST" action="signup">
                     <table>
                         <tr>
-                            <td>Username:</td>
-                            <td><input type="text" name="username" value="<?php echo htmlentities($faker->name()); ?>" placeholder="Username" /></td>
-                        </tr>
-                        <tr>
                             <td>Email:</td>
-                            <td><input type="text" name="email" value="<?php echo htmlentities($faker->unique()->safeEmail()); ?>" placeholder="Email" /></td>
+                            <td><input type="text" name="email" value="<?php echo htmlentities($faker->unique()->safeEmail()); ?>" /></td>
+                            <td><button type="button">Check</button></td>
                         </tr>
                         <tr>
                             <td>Password:</td>
-                            <td><input type="password" name="password" value="<?php echo htmlentities($faker->password(6, 20)); ?>" placeholder="Password" /></td>
+                            <td><input type="password" name="password" value="123456" /></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>Confirm Password:</td>
-                            <td><input type="password" value="" placeholder="Confirm Password"/></td>
+                            <td><input type="password" value="" /></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -49,23 +48,20 @@
                                 <button type="reset">Reset</button>
                                 <button type="submit">Submit</button>
                             </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                Already have an account? <a href="signin">Sign in</a>
+                            </td>
                         </tr>
                     </table>
                 </form>
-
-                {{-- 
-                @if (count($data) > 0)
-                    {{ $data }}
-                @else
-                    Is empty.
-                @endif
-                --}}
-
             </div><!-- .entry-content -->
 
         </div><!-- .wrap -->
     </div><!-- .container -->
-</article><!-- .page -->
+</div><!-- .page -->
 @endsection
 
 @push('scripts')

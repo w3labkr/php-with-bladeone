@@ -1,14 +1,19 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\OpenAPI\V1;
 
+use App\Controllers\Controller;
 use App\Interfaces\Controller as ControllerInterface;
 
-class Home extends Controller implements ControllerInterface
+class Index extends Controller implements ControllerInterface
 {
     public function get()
     {
-        echo $this->view('pages.home');
+        echo $this->view('pages.openapi.v1.index', [
+            'state' => 'success',
+            'message' => 'message',
+            'data' => [],
+        ]);
     }
 
     public function post()

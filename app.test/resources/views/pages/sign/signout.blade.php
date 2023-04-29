@@ -5,10 +5,10 @@
 @endpush
 
 @push('styles')
-<link rel="stylesheet" href="/assets/css/admin/dashboard.css" />
+<link rel="stylesheet" href="/assets/css/sign/signout.css" />
 @endpush
 
-@section('title', 'Admin')
+@section('title', 'Signout')
 @section('description', 'description')
 @section('keywords', 'keywords')
 
@@ -17,10 +17,14 @@
     <div class="container">
         <div class="wrap">
 
-            <h1 class="entry-title">Admin</h1>
+            <h1 class="entry-title">Signout</h1>
 
             <div class="entry-content">
-                Hello, world!
+
+                You have been logged out successfully
+
+                Didn't mean to sign out? <a href="signin">Sign in again.</a>
+
             </div><!-- .entry-content -->
 
         </div><!-- .wrap -->
@@ -29,5 +33,5 @@
 @endsection
 
 @push('scripts')
-<script src="/assets/js/admin/dashboard.js"></script>
+<script src="/assets/js/sign/signout.js"></script>
 @endpush

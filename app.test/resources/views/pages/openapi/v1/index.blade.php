@@ -13,7 +13,7 @@
 @section('keywords', 'keywords')
 
 @section('primary')
-<article class="page hentry">
+<div class="page hentry">
     <div class="container">
         <div class="wrap">
 
@@ -34,7 +34,7 @@
 
         </div><!-- .wrap -->
     </div><!-- .container -->
-</article><!-- .page -->
+</div><!-- .page -->
 @endsection
 
 @push('scripts')

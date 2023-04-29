@@ -136,6 +136,13 @@ cd app.test
 
 ### MISC
 
+- [respect/validation](https://github.com/Respect/Validation)  
+  The most awesome validation engine ever created for PHP
+
+  ```shell
+  composer require respect/validation
+  ```
+
 - [ramsey/uuid](https://github.com/ramsey/uuid)  
   A PHP library for generating universally unique identifiers (UUIDs).
 
