@@ -88,6 +88,13 @@ cd app.test
   composer require peppeocchi/php-cron-scheduler
   ```
 
+- [friendsofphp/php-cs-fixer](https://github.com/phpseclib/phpseclib)  
+  A tool to automatically fix PHP Coding Standards issues
+
+  ```shell
+  composer require --dev friendsofphp/php-cs-fixer
+  ```
+
 ### Crawler
 
 - [symfony/dom-crawler](https://github.com/symfony/dom-crawler)  

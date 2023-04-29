@@ -7,11 +7,11 @@ class Admin
     public function index()
     {
         header('location: /admin/dashboard');
-        exit();
+        exit;
     }
 
     public function dashboard()
     {
-        echo view("pages.admin.dashboard");
+        echo view('pages.admin.dashboard');
     }
 }

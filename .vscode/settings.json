@@ -1,3 +1,29 @@
 {
+    "editor.formatOnSave": false,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    "editor.tabSize": 4,
+    "editor.defaultFormatter": null,
     
+    "emmet.includeLanguages": {
+        "php": "html",
+        "blade-php": "html",
+        "ejs": "html",
+        "vue-html": "html",
+        "vue": "html",
+        "jinja-html": "html",
+        "jinja": "html",
+        "javascript": "javascriptreact",
+        "typescript": "typescriptreact"
+    },
+
+    "[php]": {
+        "editor.defaultFormatter": "DEVSENSE.phptools-vscode",
+        "editor.tabSize": 4,
+        "editor.formatOnSave": true,
+    },
+
+    "[blade]": {
+        "editor.tabSize": 4,
+    },
 }

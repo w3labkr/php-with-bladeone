@@ -4,9 +4,9 @@ use Bramus\Router\Router;
 
 return function (Router $router) {
     $rii = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__));
-    
+
     $excludes = ['_', '.'];
-    
+
     // Define routes
     foreach ($rii as $file) {
         $pathName = $file->getPathname();

@@ -6,6 +6,6 @@ class Home
 {
     public function index()
     {
-        echo view("pages.home");
+        echo view('pages.home');
     }
 }

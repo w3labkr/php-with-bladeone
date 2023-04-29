@@ -1,7 +1,6 @@
-<?php 
+<?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -24,7 +23,7 @@ return [
     | services the application utilizes. Set this in your ".env" file.
     |
     */
-    
+
     'env' => env('APP_ENV', 'production'),
 
     /*
@@ -52,7 +51,7 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
-    
+
     'asset_url' => env('ASSET_URL', null),
 
     /*
@@ -120,8 +119,6 @@ return [
 
     'key' => env('APP_KEY'),
 
-    'salt' => env('APP_SALT'),
-
     'cipher' => 'AES-256-CBC',
 
     /*
@@ -136,7 +133,6 @@ return [
     */
 
     'providers' => [
-
     ],
 
     /*
@@ -151,6 +147,5 @@ return [
     */
 
     'aliases' => [
-
     ],
 ];

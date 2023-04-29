@@ -8,10 +8,10 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Constants of Application
-require_once __DIR__ . '/config/constants.php';
+require_once __DIR__.'/config/constants.php';
 
 // Require Composer Autoloader
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__.'/vendor/autoload.php';
 
 // Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
@@ -25,13 +25,9 @@ if (!config('app.debug')) {
 }
 
 // Sends your logs to files, sockets, inboxes, databases and various web services
-//require_once __DIR__ . '/app/ThirdParty/logger.php';
+// require_once __DIR__ . '/app/ThirdParty/logger.php';
 
 // Generates fake data
 // $faker = new \App\Models\UserFaker();
 // $faker->createTable()->factory(10);
 // $faker->test();
-
-// $crypt = encrypt(123456);
-// var_dump($crypt);
-// var_dump(decrypt($crypt));

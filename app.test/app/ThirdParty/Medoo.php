@@ -7,7 +7,7 @@ class Medoo
     protected $_connect;
 
     public function __construct()
-    {        
+    {
         try {
             $config = config('database.connections.mysql');
             $this->_connect = new \Medoo\Medoo([

@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/composer
-# Edit at https://www.toptal.com/developers/gitignore?templates=composer
+# Created by https://www.toptal.com/developers/gitignore/api/composer,php-cs-fixer
+# Edit at https://www.toptal.com/developers/gitignore?templates=composer,php-cs-fixer
 
 ### Composer ###
 composer.phar
@@ -9,6 +9,16 @@ composer.phar
 # You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
 # composer.lock
 
-# End of https://www.toptal.com/developers/gitignore/api/composer
+### PHP-CS-Fixer ###
+# Covers PHP CS Fixer
+# Reference: https://cs.symfony.com/
+
+# Generated files
+.php-cs-fixer.cache
+
+# Local config See: https://cs.symfony.com/doc/config.html
+#.php-cs-fixer.php
+
+# End of https://www.toptal.com/developers/gitignore/api/composer,php-cs-fixer
 
 /storage/

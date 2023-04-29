@@ -4,7 +4,6 @@ namespace App\Models;
 
 class User extends Model
 {
-
     public function getTotalUser(): int
     {
         $conn = $this->_connect;

@@ -4,7 +4,6 @@ namespace App\Models;
 
 class UserFaker extends Model
 {
-
     public function test()
     {
         $faker = \Faker\Factory::create(config('app.faker_locale'));
@@ -15,7 +14,7 @@ class UserFaker extends Model
 
     public function createTable(): UserFaker
     {
-        $this->_connect->exec(file_get_contents(SQL_PATH . '/createUserTable.sql'));
+        $this->_connect->exec(file_get_contents(SQL_PATH.'/createUserTable.sql'));
 
         echo "Created User Table.\n";
 
@@ -24,7 +23,7 @@ class UserFaker extends Model
 
     public function dropTable(): UserFaker
     {
-        $this->_connect->exec(file_get_contents(SQL_PATH . '/dropUserTable.sql'));
+        $this->_connect->exec(file_get_contents(SQL_PATH.'/dropUserTable.sql'));
 
         echo "Dropped User Table.\n";
 
@@ -36,7 +35,7 @@ class UserFaker extends Model
         $factory = new \Database\Factories\UserFactory();
         $user = new \App\Models\User();
 
-        for ($i = 0; $i < $num; $i++) {
+        for ($i = 0; $i < $num; ++$i) {
             try {
                 $user->addUser($factory->definition());
             } catch (\Exception $e) {

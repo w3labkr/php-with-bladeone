@@ -29,15 +29,15 @@
                     <table>
                         <tr>
                             <td>Username:</td>
-                            <td><input type="text" name="username" value="<?= htmlentities($faker->name()); ?>" placeholder="Username" /></td>
+                            <td><input type="text" name="username" value="<?php echo htmlentities($faker->name()); ?>" placeholder="Username" /></td>
                         </tr>
                         <tr>
                             <td>Email:</td>
-                            <td><input type="text" name="email" value="<?= htmlentities($faker->unique()->safeEmail()); ?>" placeholder="Email" /></td>
+                            <td><input type="text" name="email" value="<?php echo htmlentities($faker->unique()->safeEmail()); ?>" placeholder="Email" /></td>
                         </tr>
                         <tr>
                             <td>Password:</td>
-                            <td><input type="password" name="password" value="<?= htmlentities($faker->password(6,20)); ?>" placeholder="Password" /></td>
+                            <td><input type="password" name="password" value="<?php echo htmlentities($faker->password(6, 20)); ?>" placeholder="Password" /></td>
                         </tr>
                         <tr>
                             <td>Confirm Password:</td>

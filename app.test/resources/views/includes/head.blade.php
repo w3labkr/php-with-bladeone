@@ -33,7 +33,7 @@
     <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Search Engine Optimization -->
-    <title>@yield('title', 'title') | <?= config('app.name'); ?></title>
+    <title>@yield('title', 'title') | <?php echo config('app.name'); ?></title>
     <meta name="description" content="@yield('description', 'description')" />
     <meta name="keywords" content="@yield('keywords', 'keywords')" />
 

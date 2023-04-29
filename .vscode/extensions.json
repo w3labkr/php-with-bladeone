@@ -1,8 +1,9 @@
 {
     "recommendations": [
-        "shufo.vscode-blade-formatter",
         "editorconfig.editorconfig",
         "mikestead.dotenv",
-        "cjhowe7.laravel-blade"
+        "devsense.phptools-vscode",
+        "onecentlin.laravel-blade",
+        "austenc.laravel-blade-spacer",
     ]
 }

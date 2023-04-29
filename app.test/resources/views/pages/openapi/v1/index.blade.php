@@ -25,7 +25,7 @@
                 Data:<br />
                 @if(count($data) > 1)
                     @foreach ($data as $d)
-                        <?= $d[0] ?>,
+                        <?php echo $d[0]; ?>,
                     @endforeach
                 @else
                     No data.

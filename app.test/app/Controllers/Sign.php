@@ -9,12 +9,12 @@ class Sign
     public function index()
     {
         header('location: /sign/signin');
-        exit();
+        exit;
     }
 
     public function signin()
     {
-        echo view("pages.sign.signin");
+        echo view('pages.sign.signin');
     }
 
     public function postSignin()
@@ -22,7 +22,7 @@ class Sign
         // $data = User::getUser($_POST);
 
         // echo view("pages.sign.signin", $data);
-        echo view("pages.sign.signin");
+        echo view('pages.sign.signin');
     }
 
     public function signout()
@@ -32,12 +32,12 @@ class Sign
         $_SESSION = [];
 
         header('location: /sign/signin');
-        exit();
+        exit;
     }
 
     public function signup()
     {
-        echo view("pages.sign.signup");
+        echo view('pages.sign.signup');
     }
 
     public function postSignup()
@@ -45,16 +45,16 @@ class Sign
         // $data = User::getUser();
 
         // echo view("pages.sign.signin", $data);
-        echo view("pages.sign.signin");
+        echo view('pages.sign.signin');
     }
 
     public function welcome()
     {
-        echo view("pages.sign.welcome");
+        echo view('pages.sign.welcome');
     }
 
     public function farewell()
     {
-        echo view("pages.sign.farewell");
+        echo view('pages.sign.farewell');
     }
 }

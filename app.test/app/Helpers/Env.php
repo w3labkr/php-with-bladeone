@@ -8,7 +8,7 @@ class Env
     {
         $value = $_ENV[$key] ?? '';
 
-        if ($value == false) {
+        if (false == $value) {
             return $default;
         }
 
@@ -37,10 +37,10 @@ class Env
         return $value;
     }
 
-    public static function getconfig(string $string): string | array
+    public static function getconfig(string $string): string|array
     {
         $lst = explode('.', $string);
-        $conf = include CONFIG_PATH . "/{$lst[0]}.php";
+        $conf = include CONFIG_PATH."/{$lst[0]}.php";
 
         array_shift($lst);
 
@@ -48,6 +48,7 @@ class Env
             $callback = function (array $xs, $x) {
                 return (array_key_exists($x, $xs)) ? $xs[$x] : null;
             };
+
             return array_reduce($array, $callback, $initial);
         };
 

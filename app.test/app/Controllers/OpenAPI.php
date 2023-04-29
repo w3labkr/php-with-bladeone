@@ -7,15 +7,15 @@ class OpenAPI
     public function index()
     {
         header('location: /openapi/v1');
-        exit();
+        exit;
     }
 
     public function v1()
     {
-        echo view("pages.openapi.v1.index", [
+        echo view('pages.openapi.v1.index', [
             'state' => 'success',
             'message' => 'message',
-            'data' => []
+            'data' => [],
         ]);
     }
 }

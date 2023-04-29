@@ -24,11 +24,15 @@ cd app.test
 ### Composer
 
 ```shell
-composer clear-cache && composer update && composer dump-autoload
+composer clear-cache && composer update
 ```
 
 ```shell
 composer clear-cache && composer dump-autoload
+```
+
+```shell
+composer run-script php-cs-fixer
 ```
 
 ### Docker
