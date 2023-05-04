@@ -4,26 +4,26 @@ namespace App\Middlewares;
 
 class Auth
 {
-    public function isSignin()
+    public static function isLogin()
     {
-        if (!isset($_SESSION['user'])) {
-            header('location: /sign/signin');
+        if (1 !== session()->get('auth.loggedin')) {
+            header('location: /login');
             exit;
         }
     }
 
-    public function isAdmin()
+    public static function isAdmin()
     {
-        if (!isset($_SESSION['user']['role']) || 'admin' !== $_SESSION['user']['role']) {
-            header('location: /sign/signin');
+        if (1 !== session()->get('user.is_admin')) {
+            header('location: /login');
             exit;
         }
     }
 
-    public function isUser()
+    public static function isWelcome()
     {
-        if (!isset($_SESSION['user']['role']) || 'user' !== $_SESSION['user']['role']) {
-            header('location: /sign/signin');
+        if (0 !== session()->get('user.welcomed')) {
+            header('location: /login');
             exit;
         }
     }

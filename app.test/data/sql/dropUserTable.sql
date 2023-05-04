@@ -1,5 +1,0 @@
-USE `laradock`;
-
-DROP TABLE IF EXISTS `user`;
-
-FLUSH PRIVILEGES;

@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 class Env
 {
-    public static function getenv(string $key, $default = null): string|bool|null
+    public static function env(string $key, mixed $default = null): mixed
     {
         $value = $_ENV[$key] ?? '';
 
@@ -37,21 +37,12 @@ class Env
         return $value;
     }
 
-    public static function getconfig(string $string): string|array
+    public static function config(string $string, mixed $default = null): mixed
     {
-        $lst = explode('.', $string);
-        $conf = include CONFIG_PATH."/{$lst[0]}.php";
+        $path = explode('.', $string);
+        $key = implode('.', array_slice($path, 1));
+        $conf = include CONFIG_PATH."/{$path[0]}.php";
 
-        array_shift($lst);
-
-        $getArrayPath = function (array $array, array $initial) {
-            $callback = function (array $xs, $x) {
-                return (array_key_exists($x, $xs)) ? $xs[$x] : null;
-            };
-
-            return array_reduce($array, $callback, $initial);
-        };
-
-        return $getArrayPath($lst, $conf);
+        return dot($conf)->get($key, $default);
     }
 }

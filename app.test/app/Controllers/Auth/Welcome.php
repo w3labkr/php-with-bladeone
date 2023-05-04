@@ -1,15 +1,23 @@
 <?php
 
-namespace App\Controllers\Admin;
+namespace App\Controllers\Auth;
 
 use App\Controllers\Controller;
 use App\Interfaces\ControllerInterface;
+use App\Models\Users;
 
-class Dashboard extends Controller implements ControllerInterface
+class Welcome extends Controller implements ControllerInterface
 {
     public function get()
     {
-        echo $this->view('pages.admin.dashboard');
+        $id = session()->get('user.id');
+
+        $users = new Users();
+        $users->updateWelcomedById(1, $id);
+
+        session_destroy();
+
+        echo $this->view('pages.auth.welcome');
     }
 
     public function post()

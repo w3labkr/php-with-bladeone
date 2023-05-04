@@ -32,6 +32,13 @@ cd app.test
   composer require vlucas/phpdotenv
   ```
 
+- [adbario/php-dot-notation](https://github.com/adbario/php-dot-notation)  
+  Dot notation access to PHP arrays
+
+  ```shell
+  composer require adbario/php-dot-notation
+  ```
+
 - [bramus/router](https://github.com/bramus/router)  
   A lightweight and simple object oriented PHP Router
 

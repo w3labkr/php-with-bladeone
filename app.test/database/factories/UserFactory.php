@@ -4,19 +4,24 @@ namespace Database\Factories;
 
 class UserFactory extends Factory
 {
-    public function definition()
+    public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
+            'username' => $this->faker->userName(),
             'email' => $this->faker->unique()->safeEmail(),
+            'email_verification_token' => bin2hex(random_bytes(16)),
             'email_verified_at' => date('Y-m-d H:i:s'),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-            // password
-            'remember_token' => substr(str_replace('-', '', $this->faker->uuid()), 1, 20),
+            'password' => password_hash('123456', PASSWORD_DEFAULT),
+            'reset_password_code' => rand(100000, 999999),
+            'remember_token' => bin2hex(random_bytes(16)),
+            'last_login' => date('Y-m-d H:i:s'),
+            'level' => 0,
+            'is_admin' => 0,
+            'welcomed' => 0,
         ];
     }
 
-    public function unverified()
+    public function unverified(): array
     {
         return [
             'email_verified_at' => null,

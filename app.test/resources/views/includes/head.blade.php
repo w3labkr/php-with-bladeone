@@ -5,7 +5,7 @@
     <!--
         By default, Safari on iOS detects any string formatted like a phone number and makes it a link that calls the number.
         Specifying telephone=no disables this feature.
-        
+
         https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html
     -->
     <meta name="format-detection" content="telephone=no" />
@@ -15,7 +15,7 @@
         A given directive in a request does not mean the same directive should be in the response.
 
         https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control
-        
+
         <meta http-equiv="Cache-Control" content="no-cache, no-store, max-age=0" />
         <meta http-equiv="Pragma" content="no-cache" />
         <meta http-equiv="Expires" content="0" />
@@ -33,9 +33,9 @@
     <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Search Engine Optimization -->
-    <title>@yield('title', 'title') | <?php echo config('app.name'); ?></title>
-    <meta name="description" content="@yield('description', 'description')" />
-    <meta name="keywords" content="@yield('keywords', 'keywords')" />
+    <title>@yield('title', 'Title') | <?php echo config('app.name'); ?></title>
+    <meta name="description" content="@yield('description', '')" />
+    <meta name="keywords" content="@yield('keywords', '')" />
 
     @stack('metas')
 

@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 class Encrypter
 {
-    public static function encrypt(string $data): string
+    public static function encrypt(mixed $data): string
     {
         $cipher_algo = config('app.cipher');
         $key = config('app.key');

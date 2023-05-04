@@ -3,7 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\Controller;
-use App\Interfaces\Controller as ControllerInterface;
+use App\Interfaces\ControllerInterface;
 
 class Index extends Controller implements ControllerInterface
 {
@@ -17,6 +17,10 @@ class Index extends Controller implements ControllerInterface
     {
     }
 
+    public function patch()
+    {
+    }
+
     public function put()
     {
     }
@@ -26,10 +30,6 @@ class Index extends Controller implements ControllerInterface
     }
 
     public function options()
-    {
-    }
-
-    public function patch()
     {
     }
 }

@@ -1,22 +1,17 @@
 <?php
 
-namespace App\Controllers\Admin;
+namespace App\Controllers;
 
-use App\Controllers\Controller;
 use App\Interfaces\ControllerInterface;
 
-class Dashboard extends Controller implements ControllerInterface
+class Index extends Controller implements ControllerInterface
 {
     public function get()
     {
-        echo $this->view('pages.admin.dashboard');
+        echo $this->view('pages.index');
     }
 
     public function post()
-    {
-    }
-
-    public function patch()
     {
     }
 
@@ -29,6 +24,10 @@ class Dashboard extends Controller implements ControllerInterface
     }
 
     public function options()
+    {
+    }
+
+    public function patch()
     {
     }
 }

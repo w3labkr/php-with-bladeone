@@ -8,6 +8,7 @@
   - [Commands](#commands)
     - [Composer](#composer)
     - [Docker](#docker)
+  - [Issue](#issue)
 
 ## Usage
 
@@ -107,4 +108,13 @@ docker container rm -f $(docker container ls -aq)
 
 ```shell
 docker image rm -f $(docker images ls -q)
+```
+
+## Issue
+
+An attempt was made to access a socket in a way forbidden by its access permissions.
+
+```shell
+net stop winnat
+net start winnat
 ```

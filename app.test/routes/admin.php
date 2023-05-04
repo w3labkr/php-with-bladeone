@@ -4,7 +4,7 @@ use Bramus\Router\Router;
 
 return function (Router $router) {
     // Define middlewares
-    $router->before('GET|POST', '/admin(/.*)?', '\App\Middlewares\Auth@isSignin');
+    $router->before('GET|POST', '/admin(/.*)?', '\App\Middlewares\Auth@isLogin');
     $router->before('GET|POST', '/admin(/.*)?', '\App\Middlewares\Auth@isAdmin');
 
     // Define routes

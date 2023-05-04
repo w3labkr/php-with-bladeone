@@ -17,13 +17,19 @@
         "typescript": "typescriptreact"
     },
 
-    "[php]": {
-        "editor.defaultFormatter": "DEVSENSE.phptools-vscode",
+    "css.validate": false,
+    "less.validate": false,
+    "scss.validate": false,
+
+    "[css]": {
+        "editor.defaultFormatter": "stylelint.vscode-stylelint",
         "editor.tabSize": 4,
         "editor.formatOnSave": true,
     },
 
-    "[blade]": {
+    "[php]": {
+        "editor.defaultFormatter": "DEVSENSE.phptools-vscode",
         "editor.tabSize": 4,
+        "editor.formatOnSave": true,
     },
 }

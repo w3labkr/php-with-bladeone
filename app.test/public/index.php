@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 // Start The Application
 require_once __DIR__.'/../server.php';
 

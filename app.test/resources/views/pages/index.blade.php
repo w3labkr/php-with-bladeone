@@ -5,10 +5,10 @@
 @endpush
 
 @push('styles')
-<link rel="stylesheet" href="/assets/css/admin/dashboard.css" />
+<link rel="stylesheet" href="/assets/css/main.css" />
 @endpush
 
-@section('title', 'Admin')
+@section('title', 'Home')
 @section('description', '')
 @section('keywords', '')
 
@@ -17,7 +17,7 @@
     <div class="container">
         <div class="wrap">
 
-            <h1 class="entry-title">Admin</h1>
+            <h1 class="entry-title">Home</h1>
 
             <div class="entry-content">
                 Hello, world!
@@ -29,5 +29,5 @@
 @endsection
 
 @push('scripts')
-<script src="/assets/js/admin/dashboard.js"></script>
+<script src="/assets/js/main.js"></script>
 @endpush

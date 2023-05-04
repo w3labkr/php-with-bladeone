@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
-class UserFaker extends Model
+use Database\Factories\UserFactory;
+use Faker\Factory;
+
+class UserFaker extends Users
 {
     public function test()
     {
-        $faker = \Faker\Factory::create(config('app.faker_locale'));
+        $faker = Factory::create(config('app.faker_locale'));
         $str = substr(str_replace('-', '', $faker->uuid()), 1, 20);
 
         var_dump($str);
@@ -14,7 +17,9 @@ class UserFaker extends Model
 
     public function createTable(): UserFaker
     {
-        $this->_connect->exec(file_get_contents(SQL_PATH.'/createUserTable.sql'));
+        $this->pdo->exec(file_get_contents(SQL_PATH.'/createUsersTable.sql'));
+
+        session_destroy();
 
         echo "Created User Table.\n";
 
@@ -23,7 +28,9 @@ class UserFaker extends Model
 
     public function dropTable(): UserFaker
     {
-        $this->_connect->exec(file_get_contents(SQL_PATH.'/dropUserTable.sql'));
+        $this->pdo->exec(file_get_contents(SQL_PATH.'/dropUsersTable.sql'));
+
+        session_destroy();
 
         echo "Dropped User Table.\n";
 
@@ -32,16 +39,11 @@ class UserFaker extends Model
 
     public function factory(int $num = 10): UserFaker
     {
-        $factory = new \Database\Factories\UserFactory();
-        $user = new \App\Models\User();
+        $factory = new UserFactory();
 
         for ($i = 0; $i < $num; ++$i) {
-            try {
-                $user->addUser($factory->definition());
-            } catch (\Exception $e) {
-                echo $e->getMessage();
-                continue;
-            }
+            $definition = array_merge($factory->definition(), $factory->unverified());
+            $this->addUser($definition);
         }
 
         echo "Inserted $num Users.\n";
