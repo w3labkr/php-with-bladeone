@@ -9,6 +9,8 @@ class Logout extends Controller implements ControllerInterface
 {
     public function get()
     {
+        session_destroy();
+
         echo $this->view('pages.auth.logout');
     }
 

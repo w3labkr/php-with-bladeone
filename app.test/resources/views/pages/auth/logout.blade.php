@@ -1,4 +1,12 @@
-@extends('layouts.default')
+@extends('layouts.content', [
+    'header' => true,
+    'branding' => true,
+    'navigation' => false,
+    'hero' => true,
+    'breadcrumb' => false,
+    'footer' => true,
+    'copyright' => true,
+])
 
 @push('metas')
 {{-- <meta /> --}}

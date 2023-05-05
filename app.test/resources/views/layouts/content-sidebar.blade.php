@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" prefix="og: http://ogp.me/ns#">
+<html lang="{{ config('app.locale') }}" prefix="og: http://ogp.me/ns#">
 
 <head>
     @include('includes.head')
@@ -9,11 +9,26 @@
     <!-- <a class="skip-link sr-only sr-only-focusable" href="#primary">Skip Content</a> -->
 
     <div id="page" class="site">
+
+        @if($header)
         <header id="masthead" class="site-header">
             @include('includes.header')
         </header>
+        @endif
 
         <div id="content" class="site-content">
+
+            @if($hero)
+            <div id="hero" class="site-hero">
+                @include('includes.hero')
+            </div>
+            @endif
+
+            @if($breadcrumb)
+            <div id="breadcrumb" class="site-breadcrumb">
+                @include('includes.breadcrumb')
+            </div>
+            @endif
 
             <div id="main-content" class="main-area">
                 <div class="container-fluid">
@@ -22,14 +37,20 @@
                         @yield('primary')
                     </main><!-- #primary -->
 
+                    <aside id="tertiary" class="widget-area sidebar tertiary-sidebar">
+                        @include('includes.sidebar-tertiary')
+                    </aside>
+
                 </div><!-- .container -->
             </div><!-- #main-content -->
 
         </div><!-- #content -->
 
+        @if($footer)
         <footer id="colophon" class="site-footer">
             @include('includes.footer')
         </footer>
+        @endif
 
     </div><!-- #page -->
 

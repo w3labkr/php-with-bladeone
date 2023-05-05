@@ -25,30 +25,29 @@
     <div class="container">
         <div class="wrap">
 
-            <h1 class="entry-title">Forgot your password?</h1>
+            <h1 class="entry-title">Forgot your username?</h1>
 
             <p class="entry-summary">
-                Enter your Username below and we will send a message to reset your password.
+                Enter your email below and we will message you with your username.
             </p>
 
             <div class="entry-content">
                 <form method="post" action="forgot-password">
                     <fieldset>
-                        <legend>Forgot password</legend>
+                        <legend>Forgot username</legend>
                         <label>
-                            <span>Username</span><br>
-                            <input type="text" name="user[username]"  required/>
+                            <span>Email</span><br>
+                            <input type="text" name="user[email]"  required/>
                         </label>
                         <br>
-                        <button type="submit">Reset my password</button>
+                        <button type="submit">Find my username</button>
                     </fieldset>
                 </form>
 
                 <br>
 
-                ㆍ<a href="/login">Already have an account?</a><br>
-                ㆍ<a href="/forgot-username">Forgot your username?</a><br>
-
+                ㆍ<a href="/register">Need an account?</a><br>
+                ㆍ<a href="/forgot-password">Forgot your password?</a>
             </div><!-- .entry-content -->
 
         </div><!-- .wrap -->

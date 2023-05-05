@@ -1,17 +1,19 @@
 <?php
 
-namespace App\Controllers\Auth;
+namespace App\Controllers\Users;
 
 use App\Controllers\Controller;
 use App\Interfaces\ControllerInterface;
+use App\Models\Users;
 
-class Farewell extends Controller implements ControllerInterface
+class Overview extends Controller implements ControllerInterface
 {
     public function get()
     {
-        session_destroy();
+        $id = session()->get('user.id');
+        $user = (new Users())->findUserById($id);
 
-        echo $this->view('pages.auth.farewell');
+        echo $this->view('pages.users.overview', compact('user'));
     }
 
     public function post()

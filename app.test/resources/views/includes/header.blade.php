@@ -1,8 +1,13 @@
 <div class="container">
-    <div class="site-branding">
-        <a class="site-title" href="/"><?php echo config('app.name'); ?></a>
-    </div>
-    <div class="site-navigation">
-        @include('includes.navigation')
-    </div>
+    @if($branding)
+        @include('includes.site-branding')
+    @endif
+
+    @if($navigation)
+        @if(session()->get('auth.loggedin'))
+            @include('includes.navigation-loggedin')
+        @else
+            @include('includes.navigation')
+        @endif
+    @endif
 </div>

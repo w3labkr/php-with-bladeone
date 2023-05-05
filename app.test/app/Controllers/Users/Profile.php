@@ -11,7 +11,7 @@ class Profile extends Controller implements ControllerInterface
 {
     public function get()
     {
-        $id = $_SESSION['user']['id'];
+        $id = session()->get('user.id');
         $user = (new Users())->findUserById($id);
 
         echo $this->view('pages.users.profile', compact('user'));
@@ -19,28 +19,35 @@ class Profile extends Controller implements ControllerInterface
 
     public function post()
     {
-        $params = Validator::safe($_POST['user']);
-        $email = $params['email'];
-        $password = password_hash($params['password'], PASSWORD_DEFAULT);
+        $id = session()->get('user.id');
+        $data = $this->data;
 
         $users = new Users();
-        $id = $_SESSION['user']['id'];
+        $older = $users->findUserById($id);
+        $newer = Validator::safe($_POST['user']);
 
-        $errors = [];
-
-        if ($users->findUserByEmail($email)) {
-            $errors[] = 'Email already exists.';
+        if ($older['nickname'] === $newer['nickname']) {
+            // ...
         } else {
-            $users->updateEmailById($email, $id);
+            $users->updateNicknameById($newer['nickname'], $id);
+            $data['status'] = 'success';
+            $data['message'] = 'Your profile has been successfully changed.';
         }
 
-        if (!empty($password)) {
-            $users->updatePasswordById($password, $id);
+        if ($older['email'] === $newer['email']) {
+            // ...
+        } elseif ($users->findUserByEmail($newer['email'])) {
+            $data['status'] = 'fail';
+            $data['errors'][] = ['message' => 'Email already exists.'];
+        } else {
+            $users->updateEmailById($newer['email'], $id);
+            $data['status'] = 'success';
+            $data['message'] = 'Your profile has been successfully changed.';
         }
 
         $user = $users->findUserById($id);
 
-        echo $this->view('pages.users.profile', compact('user', 'errors'));
+        echo $this->view('pages.users.profile', compact('user', 'data'));
     }
 
     public function patch()

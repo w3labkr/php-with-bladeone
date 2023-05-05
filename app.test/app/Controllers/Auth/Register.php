@@ -17,27 +17,28 @@ class Register extends Controller implements ControllerInterface
 
     public function post()
     {
+        $data = $this->data;
+
         $users = new Users();
-        $params = Validator::safe($_POST['user']);
+        $newer = Validator::safe($_POST['user']);
 
-        $username = $params['username'];
-        $email = $params['email'];
-        $password = password_hash($params['password'], PASSWORD_DEFAULT);
-
-        $errors = [];
-
-        if ($users->findUserByUsername($username)) {
-            $errors[] = 'Username already exists.';
-        }
-
-        if ($users->findUserByEmail($email)) {
-            $errors[] = 'Email already exists.';
-        }
-
-        if (empty($errors)) {
+        if ($newer['password'] !== $newer['confirm_password']) {
+            $data['status'] = 'fail';
+            $data['errors'][] = ['message' => 'Passwords do not match.'];
+        } elseif ($users->findUserByUsername($newer['username'])) {
+            $data['status'] = 'fail';
+            $data['errors'][] = ['message' => 'Username already exists.'];
+        } elseif ($users->findUserByEmail($newer['email'])) {
+            $data['status'] = 'fail';
+            $data['errors'][] = ['message' => 'Email already exists.'];
+        } else {
             $factory = new UserFactory();
-            $users->addUser(array_merge($factory->definition(), $factory->unverified(), compact('username', 'email', 'password')));
-            $user = $users->findUserByUsername($username);
+            $params = array_merge($factory->definition(), $factory->unverified(), $newer);
+
+            unset($params['confirm_password']);
+
+            $users->addUser($params);
+            $user = $users->findUserByUsername($newer['username']);
 
             session_regenerate_id();
 
@@ -48,7 +49,7 @@ class Register extends Controller implements ControllerInterface
             exit;
         }
 
-        echo $this->view('pages.auth.register', compact('errors'));
+        echo $this->view('pages.auth.register', compact('data'));
     }
 
     public function patch()

@@ -16,26 +16,31 @@ class Login extends Controller implements ControllerInterface
 
     public function post()
     {
-        $params = Validator::safe($_POST['user']);
+        $data = $this->data;
 
-        $username = $params['username'];
-        $password = $params['password'];
+        $users = new Users();
+        $newer = Validator::safe($_POST['user']);
+        $older = $user = $users->findUserByUsername($newer['username']);
 
-        $user = (new Users())->findUserByUsername($username);
+        if ($user && password_verify($newer['password'], $older['password'])) {
+            if ($user['deleted_at']) {
+                // $data['status'] = 'fail';
+                // $data['errors'][] = ['message' => 'User account has been deleted.'];
+            } else {
+                $_SESSION['auth']['loggedin'] = 1;
+                $_SESSION['user']['id'] = $user['id'];
+                $_SESSION['user']['username'] = $user['username'];
+                $_SESSION['user']['is_admin'] = $user['is_admin'];
 
-        if ($user && password_verify($password, $user['password'])) {
-            $_SESSION['auth']['loggedin'] = 1;
-            $_SESSION['user']['id'] = $user['id'];
-            $_SESSION['user']['uuid'] = bin2hex($user['uuid']);
-            $_SESSION['user']['is_admin'] = $user['is_admin'];
-
-            header("Location: /users/{$_SESSION['user']['uuid']}/profile");
-            exit;
+                header("Location: /users/{$user['username']}");
+                exit;
+            }
         }
 
-        $errors[] = 'The username or password is incorrect.';
+        $data['status'] = 'fail';
+        $data['errors'][] = ['message' => 'The username or password is incorrect.'];
 
-        echo $this->view('pages.auth.login', compact('errors'));
+        echo $this->view('pages.auth.login', compact('data'));
     }
 
     public function patch()

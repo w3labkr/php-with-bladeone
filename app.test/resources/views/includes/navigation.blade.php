@@ -1,5 +1,6 @@
-<nav class="site-nav">
-    <a href="/">Home</a>
-    <a href="/login">Login</a>
-    <a href="/register">Register</a>
-</nav>
+<div class="site-navigation">
+    <nav class="site-nav">
+        <a href="/">Home</a>
+        <a href="/login">Login</a>
+    </nav>
+</div>

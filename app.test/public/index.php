@@ -1,5 +1,6 @@
 <?php
 
+// creates a session or resumes the current one based on a session identifier passed via a GET or POST request, or passed via a cookie.
 session_start();
 
 // Start The Application

@@ -6,18 +6,21 @@ class UserFactory extends Factory
 {
     public function definition(): array
     {
+        $username = $this->faker->userName();
+
         return [
-            'username' => $this->faker->userName(),
+            'username' => $username,
+            'nickname' => $username,
             'email' => $this->faker->unique()->safeEmail(),
             'email_verification_token' => bin2hex(random_bytes(16)),
             'email_verified_at' => date('Y-m-d H:i:s'),
-            'password' => password_hash('123456', PASSWORD_DEFAULT),
+            'password' => '123456',
             'reset_password_code' => rand(100000, 999999),
             'remember_token' => bin2hex(random_bytes(16)),
-            'last_login' => date('Y-m-d H:i:s'),
-            'level' => 0,
-            'is_admin' => 0,
+            'status' => 0,
             'welcomed' => 0,
+            'is_admin' => 0,
+            'last_login_at' => date('Y-m-d H:i:s'),
         ];
     }
 

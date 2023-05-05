@@ -1,4 +1,12 @@
-@extends('layouts.default')
+@extends('layouts.content', [
+    'header' => true,
+    'branding' => true,
+    'navigation' => false,
+    'hero' => true,
+    'breadcrumb' => false,
+    'footer' => true,
+    'copyright' => true,
+])
 
 @push('metas')
 {{-- <meta /> --}}
@@ -29,46 +37,44 @@
                     <table>
                         <tr>
                             <td>Username</td>
-                            <td>
-                                <input type="text" name="user[username]" value="<?php echo htmlentities($faker->userName()); ?>" />
-                                {{ $errors['username']['message'] ?? '' }}
-                            </td>
+                            <td><input type="text" name="user[username]" value="{{ $faker->userName() }}" required /></td>
                         </tr>
                         <tr>
                             <td>Email</td>
-                            <td>
-                                <input type="text" name="user[email]" value="<?php echo htmlentities($faker->unique()->safeEmail()); ?>" />
-                                {{ $errors['email']['message'] ?? '' }}
-                            </td>
+                            <td><input type="text" name="user[email]" value="{{ $faker->unique()->safeEmail() }}" required /></td>
                         </tr>
                         <tr>
                             <td>Password</td>
-                            <td><input type="password" name="user[password]" value="123456" /></td>
+                            <td><input type="password" name="user[password]" value="123456" required /></td>
                         </tr>
                         <tr>
                             <td>Confirm Password</td>
-                            <td><input type="password" value="123456" /></td>
+                            <td><input type="password" name="user[confirm_password]" value="123456" required /></td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td>
-                                <button type="reset">Reset</button>
+                            <td colspan="2">
                                 <button type="submit">Submit</button>
                             </td>
                         </tr>
-                        @isset($errors)
-                        <tr>
-                            <td colspan="3">
-                                @foreach ($errors as $error)
-                                    {{ $error }}<br>
-                                @endforeach
-                            </td>
-                        </tr>
-                        @endisset
                     </table>
                 </form>
 
-                Already have an account? <a href="/login">Login</a>
+                @isset($data)
+                <div>
+                    @if($data['status'] === 'success')
+                        {{ $data['message'] }}
+                    @elseif($data['status'] === 'fail')
+                        @foreach ($data['errors'] as $error)
+                            {{ $error['message'] }}<br>
+                        @endforeach
+                    @endif
+                </div>
+                @endisset
+
+                <br>
+
+                ㆍ<a href="/login">Already have an account?</a><br>
+                ㆍ<a href="/forgot-password">Forgot your password?</a>
             </div><!-- .entry-content -->
 
         </div><!-- .wrap -->

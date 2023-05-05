@@ -69,12 +69,132 @@ class Users extends Model
 
     public function addUser(array $params): void
     {
-        $this->insertRow('users', $params);
+        $conn = $this->pdo;
+        $conn->beginTransaction();
+
+        $columns = implode(',', array_map(fn ($v) => '`'.$v.'`', array_keys($params)));
+        $values = implode(',', array_map(fn ($v) => ':'.$v, array_keys($params)));
+
+        try {
+            $stmt = $conn->prepare("INSERT INTO `users` ({$columns}) VALUES ({$values})");
+
+            foreach ($params as $key => $value) {
+                switch ($key) {
+                    case 'password':
+                        $stmt->bindValue(':'.$key, password_hash($value, PASSWORD_DEFAULT));
+                        continue 2;
+                }
+                $stmt->bindValue(':'.$key, $value);
+            }
+
+            $stmt->execute();
+            $conn->commit();
+        } catch (\PDOException $e) {
+            $conn->rollback();
+            throw $e;
+        }
     }
 
     public function updateUserById(array $params, int $id): void
     {
-        $this->updateRow('users', $params, 'WHERE `id`=:id');
+        $conn = $this->pdo;
+        $conn->beginTransaction();
+
+        $values = implode(',', array_map(fn ($v) => '`'.$v.'`=:'.$v, array_keys($params)));
+
+        try {
+            $stmt = $conn->prepare("UPDATE `users` SET {$values} WHERE `id`=:id");
+
+            foreach ($params as $key => $value) {
+                switch ($key) {
+                    case 'password':
+                        $stmt->bindValue(':'.$key, password_hash($value, PASSWORD_DEFAULT));
+                        continue 2;
+                }
+                $stmt->bindValue(':'.$key, $value);
+            }
+
+            $stmt->execute();
+            $conn->commit();
+        } catch (\PDOException $e) {
+            $conn->rollback();
+            throw $e;
+        }
+    }
+
+    public function deleteUserById(int $id): void
+    {
+        $conn = $this->pdo;
+        $conn->beginTransaction();
+
+        try {
+            $stmt = $conn->prepare('UPDATE `users` SET `deleted_at`=:deleted_at WHERE `id`=:id');
+
+            $stmt->bindValue(':deleted_at', date('Y-m-d H:i:s'), \PDO::PARAM_STR);
+            $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+            $stmt->execute();
+
+            $conn->commit();
+        } catch (\PDOException $e) {
+            $conn->rollback();
+            throw $e;
+        }
+    }
+
+    public function dropUserById(int $id): void
+    {
+        $conn = $this->pdo;
+        $conn->beginTransaction();
+
+        try {
+            $stmt = $conn->prepare('DELETE FROM `users` WHERE `id`=:id');
+
+            $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+            $stmt->execute();
+
+            $conn->commit();
+        } catch (\PDOException $e) {
+            $conn->rollback();
+            throw $e;
+        }
+    }
+
+    public function updateUsernameById(string $username, int $id): void
+    {
+        $conn = $this->pdo;
+        $conn->beginTransaction();
+
+        try {
+            $stmt = $conn->prepare('UPDATE `users` SET `username`=:username WHERE `id`=:id');
+
+            $stmt->bindValue(':username', $username, \PDO::PARAM_STR);
+            $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+            $stmt->execute();
+
+            $conn->commit();
+        } catch (\PDOException $e) {
+            $conn->rollback();
+            throw $e;
+        }
+    }
+
+    public function updateNicknameById(string $nickname, int $id): void
+    {
+        $conn = $this->pdo;
+        $conn->beginTransaction();
+
+        try {
+            $stmt = $conn->prepare('UPDATE `users` SET `nickname`=:nickname WHERE `id`=:id');
+
+            $stmt->bindValue(':nickname', $nickname, \PDO::PARAM_STR);
+            $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+            $stmt->execute();
+
+            $conn->commit();
+        } catch (\PDOException $e) {
+            $conn->rollback();
+            throw $e;
+        }
     }
 
     public function updateEmailById(string $email, int $id): void
@@ -104,7 +224,7 @@ class Users extends Model
         try {
             $stmt = $conn->prepare('UPDATE `users` SET `password`=:password WHERE `id`=:id');
 
-            $stmt->bindValue(':password', $password, \PDO::PARAM_STR);
+            $stmt->bindValue(':password', password_hash($password, PASSWORD_DEFAULT), \PDO::PARAM_STR);
             $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
             $stmt->execute();
 
@@ -115,7 +235,7 @@ class Users extends Model
         }
     }
 
-    public function updateWelcomedById(string $welcomed, int $id): void
+    public function updateWelcomedById(int $welcomed, int $id): void
     {
         $conn = $this->pdo;
         $conn->beginTransaction();
@@ -123,8 +243,8 @@ class Users extends Model
         try {
             $stmt = $conn->prepare('UPDATE `users` SET `welcomed`=:welcomed WHERE `id`=:id');
 
-            $stmt->bindValue(':welcomed', $welcomed, \PDO::PARAM_STR);
-            $stmt->bindValue(':id', $id, \PDO::PARAM_STR);
+            $stmt->bindValue(':welcomed', $welcomed, \PDO::PARAM_INT);
+            $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
             $stmt->execute();
 
             $conn->commit();

@@ -1,7 +1,7 @@
-@extends('layouts.content', [
+@extends('layouts.sidebar-content', [
     'header' => true,
     'branding' => true,
-    'navigation' => false,
+    'navigation' => true,
     'hero' => true,
     'breadcrumb' => false,
     'footer' => true,
@@ -13,10 +13,10 @@
 @endpush
 
 @push('styles')
-{{-- <link rel="stylesheet" href="/assets/css/sign/style.css" /> --}}
+{{-- <link rel="stylesheet" href="/assets/css/style.css" /> --}}
 @endpush
 
-@section('title', 'Reset password')
+@section('title', 'Security')
 @section('description', '')
 @section('keywords', '')
 
@@ -25,38 +25,47 @@
     <div class="container">
         <div class="wrap">
 
-            <h1 class="entry-title">Reset password</h1>
-
-            <p class="entry-summary">
-                We have sent a password reset code by email to a***@g***. Enter it below to reset your password.
-            </p>
+            <h1 class="entry-title">Security</h1>
 
             <div class="entry-content">
-                <form method="post" action="reset-password">
+
+                <form method="post" action="security">
                     <fieldset>
-                        <legend>Reset password</legend>
+                        <legend>Change password</legend>
                         <label>
-                            <span>Code</span><br>
-                            <input type="text" name="user[reset_password_code]" required />
+                            <span>Old password</span><br>
+                            <input type="password" name="user[password]" required />
                         </label>
                         <br>
+
                         <label>
                             <span>New password</span><br>
                             <input type="password" name="user[new_password]" required />
                         </label>
                         <br>
+
                         <label>
-                            <span>Enter new password again</span><br>
+                            <span>Confirm new password</span><br>
                             <input type="password" name="user[confirm_new_password]" required />
                         </label>
                         <br>
-                        <button type="submit">Change password</button>
+
+                        <button type="submit">Update password</button>
                     </fieldset>
                 </form>
 
-                <br>
+                @isset($data)
+                <div>
+                    @if($data['status'] === 'success')
+                        {{ $data['message'] }}
+                    @elseif($data['status'] === 'fail')
+                        @foreach ($data['errors'] as $error)
+                            {{ $error['message'] }}<br>
+                        @endforeach
+                    @endif
+                </div>
+                @endisset
 
-                ㆍ<a href="/login">Already have an account?</a><br>
             </div><!-- .entry-content -->
 
         </div><!-- .wrap -->
@@ -65,5 +74,5 @@
 @endsection
 
 @push('scripts')
-{{-- <script src="/assets/js/sign/script.js"></script> --}}
+{{-- <script src="/assets/js/script.js"></script> --}}
 @endpush

@@ -1,6 +1,6 @@
 # php-ninja
 
-PHP mvc pattern without framework
+This is a starter project using the php mvp pattern without a framework.
 
 ## Documentation
 

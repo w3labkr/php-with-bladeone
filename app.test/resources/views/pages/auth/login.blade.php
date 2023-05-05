@@ -1,4 +1,12 @@
-@extends('layouts.default')
+@extends('layouts.content', [
+    'header' => true,
+    'branding' => true,
+    'navigation' => false,
+    'hero' => true,
+    'breadcrumb' => false,
+    'footer' => true,
+    'copyright' => true,
+])
 
 @push('metas')
 {{-- <meta /> --}}
@@ -24,34 +32,42 @@
                     <table>
                         <tr>
                             <td>Username</td>
-                            <td><input type="text" name="user[username]" value="qjung" /></td>
+                            <td><input type="text" name="user[username]" value="qjung" required /></td>
                         </tr>
                         <tr>
                             <td>Password</td>
-                            <td><input type="password" name="user[password]" value="123456" /></td>
+                            <td><input type="password" name="user[password]" value="123456" required /></td>
                         </tr>
                         <tr>
-                            <td><label><input type="checkbox" name="user[remember_me]" /> Remember Me</label></td>
-                            <td><a href="forgot-password">Forgot your password?</a></td>
+                            <td>
+                                <label><input type="checkbox" name="user[remember_me]" /> Remember Me</label>
+                            </td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td colspan="2">
                                 <button type="submit">Login</button>
                             </td>
                         </tr>
-                        @isset($errors)
-                        <tr>
-                            <td colspan="3">
-                                @foreach ($errors as $error)
-                                    {{ $error }}<br>
-                                @endforeach
-                            </td>
-                        </tr>
-                        @endisset
                     </table>
                 </form>
 
-                Need an account? <a href="/register">Register</a>
+                @isset($data)
+                <div>
+                    @if($data['status'] === 'success')
+                        {{ $data['message'] }}
+                    @elseif($data['status'] === 'fail')
+                        @foreach ($data['errors'] as $error)
+                            {{ $error['message'] }}<br>
+                        @endforeach
+                    @endif
+                </div>
+                @endisset
+
+                <br>
+
+                ㆍ<a href="/register">Need an account?</a><br>
+                ㆍ<a href="/forgot-password">Forgot your password?</a>
             </div><!-- .entry-content -->
 
         </div><!-- .wrap -->

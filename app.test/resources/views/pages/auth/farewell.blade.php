@@ -1,4 +1,12 @@
-@extends('layouts.default')
+@extends('layouts.content', [
+    'header' => true,
+    'branding' => true,
+    'navigation' => false,
+    'hero' => true,
+    'breadcrumb' => false,
+    'footer' => true,
+    'copyright' => true,
+])
 
 @push('metas')
 {{-- <meta /> --}}
@@ -20,7 +28,14 @@
             <h1 class="entry-title">Farewell</h1>
 
             <div class="entry-content">
-                Hello, world!
+                <p>
+                    Your are one of the best people.<br>
+                    I will never forget you!<br>
+                    Until we meet again!
+                </p>
+
+                <a href="/">Home</a>
+
             </div><!-- .entry-content -->
 
         </div><!-- .wrap -->

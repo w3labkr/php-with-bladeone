@@ -1,4 +1,4 @@
-@extends('layouts.content', [
+@extends('layouts.sidebar-content', [
     'header' => true,
     'branding' => true,
     'navigation' => true,
@@ -13,10 +13,10 @@
 @endpush
 
 @push('styles')
-<link rel="stylesheet" href="/assets/css/main.css" />
+{{-- <link rel="stylesheet" href="/assets/css/style.css" /> --}}
 @endpush
 
-@section('title', 'Home')
+@section('title', 'Profile')
 @section('description', '')
 @section('keywords', '')
 
@@ -25,10 +25,10 @@
     <div class="container">
         <div class="wrap">
 
-            <h1 class="entry-title">Home</h1>
+            <h1 class="entry-title">Overview</h1>
 
             <div class="entry-content">
-                Hello, world!
+                Hello, {{ $user['username'] }} !!
             </div><!-- .entry-content -->
 
         </div><!-- .wrap -->
@@ -37,5 +37,5 @@
 @endsection
 
 @push('scripts')
-<script src="/assets/js/main.js"></script>
+{{-- <script src="/assets/js/script.js"></script> --}}
 @endpush

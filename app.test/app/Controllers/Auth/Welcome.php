@@ -11,7 +11,6 @@ class Welcome extends Controller implements ControllerInterface
     public function get()
     {
         $id = session()->get('user.id');
-
         $users = new Users();
         $users->updateWelcomedById(1, $id);
 

@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Controllers\Controller;
 use App\Interfaces\ControllerInterface;
 
 class Index extends Controller implements ControllerInterface

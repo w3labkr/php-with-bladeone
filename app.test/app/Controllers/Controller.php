@@ -6,15 +6,26 @@ use eftec\bladeone\BladeOne;
 
 class Controller
 {
-    protected $blade;
+    protected array $data;
+    protected BladeOne $blade;
 
     public function __construct()
     {
         $this->blade = new BladeOne(VIEW_PATH, VIEW_CACHE_PATH, BladeOne::MODE_DEBUG);
+        $this->data = $this->data();
     }
 
     public function view(string $template, array $data = [])
     {
         return $this->blade->run($template, $data);
+    }
+
+    public function data(): array
+    {
+        return [
+            'status' => 'success',
+            'message' => '',
+            'errors' => [],
+        ];
     }
 }

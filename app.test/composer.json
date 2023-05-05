@@ -1,8 +1,8 @@
 {
     "name": "w3labkr/php-ninja",
     "type": "project",
-    "description": "PHP mvc pattern without framework",
-    "keywords": ["php", "mvc", "pattern", "without", "framework"],
+    "description": "This is a starter project using the php mvp pattern without a framework.",
+    "keywords": ["starter", "project", "php", "mvp", "pattern", "framework"],
     "license": "MIT",
     "require": {
         "php": "^8.1",

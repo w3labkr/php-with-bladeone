@@ -1,4 +1,12 @@
-@extends('layouts.default')
+@extends('layouts.sidebar-content', [
+    'header' => true,
+    'branding' => true,
+    'navigation' => true,
+    'hero' => true,
+    'breadcrumb' => false,
+    'footer' => true,
+    'copyright' => true,
+])
 
 @push('metas')
 {{-- <meta /> --}}
@@ -8,7 +16,7 @@
 {{-- <link rel="stylesheet" href="/assets/css/style.css" /> --}}
 @endpush
 
-@section('title', 'Home')
+@section('title', 'Profile')
 @section('description', '')
 @section('keywords', '')
 
@@ -20,47 +28,37 @@
             <h1 class="entry-title">Profile</h1>
 
             <div class="entry-content">
-                Hello, {{ $user['username'] }} !
-                <br><br>
 
                 <form method="post" action="profile">
-                    <table>
-                        <tr>
-                            <td>Email</td>
-                            <td>
-                                <input type="email" name="user[email]" value="{{ $user['email'] }}" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Password</td>
-                            <td>
-                                <input type="password" name="user[password]" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Confirm Password</td>
-                            <td><input type="password" /></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <button type="reset">Reset</button>
-                                <button type="submit">Save</button>
-                            </td>
-                        </tr>
-                        @isset($errors)
-                        <tr>
-                            <td colspan="2">
-                                @foreach ($errors as $error)
-                                    {{ $error }}<br>
-                                @endforeach
-                            </td>
-                        </tr>
-                        @endisset
-                    </table>
+                    <fieldset>
+                        <legend>Public profile</legend>
+                        <label>
+                            <span>Name</span><br>
+                            <input type="text" name="user[nickname]" value="{{ $user['nickname'] }}" />
+                        </label>
+                        <br>
+
+                        <label>
+                            <span>Public email</span><br>
+                            <input type="email" name="user[email]" value="{{ $user['email'] }}" />
+                        </label>
+                        <br>
+
+                        <button type="submit">Update profile</button>
+                    </fieldset>
                 </form>
 
-                <a href="javascript:window.history.back();">Back</a>
+                @isset($data)
+                <div>
+                    @if($data['status'] === 'success')
+                        {{ $data['message'] }}
+                    @elseif($data['status'] === 'fail')
+                        @foreach ($data['errors'] as $error)
+                            {{ $error['message'] }}<br>
+                        @endforeach
+                    @endif
+                </div>
+                @endisset
 
             </div><!-- .entry-content -->
 

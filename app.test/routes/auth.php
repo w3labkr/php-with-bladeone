@@ -4,7 +4,7 @@ use Bramus\Router\Router;
 
 return function (Router $router) {
     // Define middlewares
-    $router->before('GET|POST', '/(logout|farewell)', '\App\Middlewares\Auth@isLogin');
+    // $router->before('GET|POST', '/(logout|farewell)', '\App\Middlewares\Auth@isLogin');
 
     // Define routes
     $router->get('/login', '\App\Controllers\Auth\Login@get');
@@ -15,11 +15,15 @@ return function (Router $router) {
     $router->get('/register', '\App\Controllers\Auth\Register@get');
     $router->post('/register', '\App\Controllers\Auth\Register@post');
 
+    $router->get('/forgot-username', '\App\Controllers\Auth\ForgotUsername@get');
+    $router->post('/forgot-username', '\App\Controllers\Auth\ForgotUsername@post');
+
     $router->get('/forgot-password', '\App\Controllers\Auth\ForgotPassword@get');
     $router->post('/forgot-password', '\App\Controllers\Auth\ForgotPassword@post');
 
     $router->get('/reset-password', '\App\Controllers\Auth\ResetPassword@get');
     $router->post('/reset-password', '\App\Controllers\Auth\ResetPassword@post');
+
     $router->get('/farewell', '\App\Controllers\Auth\Farewell@get');
 
     // Define routes

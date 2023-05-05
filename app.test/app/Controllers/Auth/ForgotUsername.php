@@ -5,13 +5,11 @@ namespace App\Controllers\Auth;
 use App\Controllers\Controller;
 use App\Interfaces\ControllerInterface;
 
-class Farewell extends Controller implements ControllerInterface
+class ForgotUsername extends Controller implements ControllerInterface
 {
     public function get()
     {
-        session_destroy();
-
-        echo $this->view('pages.auth.farewell');
+        echo $this->view('pages.auth.forgot-username');
     }
 
     public function post()

@@ -28,6 +28,6 @@ if (!config('app.debug')) {
 // require_once __DIR__ . '/app/ThirdParty/logger.php';
 
 // Generates fake data
-$faker = new \App\Models\UserFaker();
-$faker->createTable()->factory(10);
+// $faker = new \App\Models\UserFaker();
+// $faker->createTable()->factory(10);
 // $faker->test();

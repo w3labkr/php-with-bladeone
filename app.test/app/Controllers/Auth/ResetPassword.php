@@ -14,8 +14,6 @@ class ResetPassword extends Controller implements ControllerInterface
 
     public function post()
     {
-        header('location: /login');
-        exit;
     }
 
     public function patch()
