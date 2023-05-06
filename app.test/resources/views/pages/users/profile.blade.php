@@ -1,10 +1,8 @@
-@extends('layouts.sidebar-content', [
-    'header' => true,
+@extends('layouts.users', [
     'branding' => true,
     'navigation' => true,
     'hero' => true,
     'breadcrumb' => false,
-    'footer' => true,
     'copyright' => true,
 ])
 

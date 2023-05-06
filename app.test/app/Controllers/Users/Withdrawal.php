@@ -16,21 +16,21 @@ class Withdrawal extends Controller implements ControllerInterface
     public function post()
     {
         $id = session()->get('user.id');
-        $data2 = $this->data;
+        $data['withdrawal'] = $this->data;
 
         $users = new Users();
         $older = $user = $users->findUserById($id);
         $newer = Validator::safe($_POST['user']);
 
         if ($newer['username'] !== $older['username']) {
-            $data2['status'] = 'fail';
-            $data2['errors'][] = ['message' => 'Username does not match.'];
+            $data['withdrawal']['status'] = 'fail';
+            $data['withdrawal']['errors'][] = ['message' => 'Username does not match.'];
         } elseif ('delete my account' !== $newer['verify']) {
-            $data2['status'] = 'fail';
-            $data2['errors'][] = ['message' => 'Verify not match.'];
+            $data['withdrawal']['status'] = 'fail';
+            $data['withdrawal']['errors'][] = ['message' => 'Verify not match.'];
         } elseif (!password_verify($newer['password'], $older['password'])) {
-            $data2['status'] = 'fail';
-            $data2['errors'][] = ['message' => 'Password do not match.'];
+            $data['withdrawal']['status'] = 'fail';
+            $data['withdrawal']['errors'][] = ['message' => 'Password do not match.'];
         } else {
             $users->deleteUserById($id);
 
@@ -38,7 +38,7 @@ class Withdrawal extends Controller implements ControllerInterface
             exit;
         }
 
-        echo $this->view('pages.users.account', compact('user', 'data2'));
+        echo $this->view('pages.users.account', compact('user', 'data'));
     }
 
     public function patch()

@@ -1,3 +1,5 @@
+@if($branding)
 <div class="site-branding">
-    <span class="site-title">{{ config('app.name') }}</span>
+    <a class="site-title" href="/">{{ config('app.name') }}</a>
 </div>
+@endif

@@ -1,8 +1,8 @@
 @if($navigation)
 <div class="site-navigation">
     <nav class="site-nav">
-        <a href="/">Home</a>
-        <a href="/login">Demo</a>
+        <a href="/users/{{ $user['username'] }}">Overview</a>
+        <a href="/logout">Logout</a>
     </nav>
 </div>
 @endif

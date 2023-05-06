@@ -2,10 +2,9 @@
 
 namespace App\Controllers;
 
-use App\Controllers\Controller;
 use App\Interfaces\ControllerInterface;
 
-class Index extends Controller implements ControllerInterface
+class Home extends Controller implements ControllerInterface
 {
     public function get()
     {

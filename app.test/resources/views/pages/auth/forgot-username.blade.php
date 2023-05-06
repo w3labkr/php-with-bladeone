@@ -1,10 +1,8 @@
-@extends('layouts.content', [
-    'header' => true,
+@extends('layouts.default', [
     'branding' => true,
-    'navigation' => false,
+    'navigation' => true,
     'hero' => true,
     'breadcrumb' => false,
-    'footer' => true,
     'copyright' => true,
 ])
 

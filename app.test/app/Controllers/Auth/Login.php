@@ -11,6 +11,12 @@ class Login extends Controller implements ControllerInterface
 {
     public function get()
     {
+        if (1 === session()->get('auth.loggedin')) {
+            $username = session()->get('user.username');
+            header("Location: /users/{$username}");
+            exit;
+        }
+
         echo $this->view('pages.auth.login');
     }
 

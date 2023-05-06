@@ -3,8 +3,13 @@
 use Bramus\Router\Router;
 
 return function (Router $router) {
-    $rii = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__));
+    // Define routes
+    $router->set404(function () {
+        header($_SERVER['SERVER_PROTOCOL'].' 404 Not Found');
+        echo '404 Not Found';
+    });
 
+    $rii = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__));
     $excludes = ['_', '.'];
 
     // Define routes
@@ -24,4 +29,6 @@ return function (Router $router) {
 
         (require_once $pathName)($router);
     }
+
+    $router->get('/', '\App\Controllers\Home@get');
 };

@@ -1,10 +1,8 @@
-@extends('layouts.sidebar-content', [
-    'header' => true,
+@extends('layouts.users', [
     'branding' => true,
     'navigation' => true,
     'hero' => true,
     'breadcrumb' => false,
-    'footer' => true,
     'copyright' => true,
 ])
 
@@ -41,12 +39,12 @@
                     </fieldset>
                 </form>
 
-                @isset($data)
+                @isset($data['account'])
                 <div>
-                    @if($data['status'] === 'success')
-                        {{ $data['message'] }}
-                    @elseif($data['status'] === 'fail')
-                        @foreach ($data['errors'] as $error)
+                    @if($data['account']['status'] === 'success')
+                        {{ $data['account']['message'] }}
+                    @elseif($data['account']['status'] === 'fail')
+                        @foreach ($data['account']['errors'] as $error)
                             {{ $error['message'] }}<br>
                         @endforeach
                     @endif
@@ -55,7 +53,7 @@
 
                 <br>
 
-                <form method="post" action="withdraw">
+                <form method="post" action="withdrawal">
                     <fieldset>
                         <legend>Delete Account</legend>
                         <label>
@@ -77,12 +75,12 @@
                     </fieldset>
                 </form>
 
-                @isset($data2)
+                @isset($data['withdrawal'])
                 <div>
-                    @if($data2['status'] === 'success')
-                        {{ $data2['message'] }}
-                    @elseif($data2['status'] === 'fail')
-                        @foreach ($data2['errors'] as $error)
+                    @if($data['withdrawal']['status'] === 'success')
+                        {{ $data['withdrawal']['message'] }}
+                    @elseif($data['withdrawal']['status'] === 'fail')
+                        @foreach ($data['withdrawal']['errors'] as $error)
                             {{ $error['message'] }}<br>
                         @endforeach
                     @endif

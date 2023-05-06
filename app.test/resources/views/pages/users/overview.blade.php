@@ -1,10 +1,8 @@
-@extends('layouts.sidebar-content', [
-    'header' => true,
+@extends('layouts.users', [
     'branding' => true,
     'navigation' => true,
     'hero' => true,
     'breadcrumb' => false,
-    'footer' => true,
     'copyright' => true,
 ])
 
@@ -28,7 +26,7 @@
             <h1 class="entry-title">Overview</h1>
 
             <div class="entry-content">
-                Hello, {{ $user['username'] }} !!
+                Hello, {{ $user['nickname'] }} !!
             </div><!-- .entry-content -->
 
         </div><!-- .wrap -->
