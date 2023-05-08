@@ -7,6 +7,7 @@ use App\Helpers\Validator;
 use App\Interfaces\ControllerInterface;
 use App\Models\Users;
 use Database\Factories\UserFactory;
+use App\Helpers\Session;
 
 class Register extends Controller implements ControllerInterface
 {
@@ -42,8 +43,8 @@ class Register extends Controller implements ControllerInterface
 
             session_regenerate_id();
 
-            $_SESSION['user']['id'] = $user['id'];
-            $_SESSION['user']['welcomed'] = $user['welcomed'];
+            Session::set('userid', $user['id']);
+            Session::set('welcomed', $user['welcomed']);
 
             header('Location: /welcome');
             exit;

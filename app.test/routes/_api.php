@@ -2,6 +2,8 @@
 
 use Bramus\Router\Router;
 
+use App\Helpers\Session;
+
 return function (Router $router) {
     // Define middlewares
     // ...
@@ -9,7 +11,7 @@ return function (Router $router) {
     // Define routes
     $router->mount('/api', function () use ($router) {
         $router->before('GET|POST', '/(?!v1).*', function () {
-            if (1 !== session()->get('auth.loggedin')) {
+            if (1 !== Session::get('loggedin')) {
                 header('location: /api/v1');
                 exit;
             }

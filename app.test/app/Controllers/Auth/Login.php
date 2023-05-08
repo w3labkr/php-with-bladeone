@@ -6,15 +6,33 @@ use App\Controllers\Controller;
 use App\Helpers\Validator;
 use App\Interfaces\ControllerInterface;
 use App\Models\Users;
+use App\Helpers\Session;
+use App\Helpers\Cookie;
 
 class Login extends Controller implements ControllerInterface
 {
     public function get()
     {
-        if (1 === session()->get('auth.loggedin')) {
-            $username = session()->get('user.username');
+        if (1 === Session::get('loggedin')) {
+            $username = Session::get('username');
             header("Location: /users/{$username}");
             exit;
+        }
+
+        if (cookie()->has(['username', 'remember_token'])) {
+            $username = Cookie::get('username');
+            $remember_token = Cookie::get('remember_token');
+            $user = (new Users())->findUserByUsername($username);
+
+            if (hash_equals($remember_token, $user['remember_token'])) {
+                Session::set('loggedin', 1);
+                Session::set('userid', $user['id']);
+                Session::set('username', $user['username']);
+                Session::set('is_admin', $user['is_admin']);
+
+                header("Location: /users/{$user['username']}");
+                exit;
+            }
         }
 
         echo $this->view('pages.auth.login');
@@ -24,23 +42,25 @@ class Login extends Controller implements ControllerInterface
     {
         $data = $this->data;
 
-        $users = new Users();
         $newer = Validator::safe($_POST['user']);
-        $older = $user = $users->findUserByUsername($newer['username']);
+        $older = $user = (new Users())->findUserByUsername($newer['username']);
 
         if ($user && password_verify($newer['password'], $older['password'])) {
-            if ($user['deleted_at']) {
-                // $data['status'] = 'fail';
-                // $data['errors'][] = ['message' => 'User account has been deleted.'];
-            } else {
-                $_SESSION['auth']['loggedin'] = 1;
-                $_SESSION['user']['id'] = $user['id'];
-                $_SESSION['user']['username'] = $user['username'];
-                $_SESSION['user']['is_admin'] = $user['is_admin'];
+            Session::set('loggedin', 1);
+            Session::set('userid', $user['id']);
+            Session::set('username', $user['username']);
+            Session::set('is_admin', $user['is_admin']);
 
-                header("Location: /users/{$user['username']}");
-                exit;
+            if (dot($newer)->get('remember_me') === 'on' && !cookie()->has(['username', 'remember_token'])) {
+                Cookie::set('username', $user['username'], '+30 days');
+                Cookie::set('remember_token', $user['remember_token'], '+30 days');
+            } else {
+                Cookie::del('username');
+                Cookie::del('remember_token');
             }
+
+            header("Location: /users/{$user['username']}");
+            exit;
         }
 
         $data['status'] = 'fail';

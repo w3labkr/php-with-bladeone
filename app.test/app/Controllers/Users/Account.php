@@ -6,12 +6,13 @@ use App\Controllers\Controller;
 use App\Helpers\Validator;
 use App\Interfaces\ControllerInterface;
 use App\Models\Users;
+use App\Helpers\Session;
 
 class Account extends Controller implements ControllerInterface
 {
     public function get()
     {
-        $id = session()->get('user.id');
+        $id = Session::get('userid');
         $user = (new Users())->findUserById($id);
 
         echo $this->view('pages.users.account', compact('user'));
@@ -19,7 +20,7 @@ class Account extends Controller implements ControllerInterface
 
     public function post()
     {
-        $id = session()->get('user.id');
+        $id = Session::get('userid');
         $data['account'] = $this->data;
 
         $users = new Users();

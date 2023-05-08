@@ -21,6 +21,13 @@ if (!function_exists('session')) {
     }
 }
 
+if (!function_exists('cookie')) {
+    function cookie(): Adbar\Dot
+    {
+        return dot($_COOKIE);
+    }
+}
+
 if (!function_exists('encrypt')) {
     function encrypt(mixed $data): string
     {
@@ -29,7 +36,7 @@ if (!function_exists('encrypt')) {
 }
 
 if (!function_exists('decrypt')) {
-    function decrypt(string $data): string
+    function decrypt(string $data): mixed
     {
         return \App\Helpers\Encrypter::decrypt($data);
     }
