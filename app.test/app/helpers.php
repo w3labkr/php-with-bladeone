@@ -8,23 +8,9 @@ if (!function_exists('env')) {
 }
 
 if (!function_exists('config')) {
-    function config(string $string, mixed $default = null): mixed
+    function config(string $path, mixed $default = null): mixed
     {
-        return \App\Helpers\Env::config($string, $default);
-    }
-}
-
-if (!function_exists('session')) {
-    function session(): Adbar\Dot
-    {
-        return dot($_SESSION);
-    }
-}
-
-if (!function_exists('cookie')) {
-    function cookie(): Adbar\Dot
-    {
-        return dot($_COOKIE);
+        return \App\Helpers\Env::config($path, $default);
     }
 }
 

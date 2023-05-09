@@ -1,8 +1,7 @@
 <?php
 
-use Bramus\Router\Router;
-
 use App\Helpers\Session;
+use Bramus\Router\Router;
 
 return function (Router $router) {
     // Define middlewares

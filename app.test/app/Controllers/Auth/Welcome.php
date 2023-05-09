@@ -3,9 +3,9 @@
 namespace App\Controllers\Auth;
 
 use App\Controllers\Controller;
+use App\Helpers\Session;
 use App\Interfaces\ControllerInterface;
 use App\Models\Users;
-use App\Helpers\Session;
 
 class Welcome extends Controller implements ControllerInterface
 {

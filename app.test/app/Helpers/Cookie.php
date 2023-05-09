@@ -2,25 +2,27 @@
 
 namespace App\Helpers;
 
-use App\Helpers\Validator;
-
 class Cookie
 {
-    public static function set(
-        string $name,
-        string|null $value = '',
-        string|int|null $expires_or_options = 0,
-        string|null $path = '/',
-        string|null $domain = '',
-        bool|null $secure = false,
-        bool|null $httponly = false
-    ): bool {
+    public static function set(string $name, string $value = '', array $options = []): bool
+    {
+        $encrypted_value = encrypt($value);
+        $settings = array_merge([
+            'expires' => 0,
+            'path' => '/',
+            'domain' => '',
+            'secure' => false,
+            'httponly' => false,
+            'samesite' => 'None', // None || Lax  || Strict
+        ], $options);
 
-        $_COOKIE[$name] = $encrypted_value = encrypt($value);
+        if (is_string($settings['expires'])) {
+            $settings['expires'] = strtotime($settings['expires']);
+        }
 
-        $expires_or_options = is_string($expires_or_options) ? strtotime($expires_or_options) : $expires_or_options;
+        $_COOKIE[$name] = $encrypted_value;
 
-        return setcookie($name, $encrypted_value, $expires_or_options, $path, $domain, $secure, $httponly);
+        return setcookie($name, $encrypted_value, $settings);
     }
 
     public static function get(string $name): mixed
@@ -32,23 +34,24 @@ class Cookie
         $value = $_COOKIE[$name];
         $decrypted_value = decrypt($value);
 
-        return Validator::safe($decrypted_value);
+        return htmlspecialchars(stripslashes(trim($decrypted_value)));
     }
 
-    public static function del(
-        string $name,
-        string|null $value = '',
-        string|int|null $expires_or_options = 1,
-        string|null $path = '/',
-        string|null $domain = '',
-        bool|null $secure = false,
-        bool|null $httponly = false
-    ): bool {
+    public static function has(string $name): bool
+    {
+        $value = self::get($name);
 
+        return isset($value);
+    }
+
+    public static function del(string $name): bool
+    {
         if (!isset($_COOKIE[$name])) {
             return false;
         }
 
-        return setcookie($name, $value, $expires_or_options, $path, $domain, $secure, $httponly);
+        unset($_COOKIE[$name]);
+
+        return setcookie($name, '', ['expires' => 1]);
     }
 }

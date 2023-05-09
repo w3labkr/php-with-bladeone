@@ -3,11 +3,11 @@
 namespace App\Controllers\Auth;
 
 use App\Controllers\Controller;
+use App\Helpers\Session;
 use App\Helpers\Validator;
 use App\Interfaces\ControllerInterface;
 use App\Models\Users;
 use Database\Factories\UserFactory;
-use App\Helpers\Session;
 
 class Register extends Controller implements ControllerInterface
 {

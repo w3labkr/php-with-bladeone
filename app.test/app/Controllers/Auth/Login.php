@@ -3,11 +3,11 @@
 namespace App\Controllers\Auth;
 
 use App\Controllers\Controller;
+use App\Helpers\Cookie;
+use App\Helpers\Session;
 use App\Helpers\Validator;
 use App\Interfaces\ControllerInterface;
 use App\Models\Users;
-use App\Helpers\Session;
-use App\Helpers\Cookie;
 
 class Login extends Controller implements ControllerInterface
 {
@@ -19,7 +19,7 @@ class Login extends Controller implements ControllerInterface
             exit;
         }
 
-        if (cookie()->has(['username', 'remember_token'])) {
+        if (Cookie::has('username') && Cookie::has('remember_token')) {
             $username = Cookie::get('username');
             $remember_token = Cookie::get('remember_token');
             $user = (new Users())->findUserByUsername($username);
@@ -51,9 +51,17 @@ class Login extends Controller implements ControllerInterface
             Session::set('username', $user['username']);
             Session::set('is_admin', $user['is_admin']);
 
-            if (dot($newer)->get('remember_me') === 'on' && !cookie()->has(['username', 'remember_token'])) {
-                Cookie::set('username', $user['username'], '+30 days');
-                Cookie::set('remember_token', $user['remember_token'], '+30 days');
+            if (isset($newer['remember_me']) && 'on' === $newer['remember_me']) {
+                $options = [
+                    'expires' => '+30 days',
+                    'path' => '/',
+                    'domain' => $_SERVER['SERVER_NAME'],
+                    'secure' => true,
+                    'httponly' => true,
+                    'samesite' => 'Strict',
+                ];
+                Cookie::set('username', $user['username'], $options);
+                Cookie::set('remember_token', $user['username'], $options);
             } else {
                 Cookie::del('username');
                 Cookie::del('remember_token');

@@ -37,12 +37,16 @@ class Env
         return $value;
     }
 
-    public static function config(string $string, mixed $default = null): mixed
+    public static function config(string $path, mixed $default = null): mixed
     {
-        $path = explode('.', $string);
-        $key = implode('.', array_slice($path, 1));
-        $conf = include CONFIG_PATH."/{$path[0]}.php";
+        $keys = explode('.', $path);
+        $key = implode('.', array_slice($keys, 1));
+        $conf = include CONFIG_PATH."/{$keys[0]}.php";
 
-        return dot($conf)->get($key, $default);
+        if (!Dot::has($conf, $key)) {
+            Dot::set($conf, $key, $default);
+        }
+
+        return Dot::get($conf, $key);
     }
 }

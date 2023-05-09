@@ -3,9 +3,9 @@
 namespace App\Controllers\Users;
 
 use App\Controllers\Controller;
+use App\Helpers\Session;
 use App\Interfaces\ControllerInterface;
 use App\Models\Users;
-use App\Helpers\Session;
 
 class Overview extends Controller implements ControllerInterface
 {

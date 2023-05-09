@@ -6,7 +6,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
-        "adbario/php-dot-notation": "^3.3",
         "bramus/router": "~1.6",
         "catfan/medoo": "^2.1",
         "eftec/bladeone": "^4.8",

@@ -3,10 +3,10 @@
 namespace App\Controllers\Users;
 
 use App\Controllers\Controller;
+use App\Helpers\Session;
 use App\Helpers\Validator;
 use App\Interfaces\ControllerInterface;
 use App\Models\Users;
-use App\Helpers\Session;
 
 class Security extends Controller implements ControllerInterface
 {
