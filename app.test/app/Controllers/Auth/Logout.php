@@ -3,7 +3,6 @@
 namespace App\Controllers\Auth;
 
 use App\Controllers\Controller;
-use App\Helpers\Cookie;
 use App\Interfaces\ControllerInterface;
 
 class Logout extends Controller implements ControllerInterface
@@ -12,8 +11,8 @@ class Logout extends Controller implements ControllerInterface
     {
         session_destroy();
 
-        Cookie::del('username');
-        Cookie::del('remember_token');
+        cookie('Strict')->del('uuid');
+        cookie('Strict')->del('remember_token');
 
         header('location: /');
         exit;

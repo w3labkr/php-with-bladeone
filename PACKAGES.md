@@ -1,8 +1,8 @@
-# Packages
+# Recommended Packages
 
 ## Table of Contents
 
-- [Packages](#packages)
+- [Recommended Packages](#recommended-packages)
   - [Table of Contents](#table-of-contents)
   - [Usage](#usage)
   - [List of package](#list-of-package)

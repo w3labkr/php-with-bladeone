@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 class Dot
 {
-    public static function set(array &$array, string $path, mixed $value, string $separator = '.'): void
+    public static function set(array &$array, string $path, mixed $value = null, string $separator = '.'): void
     {
         $keys = explode($separator, $path);
 

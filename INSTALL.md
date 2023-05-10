@@ -103,12 +103,12 @@ WebPack 사용시
 
 ```json
 {
-  devServer: {
-    https: {
-      key: "./app.test-key.pem",
-      cert: "./app.test.pem"
+    "devServer": {
+        "https": {
+            "key": "./app.test-key.pem",
+            "cert": "./app.test.pem"
+        }
     }
-  }
 }
 ```
 

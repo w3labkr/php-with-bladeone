@@ -3,36 +3,25 @@
 namespace App\Controllers\Auth;
 
 use App\Controllers\Controller;
-use App\Helpers\Cookie;
-use App\Helpers\Session;
 use App\Helpers\Validator;
 use App\Interfaces\ControllerInterface;
+use App\Middlewares\Auth;
 use App\Models\Users;
 
 class Login extends Controller implements ControllerInterface
 {
     public function get()
     {
-        if (1 === Session::get('loggedin')) {
-            $username = Session::get('username');
-            header("Location: /users/{$username}");
-            exit;
-        }
-
-        if (Cookie::has('username') && Cookie::has('remember_token')) {
-            $username = Cookie::get('username');
-            $remember_token = Cookie::get('remember_token');
-            $user = (new Users())->findUserByUsername($username);
-
-            if (hash_equals($remember_token, $user['remember_token'])) {
-                Session::set('loggedin', 1);
-                Session::set('userid', $user['id']);
-                Session::set('username', $user['username']);
-                Session::set('is_admin', $user['is_admin']);
-
+        if (cookie()->has('uuid') && cookie()->has('remember_token')) {
+            $user = Auth::setUser();
+            if ($user) {
                 header("Location: /users/{$user['username']}");
                 exit;
             }
+        } elseif (1 === session()->get('loggedin')) {
+            $username = session()->get('username');
+            header("Location: /users/{$username}");
+            exit;
         }
 
         echo $this->view('pages.auth.login');
@@ -46,25 +35,20 @@ class Login extends Controller implements ControllerInterface
         $older = $user = (new Users())->findUserByUsername($newer['username']);
 
         if ($user && password_verify($newer['password'], $older['password'])) {
-            Session::set('loggedin', 1);
-            Session::set('userid', $user['id']);
-            Session::set('username', $user['username']);
-            Session::set('is_admin', $user['is_admin']);
+            session()->set('loggedin', 1);
+            session()->set('userid', $user['id']);
+            session()->set('username', $user['username']);
+            session()->set('is_admin', $user['is_admin']);
 
             if (isset($newer['remember_me']) && 'on' === $newer['remember_me']) {
                 $options = [
                     'expires' => '+30 days',
-                    'path' => '/',
-                    'domain' => $_SERVER['SERVER_NAME'],
-                    'secure' => true,
-                    'httponly' => true,
-                    'samesite' => 'Strict',
                 ];
-                Cookie::set('username', $user['username'], $options);
-                Cookie::set('remember_token', $user['username'], $options);
+                cookie('Strict')->set('uuid', bin2uuid4($user['uuid']), $options);
+                cookie('Strict')->set('remember_token', $user['remember_token'], $options);
             } else {
-                Cookie::del('username');
-                Cookie::del('remember_token');
+                cookie('Strict')->del('uuid');
+                cookie('Strict')->del('remember_token');
             }
 
             header("Location: /users/{$user['username']}");

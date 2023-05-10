@@ -34,7 +34,7 @@ class Users extends Model
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public function findUserByUuid(string $uuid): array|bool
+    public function findUserByUUID(string $uuid): array|bool
     {
         $conn = $this->pdo;
 

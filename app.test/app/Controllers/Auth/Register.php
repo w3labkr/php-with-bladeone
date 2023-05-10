@@ -3,7 +3,6 @@
 namespace App\Controllers\Auth;
 
 use App\Controllers\Controller;
-use App\Helpers\Session;
 use App\Helpers\Validator;
 use App\Interfaces\ControllerInterface;
 use App\Models\Users;
@@ -43,8 +42,8 @@ class Register extends Controller implements ControllerInterface
 
             session_regenerate_id();
 
-            Session::set('userid', $user['id']);
-            Session::set('welcomed', $user['welcomed']);
+            session()->set('userid', $user['id']);
+            session()->set('welcomed', $user['welcomed']);
 
             header('Location: /welcome');
             exit;

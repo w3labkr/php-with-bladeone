@@ -59,6 +59,27 @@ if (!function_exists('str_random')) {
 if (!function_exists('generate_token')) {
     function generate_token(int $length = 16): string
     {
-        return \App\Helpers\Token::generate($length);
+        return \App\Helpers\UUID::hex($length);
+    }
+}
+
+if (!function_exists('bin2uuid4')) {
+    function bin2uuid4(string $binary = ''): string
+    {
+        return \App\Helpers\UUID::bin2uuid4($binary);
+    }
+}
+
+if (!function_exists('session')) {
+    function session(): App\Helpers\Session
+    {
+        return new \App\Helpers\Session();
+    }
+}
+
+if (!function_exists('cookie')) {
+    function cookie(string $samesite = ''): App\Helpers\Cookie
+    {
+        return new \App\Helpers\Cookie($samesite);
     }
 }

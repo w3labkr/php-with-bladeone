@@ -1,6 +1,5 @@
 <?php
 
-use App\Helpers\Session;
 use Bramus\Router\Router;
 
 return function (Router $router) {
@@ -10,7 +9,7 @@ return function (Router $router) {
     // Define routes
     $router->mount('/api', function () use ($router) {
         $router->before('GET|POST', '/(?!v1).*', function () {
-            if (1 !== Session::get('loggedin')) {
+            if (1 !== session()->get('loggedin')) {
                 header('location: /api/v1');
                 exit;
             }

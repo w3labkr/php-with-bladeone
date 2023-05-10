@@ -3,7 +3,6 @@
 namespace App\Controllers\Users;
 
 use App\Controllers\Controller;
-use App\Helpers\Session;
 use App\Helpers\Validator;
 use App\Interfaces\ControllerInterface;
 use App\Models\Users;
@@ -16,7 +15,7 @@ class Withdrawal extends Controller implements ControllerInterface
 
     public function post()
     {
-        $id = Session::get('userid');
+        $id = session()->get('userid');
         $data['withdrawal'] = $this->data;
 
         $users = new Users();

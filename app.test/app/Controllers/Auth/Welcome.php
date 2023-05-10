@@ -3,7 +3,6 @@
 namespace App\Controllers\Auth;
 
 use App\Controllers\Controller;
-use App\Helpers\Session;
 use App\Interfaces\ControllerInterface;
 use App\Models\Users;
 
@@ -11,9 +10,8 @@ class Welcome extends Controller implements ControllerInterface
 {
     public function get()
     {
-        $id = Session::get('userid');
-        $users = new Users();
-        $users->updateWelcomedById(1, $id);
+        $id = session()->get('userid');
+        (new Users())->updateWelcomedById(1, $id);
 
         session_destroy();
 

@@ -3,7 +3,6 @@
 namespace App\Controllers\Users;
 
 use App\Controllers\Controller;
-use App\Helpers\Session;
 use App\Helpers\Validator;
 use App\Interfaces\ControllerInterface;
 use App\Models\Users;
@@ -12,18 +11,15 @@ class Security extends Controller implements ControllerInterface
 {
     public function get()
     {
-        $id = Session::get('userid');
+        $id = session()->get('userid');
         $user = (new Users())->findUserById($id);
-
-        // $users = new Users();
-        // $users->updatePasswordById('1', $id);
 
         echo $this->view('pages.users.security', compact('user'));
     }
 
     public function post()
     {
-        $id = Session::get('userid');
+        $id = session()->get('userid');
         $data = $this->data;
 
         $users = new Users();

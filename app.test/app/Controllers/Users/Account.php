@@ -3,7 +3,6 @@
 namespace App\Controllers\Users;
 
 use App\Controllers\Controller;
-use App\Helpers\Session;
 use App\Helpers\Validator;
 use App\Interfaces\ControllerInterface;
 use App\Models\Users;
@@ -12,7 +11,7 @@ class Account extends Controller implements ControllerInterface
 {
     public function get()
     {
-        $id = Session::get('userid');
+        $id = session()->get('userid');
         $user = (new Users())->findUserById($id);
 
         echo $this->view('pages.users.account', compact('user'));
@@ -20,7 +19,7 @@ class Account extends Controller implements ControllerInterface
 
     public function post()
     {
-        $id = Session::get('userid');
+        $id = session()->get('userid');
         $data['account'] = $this->data;
 
         $users = new Users();

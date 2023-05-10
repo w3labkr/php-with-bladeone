@@ -4,17 +4,35 @@ namespace App\Helpers;
 
 class Cookie
 {
-    public static function set(string $name, string $value = '', array $options = []): bool
+    private $defaults = [
+        'expires' => 0,
+        'path' => '/',
+        'domain' => '',
+        'secure' => false,
+        'httponly' => false,
+        'samesite' => null, // None || Lax || Strict
+    ];
+
+    public function __construct(string $samesite = '')
+    {
+        $defaults = $this->defaults;
+
+        if ('Strict' === $samesite) {
+            $options = [
+                'domain' => $_SERVER['SERVER_NAME'],
+                'secure' => true,
+                'httponly' => true,
+                'samesite' => 'Strict',
+            ];
+        }
+
+        $this->defaults = array_merge($defaults, $options ?? []);
+    }
+
+    public function set(string $name, string $value = '', array $options = []): bool
     {
         $encrypted_value = encrypt($value);
-        $settings = array_merge([
-            'expires' => 0,
-            'path' => '/',
-            'domain' => '',
-            'secure' => false,
-            'httponly' => false,
-            'samesite' => 'None', // None || Lax  || Strict
-        ], $options);
+        $settings = array_merge($this->defaults, $options);
 
         if (is_string($settings['expires'])) {
             $settings['expires'] = strtotime($settings['expires']);
@@ -25,7 +43,7 @@ class Cookie
         return setcookie($name, $encrypted_value, $settings);
     }
 
-    public static function get(string $name): mixed
+    public function get(string $name): mixed
     {
         if (!isset($_COOKIE[$name])) {
             return null;
@@ -37,21 +55,24 @@ class Cookie
         return htmlspecialchars(stripslashes(trim($decrypted_value)));
     }
 
-    public static function has(string $name): bool
+    public function has(string $name): bool
     {
         $value = self::get($name);
 
         return isset($value);
     }
 
-    public static function del(string $name): bool
+    public function del(string $name, array $options = []): bool
     {
         if (!isset($_COOKIE[$name])) {
             return false;
         }
 
+        $settings = array_merge($this->defaults, $options);
+        $settings['expires'] = 1;
+
         unset($_COOKIE[$name]);
 
-        return setcookie($name, '', ['expires' => 1]);
+        return setcookie($name, '', $settings);
     }
 }

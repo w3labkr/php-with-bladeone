@@ -17,7 +17,7 @@ return function (Router $router) {
         $pathName = $file->getPathname();
         $fileName = $file->getFileName();
 
-        if ($file->isDir() || $fileName === basename(__FILE__)) {
+        if ($file->isDir() || __FILE__ === $pathName) {
             continue;
         }
 

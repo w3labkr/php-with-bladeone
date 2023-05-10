@@ -3,9 +3,6 @@
 use Bramus\Router\Router;
 
 return function (Router $router) {
-    // Define middlewares
-    // $router->before('GET|POST', '/(logout|farewell)', '\App\Middlewares\Auth@isLogin');
-
     // Define routes
     $router->get('/login', '\App\Controllers\Auth\Login@get');
     $router->post('/login', '\App\Controllers\Auth\Login@post');
