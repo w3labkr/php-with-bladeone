@@ -16,6 +16,7 @@ The default page is shown below.
   - [Recommended Packages](#recommended-packages)
   - [Useful Commands](#useful-commands)
   - [Usage](#usage)
+    - [Facker](#facker)
     - [Router](#router)
     - [Session](#session)
     - [Cookie](#cookie)
@@ -89,6 +90,15 @@ You can see more details on the page below.
 - [COMMANDS](COMMANDS.md)
 
 ## Usage
+
+### Facker
+
+Generates fake data
+
+```php
+$faker = new \App\Models\UserFaker();
+$faker->createTable()->factory(10);
+```
 
 ### Router
 
