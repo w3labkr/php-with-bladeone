@@ -4,5 +4,5 @@ namespace App\Interfaces;
 
 interface MiddlewareInterface
 {
-    public function auth();
+    public static function auth(): void;
 }

@@ -4,11 +4,11 @@ namespace App\Middlewares;
 
 use App\Interfaces\MiddlewareInterface;
 
-class Welcome implements MiddlewareInterface
+class Admin implements MiddlewareInterface
 {
     public static function auth(): void
     {
-        if (!session()->has('welcomed')) {
+        if (1 !== session()->get('is_admin')) {
             header('location: /logout');
             exit;
         }

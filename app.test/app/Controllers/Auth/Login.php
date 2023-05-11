@@ -5,7 +5,6 @@ namespace App\Controllers\Auth;
 use App\Controllers\Controller;
 use App\Helpers\Validator;
 use App\Interfaces\ControllerInterface;
-use App\Middlewares\Auth;
 use App\Models\Users;
 
 class Login extends Controller implements ControllerInterface
@@ -13,7 +12,7 @@ class Login extends Controller implements ControllerInterface
     public function get()
     {
         if (cookie()->has('uuid') && cookie()->has('remember_token')) {
-            $user = Auth::setUser();
+            $user = \App\Middlewares\Users::setUser();
             if ($user) {
                 header("Location: /users/{$user['username']}");
                 exit;
