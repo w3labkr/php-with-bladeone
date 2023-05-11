@@ -136,6 +136,13 @@ cd app.test
 
 ### MISC
 
+- [firebase/php-jwt](https://github.com/firebase/php-jwt)  
+  PHP package for JWT
+
+  ```shell
+  composer require firebase/php-jwt
+  ```
+
 - [adbario/php-dot-notation](https://github.com/adbario/php-dot-notation)  
   Dot notation access to PHP arrays
 
@@ -183,4 +190,11 @@ cd app.test
 
   ```shell
   composer require phpseclib/phpseclib:~3.0
+  ```
+
+- [gettext/gettext](https://github.com/php-gettext/Gettext)  
+  PHP library to collect and manipulate gettext (.po, .mo, .php, .json, etc)
+
+  ```shell
+  composer require gettext/gettext
   ```
