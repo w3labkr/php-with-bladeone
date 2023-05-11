@@ -4,7 +4,10 @@ This is a starter project using the php mvp pattern without a framework. As it i
 
 The default page is shown below.
 
-- register, withdrawal, login, logout, remember me, overview, profile, account, security.
+- register, welcome, withdrawal, farewell
+- login, logout, remember me
+- forgot password, forgot username, reset password
+- overview, profile, account, security.
 
 ## Table of Contents
 
