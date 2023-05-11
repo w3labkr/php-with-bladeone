@@ -31,7 +31,7 @@ class Auth
         } elseif (1 !== session()->get('loggedin')) {
             header('location: /logout');
             exit;
-        } elseif (session()->get('username') !== $username) {
+        } elseif (!hash_equals(session()->get('username'), $username)) {
             header('location: /logout');
             exit;
         }

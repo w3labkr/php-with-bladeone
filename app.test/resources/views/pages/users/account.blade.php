@@ -32,7 +32,7 @@
                         <legend>Change username</legend>
                         <label>
                             <span>Username</span><br>
-                            <input type="text" name="user[username]" required />
+                            <input type="text" name="user[username]" value="{{ $user['username'] }}" required />
                         </label>
                         <br>
                         <button type="submit">Change username</button>
@@ -58,17 +58,17 @@
                         <legend>Delete Account</legend>
                         <label>
                             <span>Your username</span><br>
-                            <input type="text" name="user[username]" value="qwe" required />
+                            <input type="text" name="user[username]" value="{{ $user['username'] }}" required />
                         </label>
                         <br>
                         <label>
                             <span>To verify, type <i>delete my account</i> below</span><br>
-                            <input type="text" name="user[verify]" value="delete my account" required />
+                            <input type="text" name="user[verify]" required />
                         </label>
                         <br>
                         <label>
                             <span>Confirm your password</span><br>
-                            <input type="password" name="user[password]" value="123456" required />
+                            <input type="password" name="user[password]" required />
                         </label>
                         <br>
                         <button type="submit">Delete your account</button>

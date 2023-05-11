@@ -143,11 +143,11 @@ Set non-strict mode
 - samesite: `null`
 
 ```php
-cookie()->set('name', 'value');
+cookie()->set('key', 'value');
 ```
 
 ```php
-cookie()->set('name', 'value', [
+cookie()->set('key', 'value', [
     'expires' => 0,
     'path' => '/',
     'domain' => '',
@@ -155,6 +155,14 @@ cookie()->set('name', 'value', [
     'httponly' => false,
     'samesite' => null,
 ]);
+```
+
+```php
+cookie()->get('key');
+```
+
+```php
+cookie()->has('key');
 ```
 
 Set strict mode
@@ -167,11 +175,11 @@ Set strict mode
 - samesite: `'Strict'`
 
 ```php
-cookie('Strict')->set('name', 'value');
+cookie('Strict')->set('key', 'value');
 ```
 
 ```php
-cookie()->set('name', 'value', [
+cookie()->set('key', 'value', [
     'expires' => 0,
     'path' => '/',
     'domain' => $_SERVER['SERVER_NAME'],
@@ -181,10 +189,14 @@ cookie()->set('name', 'value', [
 ]);
 ```
 
+```php
+cookie('Strict')->del('key');
+```
+
 Supports the strtotime() function when the expires value is a string time.
 
 ```php
-cookie()->set('name', 'value', [
+cookie()->set('key', 'value', [
     'expires' => 'now',
     'expires' => '+1 seconds',
     'expires' => '+1 hours',
@@ -199,16 +211,7 @@ cookie()->set('name', 'value', [
 ```
 
 ```php
-cookie()->get('name');
-```
-
-```php
-cookie()->has('name');
-```
-
-```php
-cookie()->del('name');
-cookie('Strict')->del('name');
+cookie('Strict')->del('key');
 ```
 
 ## License

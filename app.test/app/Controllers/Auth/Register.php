@@ -35,6 +35,7 @@ class Register extends Controller implements ControllerInterface
             $factory = new UserFactory();
             $params = array_merge($factory->definition(), $factory->unverified(), $newer);
 
+            $params['nickname'] = $params['username'];
             unset($params['confirm_password']);
 
             $users->addUser($params);

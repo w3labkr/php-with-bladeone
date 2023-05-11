@@ -26,28 +26,23 @@
             <h1 class="entry-title">Signup</h1>
 
             <div class="entry-content">
-                @php
-                $faker = Faker\Factory::create('ko_KR');
-                $faker->seed(1234);
-                @endphp
-
                 <form method="post" action="register">
                     <table>
                         <tr>
                             <td>Username</td>
-                            <td><input type="text" name="user[username]" value="{{ $faker->userName() }}" required /></td>
+                            <td><input type="text" name="user[username]" value="username" required /></td>
                         </tr>
                         <tr>
                             <td>Email</td>
-                            <td><input type="text" name="user[email]" value="{{ $faker->unique()->safeEmail() }}" required /></td>
+                            <td><input type="text" name="user[email]" value="username@example.com" required /></td>
                         </tr>
                         <tr>
                             <td>Password</td>
-                            <td><input type="password" name="user[password]" value="123456" required /></td>
+                            <td><input type="password" name="user[password]" value="password" required /></td>
                         </tr>
                         <tr>
                             <td>Confirm Password</td>
-                            <td><input type="password" name="user[confirm_password]" value="123456" required /></td>
+                            <td><input type="password" name="user[confirm_password]" value="password" required /></td>
                         </tr>
                         <tr>
                             <td colspan="2">

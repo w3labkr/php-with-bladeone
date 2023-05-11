@@ -10,7 +10,7 @@ class Cookie
         'domain' => '',
         'secure' => false,
         'httponly' => false,
-        'samesite' => null, // None || Lax || Strict
+        'samesite' => null, // "lax", "strict", "none", null
     ];
 
     public function __construct(string $samesite = '')

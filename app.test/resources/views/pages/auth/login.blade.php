@@ -30,11 +30,11 @@
                     <table>
                         <tr>
                             <td>Username</td>
-                            <td><input type="text" name="user[username]" value="qjung" required /></td>
+                            <td><input type="text" name="user[username]" value="username" required /></td>
                         </tr>
                         <tr>
                             <td>Password</td>
-                            <td><input type="password" name="user[password]" value="123456" required /></td>
+                            <td><input type="password" name="user[password]" value="password" required /></td>
                         </tr>
                         <tr>
                             <td>

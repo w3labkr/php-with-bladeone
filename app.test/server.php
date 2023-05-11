@@ -1,17 +1,23 @@
 <?php
 
-// Set the error reporting level.
-// Prior to PHP 8.0.0, the default value was: E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED.
-error_reporting(E_ALL);
-
-// This determines whether errors should be printed to the screen as part of the output or if they should be hidden from the user.
-ini_set('display_errors', 1);
-
 // Constants of Application
 require_once __DIR__ . '/config/constants.php';
 
 // Require Composer Autoloader
 require __DIR__ . '/vendor/autoload.php';
+
+// Set the current session save path
+session_save_path(SESSION_PATH);
+
+// The probability that the gc (garbage collection) process is started on every session initialization.
+ini_set('session.gc_probability', 1);
+ini_set('session.gc_divisor', 100);
+
+// Specifies the number of seconds after which data will be seen as 'garbage' and potentially cleaned up.
+ini_set('session.gc_maxlifetime', config('session.lifetime'));
+
+// Creates a session or resumes the current one based on a session identifier passed via a GET or POST request, or passed via a cookie.
+session_start();
 
 // Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
@@ -28,6 +34,6 @@ if (!config('app.debug')) {
 // require_once __DIR__ . '/app/ThirdParty/logger.php';
 
 // Generates fake data
-$faker = new \App\Models\UserFaker();
-$faker->createTable()->factory(10);
+// $faker = new \App\Models\UserFaker();
+// $faker->createTable()->factory(10);
 // $faker->test();
