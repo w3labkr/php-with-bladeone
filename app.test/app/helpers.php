@@ -73,7 +73,7 @@ if (!function_exists('bin2uuid4')) {
 if (!function_exists('session')) {
     function session(): App\Helpers\Session
     {
-        return new \App\Helpers\Session();
+        return new \App\Helpers\Session;
     }
 }
 
@@ -81,5 +81,12 @@ if (!function_exists('cookie')) {
     function cookie(string $samesite = ''): App\Helpers\Cookie
     {
         return new \App\Helpers\Cookie($samesite);
+    }
+}
+
+if (!function_exists('mailer')) {
+    function mailer(): PHPMailer\PHPMailer\PHPMailer
+    {
+        return \App\Helpers\Mailer::smtp();
     }
 }

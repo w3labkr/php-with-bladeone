@@ -34,7 +34,7 @@
                         </tr>
                         <tr>
                             <td>Email</td>
-                            <td><input type="text" name="user[email]" value="username@example.com" required /></td>
+                            <td><input type="email" name="user[email]" value="username@example.com" required /></td>
                         </tr>
                         <tr>
                             <td>Password</td>
@@ -51,6 +51,8 @@
                         </tr>
                     </table>
                 </form>
+
+                <br>
 
                 @isset($data)
                 <div>

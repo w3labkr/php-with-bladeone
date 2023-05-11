@@ -50,6 +50,8 @@
                     </table>
                 </form>
 
+                <br>
+
                 @isset($data)
                 <div>
                     @if($data['status'] === 'success')

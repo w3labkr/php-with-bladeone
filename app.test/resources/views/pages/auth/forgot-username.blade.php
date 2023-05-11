@@ -30,17 +30,31 @@
             </p>
 
             <div class="entry-content">
-                <form method="post" action="forgot-password">
-                    <fieldset>
-                        <legend>Forgot username</legend>
-                        <label>
-                            <span>Email</span><br>
-                            <input type="text" name="user[email]"  required/>
-                        </label>
-                        <br>
-                        <button type="submit">Find my username</button>
-                    </fieldset>
-                </form>
+                @if(isset($data) && $data['status'] === 'success')
+                    {{ $data['message'] }}
+                @else
+                    <form method="post" action="forgot-username">
+                        <fieldset>
+                            <legend>Forgot username</legend>
+                            <label>
+                                <span>Email</span><br>
+                                <input type="email" name="user[email]" required/>
+                            </label>
+                            <br>
+                            <button type="submit">Find my username</button>
+                        </fieldset>
+                    </form>
+                @endif
+
+                <br>
+
+                @if(isset($data) && $data['status'] === 'fail')
+                    <div>
+                        @foreach ($data['errors'] as $error)
+                            {{ $error['message'] }}<br>
+                        @endforeach
+                    </div>
+                @endif
 
                 <br>
 
