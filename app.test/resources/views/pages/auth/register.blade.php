@@ -30,19 +30,19 @@
                     <table>
                         <tr>
                             <td>Username</td>
-                            <td><input type="text" name="user[username]" value="username" required /></td>
+                            <td><input type="text" name="user[username]" required /></td>
                         </tr>
                         <tr>
                             <td>Email</td>
-                            <td><input type="email" name="user[email]" value="username@example.com" required /></td>
+                            <td><input type="email" name="user[email]" required /></td>
                         </tr>
                         <tr>
                             <td>Password</td>
-                            <td><input type="password" name="user[password]" value="password" required /></td>
+                            <td><input type="password" name="user[password]" required /></td>
                         </tr>
                         <tr>
                             <td>Confirm Password</td>
-                            <td><input type="password" name="user[confirm_password]" value="password" required /></td>
+                            <td><input type="password" name="user[confirm_password]" required /></td>
                         </tr>
                         <tr>
                             <td colspan="2">
