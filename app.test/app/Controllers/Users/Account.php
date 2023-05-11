@@ -11,27 +11,27 @@ class Account extends Controller implements ControllerInterface
 {
     public function get()
     {
-        $id = session()->get('userid');
-        $user = (new Users())->findUserById($id);
+        $userid = session()->get('userid');
+        $user = (new Users())->findUserById($userid);
 
         echo $this->view('pages.users.account', compact('user'));
     }
 
     public function post()
     {
-        $id = session()->get('userid');
         $data['account'] = $this->data;
+        $post = Validator::safe($_POST['user']);
 
         $users = new Users();
-        $older = $user = $users->findUserById($id);
-        $newer = Validator::safe($_POST['user']);
+        $userid = session()->get('userid');
+        $user = $users->findUserById($userid);
 
-        if ($users->findUserByUsername($newer['username'])) {
+        if ($users->findUserByUsername($post['username'])) {
             $data['account']['status'] = 'fail';
             $data['account']['errors'][] = ['message' => 'Username already exists.'];
         } else {
-            $users->updateUsernameById($newer['username'], $id);
-            $user = $users->findUserById($id);
+            $users->updateUsernameById($post['username'], $userid);
+            $user = $users->findUserById($userid);
 
             $data['account']['status'] = 'success';
             $data['account']['message'] = 'Your username has been successfully changed.';

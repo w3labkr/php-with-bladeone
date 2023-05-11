@@ -46,9 +46,8 @@
                     </form>
                 @endif
 
-                <br>
-
                 @if(isset($data) && $data['status'] === 'fail')
+                    <br>
                     <div>
                         @foreach ($data['errors'] as $error)
                             {{ $error['message'] }}<br>

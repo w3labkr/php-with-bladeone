@@ -1,10 +1,10 @@
 <?php
 
 // Constants of Application
-require_once __DIR__ . '/config/constants.php';
+require_once __DIR__.'/config/constants.php';
 
 // Require Composer Autoloader
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__.'/vendor/autoload.php';
 
 // Set the current session save path
 session_save_path(SESSION_PATH);

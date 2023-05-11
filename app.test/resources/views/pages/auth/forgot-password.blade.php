@@ -26,7 +26,7 @@
             <h1 class="entry-title">Forgot your password?</h1>
 
             <p class="entry-summary">
-                Enter your Username below and we will send a message to reset your password.
+                Enter your username below and we'll email you a password reset code.
             </p>
 
             <div class="entry-content">
@@ -41,6 +41,15 @@
                         <button type="submit">Reset my password</button>
                     </fieldset>
                 </form>
+
+                @if(isset($data) && $data['status'] === 'fail')
+                    <br>
+                    <div>
+                        @foreach ($data['errors'] as $error)
+                            {{ $error['message'] }}<br>
+                        @endforeach
+                    </div>
+                @endif
 
                 <br>
 

@@ -18,28 +18,28 @@ class Register extends Controller implements ControllerInterface
     public function post()
     {
         $data = $this->data;
+        $post = Validator::safe($_POST['user']);
 
         $users = new Users();
-        $newer = Validator::safe($_POST['user']);
 
-        if ($newer['password'] !== $newer['confirm_password']) {
+        if ($post['password'] !== $post['confirm_password']) {
             $data['status'] = 'fail';
             $data['errors'][] = ['message' => 'Passwords do not match.'];
-        } elseif ($users->findUserByUsername($newer['username'])) {
+        } elseif ($users->findUserByUsername($post['username'])) {
             $data['status'] = 'fail';
             $data['errors'][] = ['message' => 'Username already exists.'];
-        } elseif ($users->findUserByEmail($newer['email'])) {
+        } elseif ($users->findUserByEmail($post['email'])) {
             $data['status'] = 'fail';
             $data['errors'][] = ['message' => 'Email already exists.'];
         } else {
             $factory = new UserFactory();
-            $params = array_merge($factory->definition(), $factory->unverified(), $newer);
+            $params = array_merge($factory->definition(), $factory->unverified(), $post);
 
             $params['nickname'] = $params['username'];
             unset($params['confirm_password']);
 
             $users->addUser($params);
-            $user = $users->findUserByUsername($newer['username']);
+            $user = $users->findUserByUsername($post['username']);
 
             session_regenerate_id();
 

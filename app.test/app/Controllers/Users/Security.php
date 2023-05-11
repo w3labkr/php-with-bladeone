@@ -11,32 +11,33 @@ class Security extends Controller implements ControllerInterface
 {
     public function get()
     {
-        $id = session()->get('userid');
-        $user = (new Users())->findUserById($id);
+        $userid = session()->get('userid');
+        $user = (new Users())->findUserById($userid);
 
         echo $this->view('pages.users.security', compact('user'));
     }
 
     public function post()
     {
-        $id = session()->get('userid');
         $data = $this->data;
+        $post = Validator::safe($_POST['user']);
 
         $users = new Users();
-        $older = $user = $users->findUserById($id);
-        $newer = Validator::safe($_POST['user']);
+        $userid = session()->get('userid');
+        $user = $users->findUserById($userid);
 
-        if (!password_verify($newer['password'], $older['password'])) {
+        if (!password_verify($post['password'], $user['password'])) {
             $data['status'] = 'fail';
             $data['errors'][] = ['message' => 'Old password do not match.'];
-        } elseif (password_verify($newer['new_password'], $older['password'])) {
+        } elseif (password_verify($post['new_password'], $user['password'])) {
             $data['status'] = 'fail';
             $data['errors'][] = ['message' => 'It cannot be changed with the same password.'];
-        } elseif ($newer['new_password'] !== $newer['confirm_new_password']) {
+        } elseif ($post['new_password'] !== $post['confirm_new_password']) {
             $data['status'] = 'fail';
             $data['errors'][] = ['message' => 'New password does not match.'];
         } else {
-            $users->updatePasswordById($newer['new_password'], $id);
+            $users->updatePasswordById($post['new_password'], $userid);
+            $data['status'] = 'success';
             $data['message'] = 'Your password has been successfully changed.';
         }
 

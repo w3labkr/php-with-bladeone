@@ -30,17 +30,17 @@ class Login extends Controller implements ControllerInterface
     public function post()
     {
         $data = $this->data;
+        $post = Validator::safe($_POST['user']);
 
-        $newer = Validator::safe($_POST['user']);
-        $older = $user = (new Users())->findUserByUsername($newer['username']);
+        $user = (new Users())->findUserByUsername($post['username']);
 
-        if ($user && password_verify($newer['password'], $older['password'])) {
+        if ($user && password_verify($post['password'], $user['password'])) {
             session()->set('loggedin', 1);
             session()->set('userid', $user['id']);
             session()->set('username', $user['username']);
             session()->set('is_admin', $user['is_admin']);
 
-            if (isset($newer['remember_me']) && 'on' === $newer['remember_me']) {
+            if (isset($post['remember_me']) && 'on' === $post['remember_me']) {
                 $options = [
                     'expires' => '+30 days',
                 ];

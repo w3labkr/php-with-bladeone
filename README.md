@@ -20,6 +20,7 @@ The default page is shown below.
     - [Router](#router)
     - [Session](#session)
     - [Cookie](#cookie)
+    - [String](#string)
   - [License](#license)
 
 ## Environment
@@ -212,6 +213,17 @@ cookie()->set('key', 'value', [
 
 ```php
 cookie('Strict')->del('key');
+```
+
+### String
+
+Replace string with new characters for privacy.
+
+```php
+substr_replace_offset('foobar', '*'); // ******
+substr_replace_offset('foobar', '*', 1); // f*****
+substr_replace_offset('foobar', '*', 0, 1); // *****r
+substr_replace_offset('foobar', '*', 1, 1); // f****r
 ```
 
 ## License

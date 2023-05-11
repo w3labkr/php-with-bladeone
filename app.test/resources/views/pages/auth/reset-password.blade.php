@@ -26,31 +26,44 @@
             <h1 class="entry-title">Reset password</h1>
 
             <p class="entry-summary">
-                We have sent a password reset code by email to a***@g***. Enter it below to reset your password.
+                We have sent a password reset code to your email {{ $user['email'] }}. Enter below to reset your password.
             </p>
 
             <div class="entry-content">
-                <form method="post" action="reset-password">
-                    <fieldset>
-                        <legend>Reset password</legend>
-                        <label>
-                            <span>Code</span><br>
-                            <input type="text" name="user[reset_password_code]" required />
-                        </label>
-                        <br>
-                        <label>
-                            <span>New password</span><br>
-                            <input type="password" name="user[new_password]" required />
-                        </label>
-                        <br>
-                        <label>
-                            <span>Enter new password again</span><br>
-                            <input type="password" name="user[confirm_new_password]" required />
-                        </label>
-                        <br>
-                        <button type="submit">Change password</button>
-                    </fieldset>
-                </form>
+                @if(isset($data) && $data['status'] === 'success')
+                    {{ $data['message'] }}
+                @else
+                    <form method="post" action="reset-password">
+                        <fieldset>
+                            <legend>Reset password</legend>
+                            <label>
+                                <span>Code</span><br>
+                                <input type="text" name="user[reset_password_code]" required />
+                            </label>
+                            <br>
+                            <label>
+                                <span>New password</span><br>
+                                <input type="password" name="user[new_password]" required />
+                            </label>
+                            <br>
+                            <label>
+                                <span>Enter new password again</span><br>
+                                <input type="password" name="user[confirm_new_password]" required />
+                            </label>
+                            <br>
+                            <button type="submit">Change password</button>
+                        </fieldset>
+                    </form>
+                @endif
+
+                @if(isset($data) && $data['status'] === 'fail')
+                    <br>
+                    <div>
+                        @foreach ($data['errors'] as $error)
+                            {{ $error['message'] }}<br>
+                        @endforeach
+                    </div>
+                @endif
 
                 <br>
 

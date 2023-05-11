@@ -28,6 +28,48 @@ if (!function_exists('decrypt')) {
     }
 }
 
+if (!function_exists('generate_token')) {
+    function generate_token(int $length = 16): string
+    {
+        return \App\Helpers\UUID::hex($length);
+    }
+}
+
+if (!function_exists('bin2uuid4')) {
+    function bin2uuid4(string $binary = ''): string
+    {
+        return \App\Helpers\UUID::bin2uuid4($binary);
+    }
+}
+
+if (!function_exists('session')) {
+    function session(): App\Helpers\Session
+    {
+        return new \App\Helpers\Session();
+    }
+}
+
+if (!function_exists('cookie')) {
+    function cookie(string $samesite = ''): App\Helpers\Cookie
+    {
+        return new \App\Helpers\Cookie($samesite);
+    }
+}
+
+if (!function_exists('mailer')) {
+    function mailer(): PHPMailer\PHPMailer\PHPMailer
+    {
+        return \App\Helpers\Mailer::smtp();
+    }
+}
+
+if (!function_exists('str_random')) {
+    function str_random(int $length = 10): string
+    {
+        return \App\Helpers\Str::random($length);
+    }
+}
+
 if (!function_exists('str_starts_with')) {
     function str_starts_with(string $haystack, string $needle): bool
     {
@@ -49,44 +91,9 @@ if (!function_exists('str_contains')) {
     }
 }
 
-if (!function_exists('str_random')) {
-    function str_random(int $length = 10): string
+if (!function_exists('substr_replace_offset')) {
+    function substr_replace_offset(string $search, string $replace, int $start = 0, int|null $end = null): string
     {
-        return \App\Helpers\Str::random($length);
-    }
-}
-
-if (!function_exists('generate_token')) {
-    function generate_token(int $length = 16): string
-    {
-        return \App\Helpers\UUID::hex($length);
-    }
-}
-
-if (!function_exists('bin2uuid4')) {
-    function bin2uuid4(string $binary = ''): string
-    {
-        return \App\Helpers\UUID::bin2uuid4($binary);
-    }
-}
-
-if (!function_exists('session')) {
-    function session(): App\Helpers\Session
-    {
-        return new \App\Helpers\Session;
-    }
-}
-
-if (!function_exists('cookie')) {
-    function cookie(string $samesite = ''): App\Helpers\Cookie
-    {
-        return new \App\Helpers\Cookie($samesite);
-    }
-}
-
-if (!function_exists('mailer')) {
-    function mailer(): PHPMailer\PHPMailer\PHPMailer
-    {
-        return \App\Helpers\Mailer::smtp();
+        return \App\Helpers\Str::substr_replace_offset($search, $replace, $start, $end);
     }
 }

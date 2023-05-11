@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 
-/**
+/*
  * PHPMailer – A full-featured email creation and transfer class for PHP.
  *
  * The classic email sending library for PHP

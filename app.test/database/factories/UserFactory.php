@@ -15,7 +15,6 @@ class UserFactory extends Factory
             'email_verification_token' => bin2hex(random_bytes(16)),
             'email_verified_at' => date('Y-m-d H:i:s'),
             'password' => 'password',
-            'reset_password_code' => rand(100000, 999999),
             'remember_token' => bin2hex(random_bytes(16)),
             'status' => 0,
             'welcomed' => 0,

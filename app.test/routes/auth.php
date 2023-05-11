@@ -18,12 +18,15 @@ return function (Router $router) {
     $router->get('/forgot-password', '\App\Controllers\Auth\ForgotPassword@get');
     $router->post('/forgot-password', '\App\Controllers\Auth\ForgotPassword@post');
 
+    // Define routes
+    // $router->before('GET|POST', '/reset-password', '\App\Middlewares\Auth@isResetPassword');
     $router->get('/reset-password', '\App\Controllers\Auth\ResetPassword@get');
     $router->post('/reset-password', '\App\Controllers\Auth\ResetPassword@post');
-
-    $router->get('/farewell', '\App\Controllers\Auth\Farewell@get');
 
     // Define routes
     $router->before('GET', '/welcome', '\App\Middlewares\Auth@isWelcome');
     $router->get('/welcome', '\App\Controllers\Auth\Welcome@get');
+
+    // Define routes
+    $router->get('/farewell', '\App\Controllers\Auth\Farewell@get');
 };

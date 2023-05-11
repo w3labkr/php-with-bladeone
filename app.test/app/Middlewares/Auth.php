@@ -47,7 +47,15 @@ class Auth
 
     public static function isWelcome()
     {
-        if (0 !== session()->get('welcomed')) {
+        if (!session()->has('welcomed')) {
+            header('location: /logout');
+            exit;
+        }
+    }
+
+    public static function isResetPassword()
+    {
+        if (!session()->has('reset_password_code')) {
             header('location: /logout');
             exit;
         }

@@ -10,8 +10,8 @@ class Overview extends Controller implements ControllerInterface
 {
     public function get()
     {
-        $id = session()->get('userid');
-        $user = (new Users())->findUserById($id);
+        $userid = session()->get('userid');
+        $user = (new Users())->findUserById($userid);
 
         echo $this->view('pages.users.overview', compact('user'));
     }

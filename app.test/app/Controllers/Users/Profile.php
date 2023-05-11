@@ -11,41 +11,41 @@ class Profile extends Controller implements ControllerInterface
 {
     public function get()
     {
-        $id = session()->get('userid');
-        $user = (new Users())->findUserById($id);
+        $userid = session()->get('userid');
+        $user = (new Users())->findUserById($userid);
 
         echo $this->view('pages.users.profile', compact('user'));
     }
 
     public function post()
     {
-        $id = session()->get('userid');
         $data = $this->data;
+        $post = Validator::safe($_POST['user']);
 
         $users = new Users();
-        $older = $users->findUserById($id);
-        $newer = Validator::safe($_POST['user']);
+        $userid = session()->get('userid');
+        $user = $users->findUserById($userid);
 
-        if ($older['nickname'] === $newer['nickname']) {
+        if ($user['nickname'] === $post['nickname']) {
             // ...
         } else {
-            $users->updateNicknameById($newer['nickname'], $id);
+            $users->updateNicknameById($post['nickname'], $userid);
             $data['status'] = 'success';
             $data['message'] = 'Your profile has been successfully changed.';
         }
 
-        if ($older['email'] === $newer['email']) {
+        if ($user['email'] === $post['email']) {
             // ...
-        } elseif ($users->findUserByEmail($newer['email'])) {
+        } elseif ($users->findUserByEmail($post['email'])) {
             $data['status'] = 'fail';
             $data['errors'][] = ['message' => 'Email already exists.'];
         } else {
-            $users->updateEmailById($newer['email'], $id);
+            $users->updateEmailById($post['email'], $userid);
             $data['status'] = 'success';
             $data['message'] = 'Your profile has been successfully changed.';
         }
 
-        $user = $users->findUserById($id);
+        $user = $users->findUserById($userid);
 
         echo $this->view('pages.users.profile', compact('user', 'data'));
     }

@@ -14,7 +14,6 @@ CREATE TABLE `users` (
   `email_verification_token` char(32) DEFAULT NULL,
   `email_verified_at` datetime DEFAULT NULL,
   `password` varchar(255) NOT NULL DEFAULT '',
-  `reset_password_code` varchar(255) DEFAULT NULL,
   `remember_token` char(32) DEFAULT NULL,
   `status` int NOT NULL DEFAULT '0',
   `welcomed` tinyint(1) NOT NULL DEFAULT '0',

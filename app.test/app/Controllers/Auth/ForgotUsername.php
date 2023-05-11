@@ -3,10 +3,10 @@
 namespace App\Controllers\Auth;
 
 use App\Controllers\Controller;
-use App\Interfaces\ControllerInterface;
-use PHPMailer\PHPMailer\Exception;
 use App\Helpers\Validator;
+use App\Interfaces\ControllerInterface;
 use App\Models\Users;
+use PHPMailer\PHPMailer\Exception;
 
 class ForgotUsername extends Controller implements ControllerInterface
 {
@@ -18,8 +18,9 @@ class ForgotUsername extends Controller implements ControllerInterface
     public function post()
     {
         $data = $this->data;
-        $newer = Validator::safe($_POST['user']);
-        $user = (new Users())->findUserByEmail($newer['email']);
+        $post = Validator::safe($_POST['user']);
+
+        $user = (new Users())->findUserByEmail($post['email']);
 
         if ($user) {
             $mailer = mailer();
@@ -27,7 +28,7 @@ class ForgotUsername extends Controller implements ControllerInterface
             $mailer->addAddress($user['email']);
 
             $mailer->isHTML(true);
-            $mailer->Subject = 'Username Requested from ' . config('app.name');
+            $mailer->Subject = 'Find your username';
 
             $mailer->Body = "
                 Hi! {$user['nickname']},
@@ -51,7 +52,7 @@ class ForgotUsername extends Controller implements ControllerInterface
             }
         } else {
             $data['status'] = 'fail';
-            $data['errors'][] = ['message' => "Email not found."];
+            $data['errors'][] = ['message' => 'Email not found.'];
         }
 
         echo $this->view('pages.auth.forgot-username', compact('data'));

@@ -15,24 +15,24 @@ class Withdrawal extends Controller implements ControllerInterface
 
     public function post()
     {
-        $id = session()->get('userid');
         $data['withdrawal'] = $this->data;
+        $post = Validator::safe($_POST['user']);
 
         $users = new Users();
-        $older = $user = $users->findUserById($id);
-        $newer = Validator::safe($_POST['user']);
+        $userid = session()->get('userid');
+        $user = $users->findUserById($userid);
 
-        if ($newer['username'] !== $older['username']) {
+        if ($post['username'] !== $user['username']) {
             $data['withdrawal']['status'] = 'fail';
             $data['withdrawal']['errors'][] = ['message' => 'Username does not match.'];
-        } elseif ('delete my account' !== $newer['verify']) {
+        } elseif ('delete my account' !== $post['verify']) {
             $data['withdrawal']['status'] = 'fail';
             $data['withdrawal']['errors'][] = ['message' => 'Verify not match.'];
-        } elseif (!password_verify($newer['password'], $older['password'])) {
+        } elseif (!password_verify($post['password'], $user['password'])) {
             $data['withdrawal']['status'] = 'fail';
             $data['withdrawal']['errors'][] = ['message' => 'Password do not match.'];
         } else {
-            $users->deleteUserById($id);
+            $users->deleteUserById($userid);
 
             header('Location: /farewell');
             exit;

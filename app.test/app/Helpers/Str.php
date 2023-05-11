@@ -31,4 +31,12 @@ class Str
     {
         return '' !== $needle && false !== mb_strpos($haystack, $needle);
     }
+
+    public static function substr_replace_offset(string $search, string $replace, int $start = 0, int|null $end = null): string
+    {
+        $offset = $start;
+        $length = $times = strlen($search) - $start - $end;
+
+        return substr_replace($search, str_repeat($replace, $times), $offset, $length);
+    }
 }

@@ -52,9 +52,8 @@
                     </table>
                 </form>
 
-                <br>
-
                 @isset($data)
+                <br>
                 <div>
                     @if($data['status'] === 'success')
                         {{ $data['message'] }}

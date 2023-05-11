@@ -10,8 +10,8 @@ class Welcome extends Controller implements ControllerInterface
 {
     public function get()
     {
-        $id = session()->get('userid');
-        (new Users())->updateWelcomedById(1, $id);
+        $userid = session()->get('userid');
+        (new Users())->updateWelcomedById(1, $userid);
 
         session_destroy();
 
