@@ -11,8 +11,6 @@ class ResetPassword extends Controller implements ControllerInterface
 {
     public function get()
     {
-        session()->set('email', 'abc.asd@example.com');
-
         $user = [];
 
         list($localPart, $domain) = explode('@', session()->get('email'));
@@ -20,7 +18,7 @@ class ResetPassword extends Controller implements ControllerInterface
 
         list($name, $tld) = explode('.', $domain);
         $name = substr_replace_offset($name, '*', 2);
-        $user['email'] = $localPart.'@'.$name.'.'.$tld;
+        $user['email'] = $localPart . '@' . $name . '.' . $tld;
 
         echo $this->view('pages.auth.reset-password', compact('user'));
     }

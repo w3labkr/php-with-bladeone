@@ -41,12 +41,12 @@ class Env
     {
         $keys = explode('.', $path);
         $key = implode('.', array_slice($keys, 1));
-        $conf = include CONFIG_PATH."/{$keys[0]}.php";
+        $conf = include CONFIG_PATH . "/{$keys[0]}.php";
 
-        if (!Dot::has($conf, $key)) {
-            Dot::set($conf, $key, $default);
+        if (!dot()->has($conf, $key)) {
+            dot()->set($conf, $key, $default);
         }
 
-        return Dot::get($conf, $key);
+        return dot()->get($conf, $key);
     }
 }

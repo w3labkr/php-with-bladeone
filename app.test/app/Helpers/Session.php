@@ -7,24 +7,24 @@ class Session
     public function set(string $path, mixed $value = null, string $separator = '.'): void
     {
         session_start();
-        Dot::set($_SESSION, $path, $value, $separator);
+        dot()->set($_SESSION, $path, $value, $separator);
         session_write_close();
     }
 
     public function get(string $path, string $separator = '.'): mixed
     {
-        return Dot::get($_SESSION, $path, $separator);
+        return dot()->get($_SESSION, $path, $separator);
     }
 
     public function has(string $path, string $separator = '.'): bool
     {
-        return Dot::has($_SESSION, $path, $separator);
+        return dot()->has($_SESSION, $path, $separator);
     }
 
     public function del(string $path, string $separator = '.'): void
     {
         session_start();
-        Dot::del($_SESSION, $path, $separator);
+        dot()->del($_SESSION, $path, $separator);
         session_write_close();
     }
 

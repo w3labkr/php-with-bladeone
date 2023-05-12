@@ -29,7 +29,7 @@ class ForgotUsername extends Controller implements ControllerInterface
             $data['status'] = 'fail';
             $data['errors'][] = ['message' => 'Invalid Email Address.'];
         } else {
-            $mailer = mailer();
+            $mailer = mailer()->smtp();
             $mailer->setFrom(config('mail.from.address'), config('mail.from.name'));
             $mailer->addAddress($user['email']);
 

@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 class Dot
 {
-    public static function set(array &$array, string $path, mixed $value = null, string $separator = '.'): void
+    public function set(array &$array, string $path, mixed $value = null, string $separator = '.'): void
     {
         $keys = explode($separator, $path);
 
@@ -19,7 +19,7 @@ class Dot
         $array = $value;
     }
 
-    public static function get(array $array, string $path, string $separator = '.'): mixed
+    public function get(array $array, string $path, string $separator = '.'): mixed
     {
         if (empty($path)) {
             return $array;
@@ -38,14 +38,14 @@ class Dot
         return $array;
     }
 
-    public static function has(array $array, string $path, string $separator = '.'): bool
+    public function has(array $array, string $path, string $separator = '.'): bool
     {
         $value = self::get($array, $path, $separator);
 
         return isset($value);
     }
 
-    public static function del(array &$array, string $path, string $separator = '.'): void
+    public function del(array &$array, string $path, string $separator = '.'): void
     {
         $keys = explode($separator, $path);
         $length = count($keys);

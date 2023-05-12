@@ -21,7 +21,8 @@ class ForgotPassword extends Controller implements ControllerInterface
         $post = Validator::safe($_POST['user']);
 
         $user = (new Users())->findUserByUsername($post['username']);
-        $reset_password_code = rand(100000, 999999);
+        // $reset_password_code = rand(100000, 999999);
+        $reset_password_code = generate_token();
 
         if (!$user) {
             $data['status'] = 'fail';
@@ -30,7 +31,7 @@ class ForgotPassword extends Controller implements ControllerInterface
             $data['status'] = 'fail';
             $data['errors'][] = ['message' => 'Your registered email is invalid.'];
         } else {
-            $mailer = mailer();
+            $mailer = mailer()->smtp();
             $mailer->setFrom(config('mail.from.address'), config('mail.from.name'));
             $mailer->addAddress($user['email']);
 

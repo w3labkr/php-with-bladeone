@@ -42,6 +42,13 @@ if (!function_exists('bin2uuid4')) {
     }
 }
 
+if (!function_exists('dot')) {
+    function dot(): App\Helpers\Dot
+    {
+        return new \App\Helpers\Dot();
+    }
+}
+
 if (!function_exists('session')) {
     function session(): App\Helpers\Session
     {
@@ -57,9 +64,9 @@ if (!function_exists('cookie')) {
 }
 
 if (!function_exists('mailer')) {
-    function mailer(): PHPMailer\PHPMailer\PHPMailer
+    function mailer(): App\Helpers\Mailer
     {
-        return \App\Helpers\Mailer::smtp();
+        return new \App\Helpers\Mailer();
     }
 }
 
