@@ -28,6 +28,13 @@ if (!function_exists('decrypt')) {
     }
 }
 
+if (!function_exists('csrf_token')) {
+    function csrf_token(string $tokenId = '_token', int $length = 16): void
+    {
+        \App\Helpers\Blade::csrf_token($tokenId, $length);
+    }
+}
+
 if (!function_exists('generate_token')) {
     function generate_token(int $length = 16): string
     {
@@ -43,16 +50,9 @@ if (!function_exists('uuid4')) {
 }
 
 if (!function_exists('bin2uuid4')) {
-    function bin2uuid4(string $binary = ''): string
+    function bin2uuid4(string $binary): string
     {
         return \App\Helpers\UUID::bin2uuid4($binary);
-    }
-}
-
-if (!function_exists('csrf_token')) {
-    function csrf_token(string $tokenId = '_token'): void
-    {
-        \App\Helpers\Blade::csrf_token($tokenId);
     }
 }
 

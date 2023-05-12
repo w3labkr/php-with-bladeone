@@ -21,7 +21,6 @@ class ForgotPassword extends Controller implements ControllerInterface
         $post = Validator::safe($_POST['user']);
 
         $user = (new Users())->findUserByUsername($post['username']);
-        // $reset_password_code = rand(100000, 999999);
         $reset_password_code = generate_token();
 
         if (!hash_equals(session()->get('_token'), $post['_token'])) {

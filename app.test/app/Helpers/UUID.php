@@ -14,7 +14,7 @@ class UUID
         return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(self::hex(16), 4));
     }
 
-    public static function bin2uuid4(string $binary = ''): string
+    public static function bin2uuid4(string $binary): string
     {
         return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($binary), 4));
     }

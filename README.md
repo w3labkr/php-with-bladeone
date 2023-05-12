@@ -24,6 +24,9 @@ The default page is shown below.
     - [Session](#session)
     - [Cookie](#cookie)
     - [String](#string)
+    - [UUID](#uuid)
+    - [CSRF Token](#csrf-token)
+    - [Mailer](#mailer)
   - [License](#license)
 
 ## Environment
@@ -227,6 +230,58 @@ substr_replace_offset('foobar', '*'); // ******
 substr_replace_offset('foobar', '*', 1); // f*****
 substr_replace_offset('foobar', '*', 0, 1); // *****r
 substr_replace_offset('foobar', '*', 1, 1); // f****r
+```
+
+### UUID
+
+Generates random tokens. The byte length can be modified as a parameter.
+
+```php
+generate_token(16);
+// 5cb43bbe36e79532f776fca4b74e84ee
+```
+
+Convert randomly generated tokens to UUID4 format.
+
+```php
+uuid4();
+// 011d0956-24d9-0da2-9cf4-68032a05723c
+```
+
+Convert UUID in binary format to UUID4 format.
+
+```php
+bin2uuid4(' íðs u£¼¸N B¬   ');
+// 20c3adc3-b073-2075-c2a3-c2bcc2b84e20
+```
+
+### CSRF Token
+
+```html
+<input type="hidden" name="_token" value="{{ csrf_token() }}" />
+```
+
+```php
+if (!hash_equals(session()->get('_token'), $_POST['_token'])) {
+    // ...
+}
+```
+
+### Mailer
+
+Usage is same as [PHPMailer](https://github.com/PHPMailer/PHPMailer) library.
+
+```php
+$mailer = mailer()->smtp();
+
+$mailer->setFrom('from@example.com', 'Mailer');
+$mailer->addAddress('to@example.net');
+
+$mailer->isHTML(true);
+$mailer->Subject = 'Here is the subject';
+
+$mailer->Body = "This is the HTML message body <b>in bold!</b>";
+$mailer->send();
 ```
 
 ## License
