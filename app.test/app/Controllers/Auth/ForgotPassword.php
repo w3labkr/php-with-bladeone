@@ -24,7 +24,10 @@ class ForgotPassword extends Controller implements ControllerInterface
         // $reset_password_code = rand(100000, 999999);
         $reset_password_code = generate_token();
 
-        if (!$user) {
+        if (!hash_equals(session()->get('_token'), $post['_token'])) {
+            $data['status'] = 'fail';
+            $data['errors'][] = ['message' => 'Invalid Token.'];
+        } elseif (!$user) {
             $data['status'] = 'fail';
             $data['errors'][] = ['message' => 'Your username is incorrect.'];
         } elseif (!filter_var($user['email'], FILTER_VALIDATE_EMAIL)) {

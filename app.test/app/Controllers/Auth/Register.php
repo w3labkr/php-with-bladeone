@@ -22,7 +22,13 @@ class Register extends Controller implements ControllerInterface
 
         $users = new Users();
 
-        if ($post['password'] !== $post['confirm_password']) {
+        if (!hash_equals(session()->get('_token'), $post['_token'])) {
+            $data['status'] = 'fail';
+            $data['errors'][] = ['message' => 'Invalid Token.'];
+        } elseif (!filter_var($post['email'], FILTER_VALIDATE_EMAIL)) {
+            $data['status'] = 'fail';
+            $data['errors'][] = ['message' => 'Invalid Email Address.'];
+        } elseif ($post['password'] !== $post['confirm_password']) {
             $data['status'] = 'fail';
             $data['errors'][] = ['message' => 'Passwords do not match.'];
         } elseif ($users->findUserByUsername($post['username'])) {

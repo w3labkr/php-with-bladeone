@@ -18,7 +18,7 @@ class ResetPassword extends Controller implements ControllerInterface
 
         list($name, $tld) = explode('.', $domain);
         $name = substr_replace_offset($name, '*', 2);
-        $user['email'] = $localPart . '@' . $name . '.' . $tld;
+        $user['email'] = $localPart.'@'.$name.'.'.$tld;
 
         echo $this->view('pages.auth.reset-password', compact('user'));
     }
@@ -32,7 +32,10 @@ class ResetPassword extends Controller implements ControllerInterface
         $userid = session()->get('userid');
         $user = $users->findUserById($userid);
 
-        if (!$user) {
+        if (!hash_equals(session()->get('_token'), $post['_token'])) {
+            $data['status'] = 'fail';
+            $data['errors'][] = ['message' => 'Invalid Token.'];
+        } elseif (!$user) {
             $data['status'] = 'fail';
             $data['errors'][] = ['message' => 'The username is incorrect.'];
         } elseif (!hash_equals(session()->get('reset_password_code'), $post['reset_password_code'])) {

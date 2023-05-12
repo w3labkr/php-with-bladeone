@@ -3,18 +3,9 @@
 namespace App\Models;
 
 use Database\Factories\UserFactory;
-use Faker\Factory;
 
 class UserFaker extends Users
 {
-    public function test()
-    {
-        $faker = Factory::create(config('app.faker_locale'));
-        $str = substr(str_replace('-', '', $faker->uuid()), 1, 20);
-
-        var_dump($str);
-    }
-
     public function createTable(): UserFaker
     {
         $this->pdo->exec(file_get_contents(SQL_PATH.'/createUsersTable.sql'));

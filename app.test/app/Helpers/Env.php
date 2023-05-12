@@ -41,7 +41,7 @@ class Env
     {
         $keys = explode('.', $path);
         $key = implode('.', array_slice($keys, 1));
-        $conf = include CONFIG_PATH . "/{$keys[0]}.php";
+        $conf = include CONFIG_PATH."/{$keys[0]}.php";
 
         if (!dot()->has($conf, $key)) {
             dot()->set($conf, $key, $default);

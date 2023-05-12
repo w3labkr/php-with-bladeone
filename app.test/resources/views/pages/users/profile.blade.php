@@ -28,6 +28,7 @@
             <div class="entry-content">
 
                 <form method="post" action="profile">
+                    <input type="hidden" name="user[_token]" value="{{ csrf_token() }}" />
                     <fieldset>
                         <legend>Public profile</legend>
                         <label>

@@ -26,7 +26,10 @@ class Security extends Controller implements ControllerInterface
         $userid = session()->get('userid');
         $user = $users->findUserById($userid);
 
-        if (!password_verify($post['password'], $user['password'])) {
+        if (!hash_equals(session()->get('_token'), $post['_token'])) {
+            $data['status'] = 'fail';
+            $data['errors'][] = ['message' => 'Invalid Token.'];
+        } elseif (!password_verify($post['password'], $user['password'])) {
             $data['status'] = 'fail';
             $data['errors'][] = ['message' => 'Old password do not match.'];
         } elseif (password_verify($post['new_password'], $user['password'])) {

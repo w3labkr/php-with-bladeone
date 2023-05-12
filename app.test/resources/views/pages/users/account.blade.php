@@ -28,6 +28,7 @@
             <div class="entry-content">
 
                 <form method="post" action="account">
+                    <input type="hidden" name="user[_token]" value="{{ csrf_token() }}" />
                     <fieldset>
                         <legend>Change username</legend>
                         <label>
@@ -54,6 +55,7 @@
                 <br>
 
                 <form method="post" action="withdrawal">
+                    <input type="hidden" name="user[_token]" value="{{ csrf_token() }}" />
                     <fieldset>
                         <legend>Delete Account</legend>
                         <label>

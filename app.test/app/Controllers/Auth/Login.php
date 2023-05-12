@@ -11,7 +11,7 @@ class Login extends Controller implements ControllerInterface
 {
     public function get()
     {
-        if (cookie()->has('uuid') && cookie()->has('remember_token')) {
+        if (cookie()->has('uuid') && cookie()->has('refresh_token')) {
             $user = \App\Middlewares\Users::setUser();
             if ($user) {
                 header("Location: /users/{$user['username']}");
@@ -31,9 +31,13 @@ class Login extends Controller implements ControllerInterface
         $data = $this->data;
         $post = Validator::safe($_POST['user']);
 
-        $user = (new Users())->findUserByUsername($post['username']);
+        $users = new Users();
+        $user = $users->findUserByUsername($post['username']);
 
-        if (!$user) {
+        if (!hash_equals(session()->get('_token'), $post['_token'])) {
+            $data['status'] = 'fail';
+            $data['errors'][] = ['message' => 'Invalid Token.'];
+        } elseif (!$user) {
             $data['status'] = 'fail';
             $data['errors'][] = ['message' => 'Username or password is incorrect.'];
         } elseif (!password_verify($post['password'], $user['password'])) {
@@ -50,11 +54,13 @@ class Login extends Controller implements ControllerInterface
                     'expires' => '+30 days',
                 ];
                 cookie('Strict')->set('uuid', bin2uuid4($user['uuid']), $options);
-                cookie('Strict')->set('remember_token', $user['remember_token'], $options);
+                cookie('Strict')->set('refresh_token', $user['refresh_token'], $options);
             } else {
                 cookie('Strict')->del('uuid');
-                cookie('Strict')->del('remember_token');
+                cookie('Strict')->del('refresh_token');
             }
+
+            $users->updateLastLoginAtById(date('Y-m-d H:i:s'), $user['id']);
 
             header("Location: /users/{$user['username']}");
             exit;

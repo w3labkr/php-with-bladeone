@@ -11,8 +11,8 @@ class Controller
 
     public function __construct()
     {
-        $this->blade = new BladeOne(VIEW_PATH, VIEW_CACHE_PATH, BladeOne::MODE_DEBUG);
         $this->data = $this->data();
+        $this->blade = new BladeOne(VIEW_PATH, VIEW_CACHE_PATH, BladeOne::MODE_DEBUG);
     }
 
     public function view(string $template, array $data = [])

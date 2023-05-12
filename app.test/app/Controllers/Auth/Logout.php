@@ -12,7 +12,7 @@ class Logout extends Controller implements ControllerInterface
         session()->destroy();
 
         cookie('Strict')->del('uuid');
-        cookie('Strict')->del('remember_token');
+        cookie('Strict')->del('refresh_token');
 
         header('location: /');
         exit;

@@ -40,4 +40,4 @@ if (!config('app.debug')) {
 // Generates fake data
 // $faker = new \App\Models\UserFaker();
 // $faker->createTable()->factory(10);
-// $faker->test();
+// $faker->dropTable();

@@ -35,10 +35,24 @@ if (!function_exists('generate_token')) {
     }
 }
 
+if (!function_exists('uuid4')) {
+    function uuid4(): string
+    {
+        return \App\Helpers\UUID::uuid4();
+    }
+}
+
 if (!function_exists('bin2uuid4')) {
     function bin2uuid4(string $binary = ''): string
     {
         return \App\Helpers\UUID::bin2uuid4($binary);
+    }
+}
+
+if (!function_exists('csrf_token')) {
+    function csrf_token(string $tokenId = '_token'): void
+    {
+        \App\Helpers\Blade::csrf_token($tokenId);
     }
 }
 

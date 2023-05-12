@@ -28,6 +28,7 @@
             <div class="entry-content">
 
                 <form method="post" action="security">
+                    <input type="hidden" name="user[_token]" value="{{ csrf_token() }}" />
                     <fieldset>
                         <legend>Change password</legend>
                         <label>

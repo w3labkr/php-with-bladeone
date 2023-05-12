@@ -22,7 +22,10 @@ class Withdrawal extends Controller implements ControllerInterface
         $userid = session()->get('userid');
         $user = $users->findUserById($userid);
 
-        if ($post['username'] !== $user['username']) {
+        if (!hash_equals(session()->get('_token'), $post['_token'])) {
+            $data['status'] = 'fail';
+            $data['errors'][] = ['message' => 'Invalid Token.'];
+        } elseif ($post['username'] !== $user['username']) {
             $data['withdrawal']['status'] = 'fail';
             $data['withdrawal']['errors'][] = ['message' => 'Username does not match.'];
         } elseif ('delete my account' !== $post['verify']) {

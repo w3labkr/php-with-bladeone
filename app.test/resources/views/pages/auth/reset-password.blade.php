@@ -34,6 +34,7 @@
                     {{ $data['message'] }}
                 @else
                     <form method="post" action="reset-password">
+                        <input type="hidden" name="user[_token]" value="{{ csrf_token() }}" />
                         <fieldset>
                             <legend>Reset password</legend>
                             <label>

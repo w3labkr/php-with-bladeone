@@ -27,6 +27,7 @@
 
             <div class="entry-content">
                 <form method="post" action="login">
+                    <input type="hidden" name="user[_token]" value="{{ csrf_token() }}" />
                     <table>
                         <tr>
                             <td>Username</td>

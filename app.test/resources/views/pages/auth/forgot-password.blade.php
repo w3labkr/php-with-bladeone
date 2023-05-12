@@ -31,6 +31,7 @@
 
             <div class="entry-content">
                 <form method="post" action="forgot-password">
+                    <input type="hidden" name="user[_token]" value="{{ csrf_token() }}" />
                     <fieldset>
                         <legend>Forgot password</legend>
                         <label>

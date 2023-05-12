@@ -22,7 +22,10 @@ class ForgotUsername extends Controller implements ControllerInterface
 
         $user = (new Users())->findUserByEmail($post['email']);
 
-        if (!$user) {
+        if (!hash_equals(session()->get('_token'), $post['_token'])) {
+            $data['status'] = 'fail';
+            $data['errors'][] = ['message' => 'Invalid Token.'];
+        } elseif (!$user) {
             $data['status'] = 'fail';
             $data['errors'][] = ['message' => 'Email is incorrect.'];
         } elseif (!filter_var($user['email'], FILTER_VALIDATE_EMAIL)) {

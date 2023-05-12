@@ -253,4 +253,23 @@ class Users extends Model
             throw $e;
         }
     }
+
+    public function updateLastLoginAtById(string $datetime, int $id): void
+    {
+        $conn = $this->pdo;
+        $conn->beginTransaction();
+
+        try {
+            $stmt = $conn->prepare('UPDATE `users` SET `last_login_at`=:last_login_at WHERE `id`=:id');
+
+            $stmt->bindValue(':last_login_at', $datetime, \PDO::PARAM_STR);
+            $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+            $stmt->execute();
+
+            $conn->commit();
+        } catch (\PDOException $e) {
+            $conn->rollback();
+            throw $e;
+        }
+    }
 }

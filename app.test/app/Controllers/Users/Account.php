@@ -26,7 +26,10 @@ class Account extends Controller implements ControllerInterface
         $userid = session()->get('userid');
         $user = $users->findUserById($userid);
 
-        if ($users->findUserByUsername($post['username'])) {
+        if (!hash_equals(session()->get('_token'), $post['_token'])) {
+            $data['status'] = 'fail';
+            $data['errors'][] = ['message' => 'Invalid Token.'];
+        } elseif ($users->findUserByUsername($post['username'])) {
             $data['account']['status'] = 'fail';
             $data['account']['errors'][] = ['message' => 'Username already exists.'];
         } else {
