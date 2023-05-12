@@ -8,13 +8,13 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Start The Application
-require_once __DIR__.'/../server.php';
+require_once __DIR__ . '/../server.php';
 
 // Create Router instance
 $router = new \Bramus\Router\Router();
 
 // Define routes
-(require_once __DIR__.'/../routes/web.php')($router);
+(require_once __DIR__ . '/../routes/web.php')($router);
 
 // Run it!
 $router->run();

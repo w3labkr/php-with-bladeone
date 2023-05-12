@@ -47,7 +47,7 @@ class ResetPassword extends Controller implements ControllerInterface
                 $data['status'] = 'success';
                 $data['message'] = 'Your password has been successfully changed.';
 
-                session_destroy();
+                session()->destroy();
             }
         } else {
             $data['status'] = 'fail';

@@ -9,7 +9,7 @@ class Farewell extends Controller implements ControllerInterface
 {
     public function get()
     {
-        session_destroy();
+        session()->destroy();
 
         echo $this->view('pages.auth.farewell');
     }

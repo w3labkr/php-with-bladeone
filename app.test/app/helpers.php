@@ -45,7 +45,7 @@ if (!function_exists('bin2uuid4')) {
 if (!function_exists('session')) {
     function session(): App\Helpers\Session
     {
-        return new \App\Helpers\Session();
+        return new \App\Helpers\Session;
     }
 }
 
@@ -60,34 +60,6 @@ if (!function_exists('mailer')) {
     function mailer(): PHPMailer\PHPMailer\PHPMailer
     {
         return \App\Helpers\Mailer::smtp();
-    }
-}
-
-if (!function_exists('str_random')) {
-    function str_random(int $length = 10): string
-    {
-        return \App\Helpers\Str::random($length);
-    }
-}
-
-if (!function_exists('str_starts_with')) {
-    function str_starts_with(string $haystack, string $needle): bool
-    {
-        return \App\Helpers\Str::str_starts_with($haystack, $needle);
-    }
-}
-
-if (!function_exists('str_ends_with')) {
-    function str_ends_with(string $haystack, string $needle): bool
-    {
-        return \App\Helpers\Str::str_ends_with($haystack, $needle);
-    }
-}
-
-if (!function_exists('str_contains')) {
-    function str_contains(string $haystack, string $needle): bool
-    {
-        return \App\Helpers\Str::str_contains($haystack, $needle);
     }
 }
 

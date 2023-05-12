@@ -13,7 +13,7 @@ class Welcome extends Controller implements ControllerInterface
         $userid = session()->get('userid');
         (new Users())->updateWelcomedById(1, $userid);
 
-        session_destroy();
+        session()->destroy();
 
         echo $this->view('pages.auth.welcome');
     }

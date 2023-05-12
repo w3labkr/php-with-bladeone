@@ -19,7 +19,7 @@ class UserFaker extends Users
     {
         $this->pdo->exec(file_get_contents(SQL_PATH.'/createUsersTable.sql'));
 
-        session_destroy();
+        session()->destroy();
 
         echo "Created User Table.\n";
 
@@ -30,7 +30,7 @@ class UserFaker extends Users
     {
         $this->pdo->exec(file_get_contents(SQL_PATH.'/dropUsersTable.sql'));
 
-        session_destroy();
+        session()->destroy();
 
         echo "Dropped User Table.\n";
 

@@ -9,7 +9,7 @@ class Logout extends Controller implements ControllerInterface
 {
     public function get()
     {
-        session_destroy();
+        session()->destroy();
 
         cookie('Strict')->del('uuid');
         cookie('Strict')->del('remember_token');
