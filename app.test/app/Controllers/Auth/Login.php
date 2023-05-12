@@ -33,7 +33,13 @@ class Login extends Controller implements ControllerInterface
 
         $user = (new Users())->findUserByUsername($post['username']);
 
-        if ($user && password_verify($post['password'], $user['password'])) {
+        if (!$user) {
+            $data['status'] = 'fail';
+            $data['errors'][] = ['message' => 'Username or password is incorrect.'];
+        } elseif (!password_verify($post['password'], $user['password'])) {
+            $data['status'] = 'fail';
+            $data['errors'][] = ['message' => 'Username or password is incorrect.'];
+        } else {
             session()->set('loggedin', 1);
             session()->set('userid', $user['id']);
             session()->set('username', $user['username']);
@@ -53,9 +59,6 @@ class Login extends Controller implements ControllerInterface
             header("Location: /users/{$user['username']}");
             exit;
         }
-
-        $data['status'] = 'fail';
-        $data['errors'][] = ['message' => 'The username or password is incorrect.'];
 
         echo $this->view('pages.auth.login', compact('data'));
     }

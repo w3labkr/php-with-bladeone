@@ -2,9 +2,11 @@
 
 namespace App\Middlewares;
 
-class Users
+use App\Interfaces\MiddlewareInterface;
+
+class Users implements MiddlewareInterface
 {
-    public static function auth($username): void
+    public static function auth(string|null $username = null)
     {
         if (cookie()->has('uuid') && cookie()->has('remember_token')) {
             self::setUser();

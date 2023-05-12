@@ -22,7 +22,13 @@ class ForgotUsername extends Controller implements ControllerInterface
 
         $user = (new Users())->findUserByEmail($post['email']);
 
-        if ($user) {
+        if (!$user) {
+            $data['status'] = 'fail';
+            $data['errors'][] = ['message' => 'Email is incorrect.'];
+        } elseif (!filter_var($user['email'], FILTER_VALIDATE_EMAIL)) {
+            $data['status'] = 'fail';
+            $data['errors'][] = ['message' => 'Invalid Email Address.'];
+        } else {
             $mailer = mailer();
             $mailer->setFrom(config('mail.from.address'), config('mail.from.name'));
             $mailer->addAddress($user['email']);
@@ -50,9 +56,6 @@ class ForgotUsername extends Controller implements ControllerInterface
                 $data['status'] = 'fail';
                 $data['errors'][] = ['message' => "Message could not be sent. {$mailer->ErrorInfo}"];
             }
-        } else {
-            $data['status'] = 'fail';
-            $data['errors'][] = ['message' => 'Email not found.'];
         }
 
         echo $this->view('pages.auth.forgot-username', compact('data'));

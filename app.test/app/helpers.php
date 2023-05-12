@@ -45,7 +45,7 @@ if (!function_exists('bin2uuid4')) {
 if (!function_exists('session')) {
     function session(): App\Helpers\Session
     {
-        return new \App\Helpers\Session;
+        return new \App\Helpers\Session();
     }
 }
 

@@ -23,7 +23,13 @@ class ForgotPassword extends Controller implements ControllerInterface
         $user = (new Users())->findUserByUsername($post['username']);
         $reset_password_code = rand(100000, 999999);
 
-        if ($user) {
+        if (!$user) {
+            $data['status'] = 'fail';
+            $data['errors'][] = ['message' => 'Your username is incorrect.'];
+        } elseif (!filter_var($user['email'], FILTER_VALIDATE_EMAIL)) {
+            $data['status'] = 'fail';
+            $data['errors'][] = ['message' => 'Your registered email is invalid.'];
+        } else {
             $mailer = mailer();
             $mailer->setFrom(config('mail.from.address'), config('mail.from.name'));
             $mailer->addAddress($user['email']);
@@ -57,9 +63,6 @@ class ForgotPassword extends Controller implements ControllerInterface
                 $data['status'] = 'fail';
                 $data['errors'][] = ['message' => "Message could not be sent. {$mailer->ErrorInfo}"];
             }
-        } else {
-            $data['status'] = 'fail';
-            $data['errors'][] = ['message' => 'The username is incorrect.'];
         }
 
         echo $this->view('pages.auth.forgot-password', compact('data'));

@@ -34,24 +34,22 @@ class ResetPassword extends Controller implements ControllerInterface
         $userid = session()->get('userid');
         $user = $users->findUserById($userid);
 
-        if ($user) {
-            if (!hash_equals(session()->get('reset_password_code'), $post['reset_password_code'])) {
-                $data['status'] = 'fail';
-                $data['errors'][] = ['message' => 'Code does not match.'];
-            } elseif ($post['new_password'] !== $post['confirm_new_password']) {
-                $data['status'] = 'fail';
-                $data['errors'][] = ['message' => 'New password does not match.'];
-            } else {
-                $users->updatePasswordById($post['new_password'], $userid);
-
-                $data['status'] = 'success';
-                $data['message'] = 'Your password has been successfully changed.';
-
-                session()->destroy();
-            }
-        } else {
+        if (!$user) {
             $data['status'] = 'fail';
             $data['errors'][] = ['message' => 'The username is incorrect.'];
+        } elseif (!hash_equals(session()->get('reset_password_code'), $post['reset_password_code'])) {
+            $data['status'] = 'fail';
+            $data['errors'][] = ['message' => 'Code does not match.'];
+        } elseif ($post['new_password'] !== $post['confirm_new_password']) {
+            $data['status'] = 'fail';
+            $data['errors'][] = ['message' => 'New password does not match.'];
+        } else {
+            $users->updatePasswordById($post['new_password'], $userid);
+
+            $data['status'] = 'success';
+            $data['message'] = 'Your password has been successfully changed.';
+
+            session()->destroy();
         }
 
         echo $this->view('pages.auth.reset-password', compact('data'));
