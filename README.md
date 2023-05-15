@@ -18,11 +18,12 @@ The default page is shown below.
   - [Installation](#installation)
   - [Recommended Packages](#recommended-packages)
   - [Useful Commands](#useful-commands)
-  - [Usage](#usage)
+  - [Functions](#functions)
     - [Facker](#facker)
     - [Router](#router)
     - [Session](#session)
     - [Cookie](#cookie)
+    - [Dot Notation](#dot-notation)
     - [String](#string)
     - [UUID](#uuid)
     - [CSRF Token](#csrf-token)
@@ -96,7 +97,7 @@ You can see more details on the page below.
 
 - [COMMANDS](COMMANDS.md)
 
-## Usage
+## Functions
 
 ### Facker
 
@@ -230,6 +231,35 @@ cookie()->set('key', 'value', [
 cookie('Strict')->del('key');
 ```
 
+### Dot Notation
+
+Dot notation access to PHP arrays
+
+```php
+// $array['a'] = 'a';
+dot()->set('a', 'a');
+```
+
+```php
+// $array['a'];
+dot()->get('a');
+```
+
+```php
+// unset($array['a']);
+dot()->del('a');
+```
+
+```php
+// isset($array['a']);
+dot()->exists('a');
+```
+
+```php
+// !isset($array['a']);
+dot()->noexists('a');
+```
+
 ### String
 
 Replace string with new characters for privacy.
@@ -266,17 +296,20 @@ bin2uuid4(' íðs u£¼¸N B¬   ');
 
 ### CSRF Token
 
+By default, CSRF validation applies to all forms where the method is POST.
+You can modify it in middleware `CSRF.php`.
+
 ```html
 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 ```
 
 ```php
-use App\Helpers\Validator;
+function get()
+{
+    $csrf_token = csrf_token();
 
-$token = Validator::safe($_POST['_token']);
-verify_csrf_token($token, '_token');
-
-// session()->exists('_token') && !hash_equals(session()->get('_token'), $token);
+    echo $this->view('pages.page', compact('csrf_token'));
+}
 ```
 
 ### Mailer
