@@ -11,30 +11,30 @@ class Account extends Controller implements ControllerInterface
 {
     public function get()
     {
+        $csrf_token = csrf_token();
+
         $userid = session()->get('userid');
         $user = (new Users())->findUserById($userid);
 
-        echo $this->view('pages.users.account', compact('user'));
+        echo $this->view('pages.users.account', compact('user', 'csrf_token'));
     }
 
     public function post()
     {
+        $csrf_token = csrf_token();
+
         $data['account'] = $this->data;
-        $post = Validator::safe($_POST['user']);
+        $post = Validator::safe($_POST['account']);
 
         $users = new Users();
         $userid = session()->get('userid');
         $user = $users->findUserById($userid);
 
-        if (!hash_equals(session()->get('_token'), $post['_token'])) {
-            $data['status'] = 'fail';
-            $data['errors'][] = ['message' => 'Invalid Token.'];
-        } elseif ($users->findUserByUsername($post['username'])) {
+        if ($users->findUserByUsername($post['username'])) {
             $data['account']['status'] = 'fail';
             $data['account']['errors'][] = ['message' => 'Username already exists.'];
         } else {
             $users->updateUsernameById($post['username'], $userid);
-            $user = $users->findUserById($userid);
 
             $data['account']['status'] = 'success';
             $data['account']['message'] = 'Your username has been successfully changed.';
@@ -43,7 +43,7 @@ class Account extends Controller implements ControllerInterface
             exit;
         }
 
-        echo $this->view('pages.users.account', compact('user', 'data'));
+        echo $this->view('pages.users.account', compact('user', 'csrf_token', 'data'));
     }
 
     public function patch()

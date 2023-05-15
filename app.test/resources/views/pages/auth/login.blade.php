@@ -27,19 +27,19 @@
 
             <div class="entry-content">
                 <form method="post" action="login">
-                    <input type="hidden" name="user[_token]" value="{{ csrf_token() }}" />
+                    <input type="hidden" name="login[_token]" value="{{ $csrf_token }}" />
                     <table>
                         <tr>
                             <td>Username</td>
-                            <td><input type="text" name="user[username]" required /></td>
+                            <td><input type="text" name="login[username]" required /></td>
                         </tr>
                         <tr>
                             <td>Password</td>
-                            <td><input type="password" name="user[password]" required /></td>
+                            <td><input type="password" name="login[password]" required /></td>
                         </tr>
                         <tr>
                             <td>
-                                <label><input type="checkbox" name="user[remember_me]" /> Remember Me</label>
+                                <label><input type="checkbox" name="login[remember_me]" /> Remember Me</label>
                             </td>
                             <td></td>
                         </tr>

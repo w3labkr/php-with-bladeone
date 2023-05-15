@@ -8,17 +8,19 @@ return function (Router $router) {
 
     // Define routes
     $router->mount('/users/{username}', function () use ($router) {
-        $router->get('/profile', '\App\Controllers\Users\Profile@get');
-        $router->post('/profile', '\App\Controllers\Users\Profile@post');
+        $controller = '\App\Controllers\Users';
 
-        $router->get('/account', '\App\Controllers\Users\Account@get');
-        $router->post('/account', '\App\Controllers\Users\Account@post');
+        $router->get('/profile', $controller.'\Profile@get');
+        $router->post('/profile', $controller.'\Profile@post');
 
-        $router->post('/withdrawal', '\App\Controllers\Users\Withdrawal@post');
+        $router->get('/account', $controller.'\Account@get');
+        $router->post('/account', $controller.'\Account@post');
 
-        $router->get('/security', '\App\Controllers\Users\Security@get');
-        $router->post('/security', '\App\Controllers\Users\Security@post');
+        $router->post('/withdrawal', $controller.'\Withdrawal@post');
 
-        $router->get('/', '\App\Controllers\Users\Overview@get');
+        $router->get('/security', $controller.'\Security@get');
+        $router->post('/security', $controller.'\Security@post');
+
+        $router->get('/', $controller.'\Overview@get');
     });
 };

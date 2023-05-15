@@ -31,12 +31,12 @@
 
             <div class="entry-content">
                 <form method="post" action="forgot-password">
-                    <input type="hidden" name="user[_token]" value="{{ csrf_token() }}" />
+                    <input type="hidden" name="forgot-password[_token]" value="{{ $csrf_token }}" />
                     <fieldset>
                         <legend>Forgot password</legend>
                         <label>
                             <span>Username</span><br>
-                            <input type="text" name="user[username]"  required/>
+                            <input type="text" name="forgot-password[username]"  required/>
                         </label>
                         <br>
                         <button type="submit">Reset my password</button>

@@ -28,12 +28,12 @@
             <div class="entry-content">
 
                 <form method="post" action="account">
-                    <input type="hidden" name="user[_token]" value="{{ csrf_token() }}" />
+                    <input type="hidden" name="account[_token]" value="{{ $csrf_token }}" />
                     <fieldset>
                         <legend>Change username</legend>
                         <label>
                             <span>Username</span><br>
-                            <input type="text" name="user[username]" value="{{ $user['username'] }}" required />
+                            <input type="text" name="account[username]" value="{{ $user['username'] }}" required />
                         </label>
                         <br>
                         <button type="submit">Change username</button>
@@ -55,22 +55,22 @@
                 <br>
 
                 <form method="post" action="withdrawal">
-                    <input type="hidden" name="user[_token]" value="{{ csrf_token() }}" />
+                    <input type="hidden" name="withdrawal[_token]" value="{{ $csrf_token }}" />
                     <fieldset>
                         <legend>Delete Account</legend>
                         <label>
                             <span>Your username</span><br>
-                            <input type="text" name="user[username]" value="{{ $user['username'] }}" required />
+                            <input type="text" name="withdrawal[username]" value="{{ $user['username'] }}" required />
                         </label>
                         <br>
                         <label>
                             <span>To verify, type <i>delete my account</i> below</span><br>
-                            <input type="text" name="user[verify]" required />
+                            <input type="text" name="withdrawal[verify]" required />
                         </label>
                         <br>
                         <label>
                             <span>Confirm your password</span><br>
-                            <input type="password" name="user[password]" required />
+                            <input type="password" name="withdrawal[password]" required />
                         </label>
                         <br>
                         <button type="submit">Delete your account</button>

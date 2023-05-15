@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Middlewares;
+namespace App\Middlewares\Auth;
 
 use App\Interfaces\MiddlewareInterface;
 
-class Admin implements MiddlewareInterface
+class ResetPassword implements MiddlewareInterface
 {
     public static function auth()
     {
-        if (1 !== session()->get('is_admin')) {
+        if (session()->noexists('reset_password_token')) {
             header('location: /logout');
             exit;
         }

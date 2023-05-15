@@ -12,20 +12,21 @@ class Register extends Controller implements ControllerInterface
 {
     public function get()
     {
-        echo $this->view('pages.auth.register');
+        $csrf_token = csrf_token();
+
+        echo $this->view('pages.auth.register', compact('csrf_token'));
     }
 
     public function post()
     {
+        $csrf_token = csrf_token();
+
         $data = $this->data;
-        $post = Validator::safe($_POST['user']);
+        $post = Validator::safe($_POST['register']);
 
         $users = new Users();
 
-        if (!hash_equals(session()->get('_token'), $post['_token'])) {
-            $data['status'] = 'fail';
-            $data['errors'][] = ['message' => 'Invalid Token.'];
-        } elseif (!filter_var($post['email'], FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($post['email'], FILTER_VALIDATE_EMAIL)) {
             $data['status'] = 'fail';
             $data['errors'][] = ['message' => 'Invalid Email Address.'];
         } elseif ($post['password'] !== $post['confirm_password']) {
@@ -56,7 +57,7 @@ class Register extends Controller implements ControllerInterface
             exit;
         }
 
-        echo $this->view('pages.auth.register', compact('data'));
+        echo $this->view('pages.auth.register', compact('csrf_token', 'data'));
     }
 
     public function patch()

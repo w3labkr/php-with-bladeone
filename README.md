@@ -129,13 +129,18 @@ session()->get('a.b.c');
 ```
 
 ```php
-// isset($_SESSION['a']['b']['c'])
-session()->has('a.b.c');
+// unset($_SESSION['a']['b']['c'])
+session()->del('a.b.c');
 ```
 
 ```php
-// unset($_SESSION['a']['b']['c'])
-session()->del('a.b.c');
+// isset($_SESSION['a']['b']['c'])
+session()->exists('a.b.c');
+```
+
+```php
+// !isset($_SESSION['a']['b']['c'])
+session()->noexists('a.b.c');
 ```
 
 ### Cookie
@@ -169,7 +174,11 @@ cookie()->get('key');
 ```
 
 ```php
-cookie()->has('key');
+cookie()->exists('key');
+```
+
+```php
+cookie()->noexists('key');
 ```
 
 Set strict mode
@@ -262,9 +271,12 @@ bin2uuid4(' íðs u£¼¸N B¬   ');
 ```
 
 ```php
-if (!hash_equals(session()->get('_token'), $_POST['_token'])) {
-    // ...
-}
+use App\Helpers\Validator;
+
+$token = Validator::safe($_POST['_token']);
+verify_csrf_token($token, '_token');
+
+// session()->exists('_token') && !hash_equals(session()->get('_token'), $token);
 ```
 
 ### Mailer

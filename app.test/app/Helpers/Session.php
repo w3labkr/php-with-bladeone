@@ -16,16 +16,21 @@ class Session
         return dot()->get($_SESSION, $path, $separator);
     }
 
-    public function has(string $path, string $separator = '.'): bool
-    {
-        return dot()->has($_SESSION, $path, $separator);
-    }
-
     public function del(string $path, string $separator = '.'): void
     {
         session_start();
         dot()->del($_SESSION, $path, $separator);
         session_write_close();
+    }
+
+    public function exists(string $path, string $separator = '.'): bool
+    {
+        return dot()->exists($_SESSION, $path, $separator);
+    }
+
+    public function noexists(string $path, string $separator = '.'): bool
+    {
+        return !$this->exists($path, $separator);
     }
 
     public function destroy(): void

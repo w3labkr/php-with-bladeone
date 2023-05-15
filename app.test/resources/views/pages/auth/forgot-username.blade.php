@@ -34,12 +34,12 @@
                     {{ $data['message'] }}
                 @else
                     <form method="post" action="forgot-username">
-                        <input type="hidden" name="user[_token]" value="{{ csrf_token() }}" />
+                        <input type="hidden" name="forgot-username[_token]" value="{{ $csrf_token }}" />
                         <fieldset>
                             <legend>Forgot username</legend>
                             <label>
                                 <span>Email</span><br>
-                                <input type="email" name="user[email]" required/>
+                                <input type="email" name="forgot-username[email]" required/>
                             </label>
                             <br>
                             <button type="submit">Find my username</button>

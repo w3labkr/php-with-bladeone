@@ -28,24 +28,24 @@
             <div class="entry-content">
 
                 <form method="post" action="security">
-                    <input type="hidden" name="user[_token]" value="{{ csrf_token() }}" />
+                    <input type="hidden" name="security[_token]" value="{{ $csrf_token }}" />
                     <fieldset>
                         <legend>Change password</legend>
                         <label>
                             <span>Old password</span><br>
-                            <input type="password" name="user[password]" required />
+                            <input type="password" name="security[password]" required />
                         </label>
                         <br>
 
                         <label>
                             <span>New password</span><br>
-                            <input type="password" name="user[new_password]" required />
+                            <input type="password" name="security[new_password]" required />
                         </label>
                         <br>
 
                         <label>
                             <span>Confirm new password</span><br>
-                            <input type="password" name="user[confirm_new_password]" required />
+                            <input type="password" name="security[confirm_new_password]" required />
                         </label>
                         <br>
 

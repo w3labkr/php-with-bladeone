@@ -11,6 +11,7 @@ class ResetPassword extends Controller implements ControllerInterface
 {
     public function get()
     {
+        $csrf_token = csrf_token();
         $user = [];
 
         list($localPart, $domain) = explode('@', session()->get('email'));
@@ -20,25 +21,24 @@ class ResetPassword extends Controller implements ControllerInterface
         $name = substr_replace_offset($name, '*', 2);
         $user['email'] = $localPart.'@'.$name.'.'.$tld;
 
-        echo $this->view('pages.auth.reset-password', compact('user'));
+        echo $this->view('pages.auth.reset-password', compact('user', 'csrf_token'));
     }
 
     public function post()
     {
+        $csrf_token = csrf_token();
+
         $data = $this->data;
-        $post = Validator::safe($_POST['user']);
+        $post = Validator::safe($_POST['reset-password']);
 
         $users = new Users();
         $userid = session()->get('userid');
         $user = $users->findUserById($userid);
 
-        if (!hash_equals(session()->get('_token'), $post['_token'])) {
-            $data['status'] = 'fail';
-            $data['errors'][] = ['message' => 'Invalid Token.'];
-        } elseif (!$user) {
+        if (!$user) {
             $data['status'] = 'fail';
             $data['errors'][] = ['message' => 'The username is incorrect.'];
-        } elseif (!hash_equals(session()->get('reset_password_code'), $post['reset_password_code'])) {
+        } elseif (!hash_equals(session()->get('reset_password_token'), $post['reset_password_token'])) {
             $data['status'] = 'fail';
             $data['errors'][] = ['message' => 'Code does not match.'];
         } elseif ($post['new_password'] !== $post['confirm_new_password']) {
@@ -53,7 +53,7 @@ class ResetPassword extends Controller implements ControllerInterface
             session()->destroy();
         }
 
-        echo $this->view('pages.auth.reset-password', compact('data'));
+        echo $this->view('pages.auth.reset-password', compact('csrf_token', 'data'));
     }
 
     public function patch()

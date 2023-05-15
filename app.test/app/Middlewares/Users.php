@@ -8,7 +8,7 @@ class Users implements MiddlewareInterface
 {
     public static function auth(string|null $username = null)
     {
-        if (cookie()->has('uuid') && cookie()->has('refresh_token')) {
+        if (cookie()->exists('uuid') && cookie()->exists('refresh_token')) {
             self::setUser();
         } elseif (1 !== session()->get('loggedin')) {
             header('location: /logout');

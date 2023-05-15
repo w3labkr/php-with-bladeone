@@ -28,18 +28,18 @@
             <div class="entry-content">
 
                 <form method="post" action="profile">
-                    <input type="hidden" name="user[_token]" value="{{ csrf_token() }}" />
+                    <input type="hidden" name="profile[_token]" value="{{ $csrf_token }}" />
                     <fieldset>
                         <legend>Public profile</legend>
                         <label>
                             <span>Name</span><br>
-                            <input type="text" name="user[nickname]" value="{{ $user['nickname'] }}" />
+                            <input type="text" name="profile[nickname]" value="{{ $user['nickname'] }}" />
                         </label>
                         <br>
 
                         <label>
                             <span>Public email</span><br>
-                            <input type="email" name="user[email]" value="{{ $user['email'] }}" />
+                            <input type="email" name="profile[email]" value="{{ $user['email'] }}" />
                         </label>
                         <br>
 

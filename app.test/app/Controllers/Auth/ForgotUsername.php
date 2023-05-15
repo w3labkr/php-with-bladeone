@@ -12,20 +12,21 @@ class ForgotUsername extends Controller implements ControllerInterface
 {
     public function get()
     {
-        echo $this->view('pages.auth.forgot-username');
+        $csrf_token = csrf_token();
+
+        echo $this->view('pages.auth.forgot-username', compact('csrf_token'));
     }
 
     public function post()
     {
+        $csrf_token = csrf_token();
+
         $data = $this->data;
-        $post = Validator::safe($_POST['user']);
+        $post = Validator::safe($_POST['forgot-username']);
 
         $user = (new Users())->findUserByEmail($post['email']);
 
-        if (!hash_equals(session()->get('_token'), $post['_token'])) {
-            $data['status'] = 'fail';
-            $data['errors'][] = ['message' => 'Invalid Token.'];
-        } elseif (!$user) {
+        if (!$user) {
             $data['status'] = 'fail';
             $data['errors'][] = ['message' => 'Email is incorrect.'];
         } elseif (!filter_var($user['email'], FILTER_VALIDATE_EMAIL)) {
@@ -61,7 +62,7 @@ class ForgotUsername extends Controller implements ControllerInterface
             }
         }
 
-        echo $this->view('pages.auth.forgot-username', compact('data'));
+        echo $this->view('pages.auth.forgot-username', compact('csrf_token', 'data'));
     }
 
     public function patch()

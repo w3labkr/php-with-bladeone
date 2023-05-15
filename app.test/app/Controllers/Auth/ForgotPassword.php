@@ -12,21 +12,22 @@ class ForgotPassword extends Controller implements ControllerInterface
 {
     public function get()
     {
-        echo $this->view('pages.auth.forgot-password');
+        $csrf_token = csrf_token();
+
+        echo $this->view('pages.auth.forgot-password', compact('csrf_token'));
     }
 
     public function post()
     {
+        $csrf_token = csrf_token();
+
         $data = $this->data;
-        $post = Validator::safe($_POST['user']);
+        $post = Validator::safe($_POST['forgot-password']);
 
         $user = (new Users())->findUserByUsername($post['username']);
-        $reset_password_code = generate_token();
+        $token = generate_token();
 
-        if (!hash_equals(session()->get('_token'), $post['_token'])) {
-            $data['status'] = 'fail';
-            $data['errors'][] = ['message' => 'Invalid Token.'];
-        } elseif (!$user) {
+        if (!$user) {
             $data['status'] = 'fail';
             $data['errors'][] = ['message' => 'Your username is incorrect.'];
         } elseif (!filter_var($user['email'], FILTER_VALIDATE_EMAIL)) {
@@ -46,7 +47,7 @@ class ForgotPassword extends Controller implements ControllerInterface
                 You are receiving this email because we have received a password reset request for your account.
 
                 Reset your password
-                code: {$reset_password_code}.
+                code: {$token}.
 
                 If you have not requested a password reset, no further action is required.
 
@@ -58,7 +59,7 @@ class ForgotPassword extends Controller implements ControllerInterface
 
                 session()->set('userid', $user['id']);
                 session()->set('email', $user['email']);
-                session()->set('reset_password_code', $reset_password_code);
+                session()->set('reset_password_token', $token);
 
                 header('location: /reset-password');
                 exit;
@@ -68,7 +69,7 @@ class ForgotPassword extends Controller implements ControllerInterface
             }
         }
 
-        echo $this->view('pages.auth.forgot-password', compact('data'));
+        echo $this->view('pages.auth.forgot-password', compact('csrf_token', 'data'));
     }
 
     public function patch()

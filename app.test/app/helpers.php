@@ -29,9 +29,16 @@ if (!function_exists('decrypt')) {
 }
 
 if (!function_exists('csrf_token')) {
-    function csrf_token(string $tokenId = '_token', int $length = 16): void
+    function csrf_token(string $tokenId = '_token', int $length = 16): string
     {
-        \App\Helpers\Blade::csrf_token($tokenId, $length);
+        return \App\Helpers\CSRF::csrf_token($tokenId, $length);
+    }
+}
+
+if (!function_exists('verify_csrf_token')) {
+    function verify_csrf_token(string $token, string $tokenId = '_token'): bool
+    {
+        return \App\Helpers\CSRF::verify_csrf_token($token, $tokenId);
     }
 }
 

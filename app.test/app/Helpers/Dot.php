@@ -38,13 +38,6 @@ class Dot
         return $array;
     }
 
-    public function has(array $array, string $path, string $separator = '.'): bool
-    {
-        $value = self::get($array, $path, $separator);
-
-        return isset($value);
-    }
-
     public function del(array &$array, string $path, string $separator = '.'): void
     {
         $keys = explode($separator, $path);
@@ -57,5 +50,17 @@ class Dot
                 $array = &$array[$key];
             }
         }
+    }
+
+    public function exists(array $array, string $path, string $separator = '.'): bool
+    {
+        $value = $this->get($array, $path, $separator);
+
+        return isset($value);
+    }
+
+    public function noexists(array $array, string $path, string $separator = '.'): bool
+    {
+        return !$this->exists($array, $path, $separator);
     }
 }

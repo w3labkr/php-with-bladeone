@@ -3,6 +3,9 @@
 use Bramus\Router\Router;
 
 return function (Router $router) {
+    // Define middlewares
+    $router->before('POST', '/(.*)', '\App\Middlewares\CSRF@auth');
+
     // Define routes
     $router->set404(function () {
         header($_SERVER['SERVER_PROTOCOL'].' 404 Not Found');

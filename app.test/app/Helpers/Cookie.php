@@ -55,13 +55,6 @@ class Cookie
         return htmlspecialchars(stripslashes(trim($decrypted_value)));
     }
 
-    public function has(string $name): bool
-    {
-        $value = self::get($name);
-
-        return isset($value);
-    }
-
     public function del(string $name, array $options = []): bool
     {
         if (!isset($_COOKIE[$name])) {
@@ -74,5 +67,17 @@ class Cookie
         unset($_COOKIE[$name]);
 
         return setcookie($name, '', $settings);
+    }
+
+    public function exists(string $name): bool
+    {
+        $value = self::get($name);
+
+        return isset($value);
+    }
+
+    public function noexists(string $name): bool
+    {
+        return !$this->exists($name);
     }
 }

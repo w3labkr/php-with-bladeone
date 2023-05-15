@@ -15,17 +15,16 @@ class Withdrawal extends Controller implements ControllerInterface
 
     public function post()
     {
+        $csrf_token = csrf_token();
+
         $data['withdrawal'] = $this->data;
-        $post = Validator::safe($_POST['user']);
+        $post = Validator::safe($_POST['withdrawal']);
 
         $users = new Users();
         $userid = session()->get('userid');
         $user = $users->findUserById($userid);
 
-        if (!hash_equals(session()->get('_token'), $post['_token'])) {
-            $data['status'] = 'fail';
-            $data['errors'][] = ['message' => 'Invalid Token.'];
-        } elseif ($post['username'] !== $user['username']) {
+        if ($post['username'] !== $user['username']) {
             $data['withdrawal']['status'] = 'fail';
             $data['withdrawal']['errors'][] = ['message' => 'Username does not match.'];
         } elseif ('delete my account' !== $post['verify']) {
@@ -41,7 +40,7 @@ class Withdrawal extends Controller implements ControllerInterface
             exit;
         }
 
-        echo $this->view('pages.users.account', compact('user', 'data'));
+        echo $this->view('pages.users.account', compact('user', 'csrf_token', 'data'));
     }
 
     public function patch()

@@ -11,7 +11,9 @@ class Login extends Controller implements ControllerInterface
 {
     public function get()
     {
-        if (cookie()->has('uuid') && cookie()->has('refresh_token')) {
+        $csrf_token = csrf_token();
+
+        if (cookie()->exists('uuid') && cookie()->exists('refresh_token')) {
             $user = \App\Middlewares\Users::setUser();
             if ($user) {
                 header("Location: /users/{$user['username']}");
@@ -23,21 +25,23 @@ class Login extends Controller implements ControllerInterface
             exit;
         }
 
-        echo $this->view('pages.auth.login');
+        echo $this->view('pages.auth.login', compact('csrf_token'));
     }
 
     public function post()
     {
+        $csrf_token = csrf_token();
+
         $data = $this->data;
-        $post = Validator::safe($_POST['user']);
+        $post = Validator::safe($_POST['login']);
 
         $users = new Users();
         $user = $users->findUserByUsername($post['username']);
 
-        if (!hash_equals(session()->get('_token'), $post['_token'])) {
+        if (!$user) {
             $data['status'] = 'fail';
-            $data['errors'][] = ['message' => 'Invalid Token.'];
-        } elseif (!$user) {
+            $data['errors'][] = ['message' => 'Username or password is incorrect.'];
+        } elseif ($user['deleted_at']) {
             $data['status'] = 'fail';
             $data['errors'][] = ['message' => 'Username or password is incorrect.'];
         } elseif (!password_verify($post['password'], $user['password'])) {
@@ -66,7 +70,7 @@ class Login extends Controller implements ControllerInterface
             exit;
         }
 
-        echo $this->view('pages.auth.login', compact('data'));
+        echo $this->view('pages.auth.login', compact('csrf_token', 'data'));
     }
 
     public function patch()

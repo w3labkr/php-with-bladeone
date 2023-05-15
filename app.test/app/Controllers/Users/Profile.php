@@ -11,25 +11,24 @@ class Profile extends Controller implements ControllerInterface
 {
     public function get()
     {
+        $csrf_token = csrf_token();
+
         $userid = session()->get('userid');
         $user = (new Users())->findUserById($userid);
 
-        echo $this->view('pages.users.profile', compact('user'));
+        echo $this->view('pages.users.profile', compact('user', 'csrf_token'));
     }
 
     public function post()
     {
+        $csrf_token = csrf_token();
+
         $data = $this->data;
-        $post = Validator::safe($_POST['user']);
+        $post = Validator::safe($_POST['profile']);
 
         $users = new Users();
         $userid = session()->get('userid');
         $user = $users->findUserById($userid);
-
-        if (!hash_equals(session()->get('_token'), $post['_token'])) {
-            $data['status'] = 'fail';
-            $data['errors'][] = ['message' => 'Invalid Token.'];
-        }
 
         if ($user['nickname'] === $post['nickname']) {
             // ...
@@ -52,7 +51,7 @@ class Profile extends Controller implements ControllerInterface
 
         $user = $users->findUserById($userid);
 
-        echo $this->view('pages.users.profile', compact('user', 'data'));
+        echo $this->view('pages.users.profile', compact('user', 'csrf_token', 'data'));
     }
 
     public function patch()

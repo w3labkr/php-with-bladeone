@@ -27,23 +27,23 @@
 
             <div class="entry-content">
                 <form method="post" action="register">
-                    <input type="hidden" name="user[_token]" value="{{ csrf_token() }}" />
+                    <input type="hidden" name="register[_token]" value="{{ $csrf_token }}" />
                     <table>
                         <tr>
                             <td>Username</td>
-                            <td><input type="text" name="user[username]" required /></td>
+                            <td><input type="text" name="register[username]" required /></td>
                         </tr>
                         <tr>
                             <td>Email</td>
-                            <td><input type="email" name="user[email]" required /></td>
+                            <td><input type="email" name="register[email]" required /></td>
                         </tr>
                         <tr>
                             <td>Password</td>
-                            <td><input type="password" name="user[password]" required /></td>
+                            <td><input type="password" name="register[password]" required /></td>
                         </tr>
                         <tr>
                             <td>Confirm Password</td>
-                            <td><input type="password" name="user[confirm_password]" required /></td>
+                            <td><input type="password" name="register[confirm_password]" required /></td>
                         </tr>
                         <tr>
                             <td colspan="2">
