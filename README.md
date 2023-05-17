@@ -271,6 +271,11 @@ substr_replace_offset('foobar', '*', 0, 1); // *****r
 substr_replace_offset('foobar', '*', 1, 1); // f****r
 ```
 
+```php
+safety($_POST);
+// htmlspecialchars(stripslashes(trim($_POST)));
+```
+
 ### UUID
 
 Generates random tokens. The byte length can be modified as a parameter.

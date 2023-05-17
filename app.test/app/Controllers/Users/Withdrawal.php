@@ -3,7 +3,6 @@
 namespace App\Controllers\Users;
 
 use App\Controllers\Controller;
-use App\Helpers\Validator;
 use App\Interfaces\ControllerInterface;
 use App\Models\Users;
 
@@ -18,7 +17,7 @@ class Withdrawal extends Controller implements ControllerInterface
         $csrf_token = csrf_token();
 
         $data['withdrawal'] = $this->data;
-        $post = Validator::safe($_POST['withdrawal']);
+        $post = safety($_POST['withdrawal']);
 
         $users = new Users();
         $userid = session()->get('userid');

@@ -2,7 +2,6 @@
 
 namespace App\Middlewares;
 
-use App\Helpers\Validator;
 use App\Interfaces\MiddlewareInterface;
 
 class CSRF implements MiddlewareInterface
@@ -12,7 +11,7 @@ class CSRF implements MiddlewareInterface
         $array = explode('/', $slug);
         $last_slug = $array[array_key_last($array)];
         $last_page = strtok($last_slug, '?');
-        $token = Validator::safe($_POST[$last_page]['_token']);
+        $token = safety($_POST[$last_page]['_token']);
 
         if (!verify_csrf_token($token)) {
             header('location: /logout');

@@ -3,7 +3,6 @@
 namespace App\Controllers\Auth;
 
 use App\Controllers\Controller;
-use App\Helpers\Validator;
 use App\Interfaces\ControllerInterface;
 use App\Models\Users;
 
@@ -33,7 +32,7 @@ class Login extends Controller implements ControllerInterface
         $csrf_token = csrf_token();
 
         $data = $this->data;
-        $post = Validator::safe($_POST['login']);
+        $post = safety($_POST['login']);
 
         $users = new Users();
         $user = $users->findUserByUsername($post['username']);

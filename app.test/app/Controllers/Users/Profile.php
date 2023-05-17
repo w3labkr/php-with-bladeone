@@ -3,7 +3,6 @@
 namespace App\Controllers\Users;
 
 use App\Controllers\Controller;
-use App\Helpers\Validator;
 use App\Interfaces\ControllerInterface;
 use App\Models\Users;
 
@@ -24,7 +23,7 @@ class Profile extends Controller implements ControllerInterface
         $csrf_token = csrf_token();
 
         $data = $this->data;
-        $post = Validator::safe($_POST['profile']);
+        $post = safety($_POST['profile']);
 
         $users = new Users();
         $userid = session()->get('userid');

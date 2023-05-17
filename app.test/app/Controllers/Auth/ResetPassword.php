@@ -3,7 +3,6 @@
 namespace App\Controllers\Auth;
 
 use App\Controllers\Controller;
-use App\Helpers\Validator;
 use App\Interfaces\ControllerInterface;
 use App\Models\Users;
 
@@ -29,7 +28,7 @@ class ResetPassword extends Controller implements ControllerInterface
         $csrf_token = csrf_token();
 
         $data = $this->data;
-        $post = Validator::safe($_POST['reset-password']);
+        $post = safety($_POST['reset-password']);
 
         $users = new Users();
         $userid = session()->get('userid');

@@ -3,7 +3,6 @@
 namespace App\Controllers\Auth;
 
 use App\Controllers\Controller;
-use App\Helpers\Validator;
 use App\Interfaces\ControllerInterface;
 use App\Models\Users;
 use PHPMailer\PHPMailer\Exception;
@@ -22,7 +21,7 @@ class ForgotPassword extends Controller implements ControllerInterface
         $csrf_token = csrf_token();
 
         $data = $this->data;
-        $post = Validator::safe($_POST['forgot-password']);
+        $post = safety($_POST['forgot-password']);
 
         $user = (new Users())->findUserByUsername($post['username']);
         $token = generate_token();

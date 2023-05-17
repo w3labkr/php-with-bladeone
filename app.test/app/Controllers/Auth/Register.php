@@ -3,7 +3,6 @@
 namespace App\Controllers\Auth;
 
 use App\Controllers\Controller;
-use App\Helpers\Validator;
 use App\Interfaces\ControllerInterface;
 use App\Models\Users;
 use Database\Factories\UserFactory;
@@ -22,7 +21,7 @@ class Register extends Controller implements ControllerInterface
         $csrf_token = csrf_token();
 
         $data = $this->data;
-        $post = Validator::safe($_POST['register']);
+        $post = safety($_POST['register']);
 
         $users = new Users();
 

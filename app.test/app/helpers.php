@@ -91,6 +91,13 @@ if (!function_exists('mailer')) {
     }
 }
 
+if (!function_exists('safety')) {
+    function safety(mixed $params): mixed
+    {
+        return \App\Helpers\Validator::safety($params);
+    }
+}
+
 if (!function_exists('substr_replace_offset')) {
     function substr_replace_offset(string $search, string $replace, int $start = 0, int|null $end = null): string
     {
