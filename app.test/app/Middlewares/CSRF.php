@@ -11,7 +11,7 @@ class CSRF implements MiddlewareInterface
     {
         $array = explode('/', $slug);
         $last_slug = $array[array_key_last($array)];
-        $last_page = explode('?', $last_slug)[0];
+        $last_page = strtok($last_slug, '?');
         $token = Validator::safe($_POST[$last_page]['_token']);
 
         if (!verify_csrf_token($token)) {
