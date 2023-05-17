@@ -18,7 +18,7 @@ docker-compose exec --user=laradock workspace bash
 ```
 
 ```shell
-cd app.test
+cd application
 ```
 
 ## List of package

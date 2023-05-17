@@ -17,7 +17,7 @@ docker-compose exec --user=laradock workspace bash
 ```
 
 ```shell
-cd app.test
+cd application
 ```
 
 ## Commands
@@ -41,7 +41,7 @@ composer run-script php-cs-fixer
 라라독 실행하기
 
 ```shell
-docker-compose up -d apache2 mysql redis workspace
+docker-compose up -d apache2 mysql workspace
 ```
 
 컨테이너 빌드

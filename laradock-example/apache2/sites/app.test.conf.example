@@ -1,9 +1,9 @@
 <VirtualHost *:80>
   ServerName app.test
-  DocumentRoot /var/www/app.test/public/
+  DocumentRoot /var/www/application/public/
   Options Indexes FollowSymLinks
 
-  <Directory "/var/www/app.test/public/">
+  <Directory "/var/www/application/public/">
     AllowOverride All
     <IfVersion < 2.4>
       Allow from all

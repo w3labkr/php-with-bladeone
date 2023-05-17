@@ -38,7 +38,7 @@ $ vi c://Windows/System32/drivers/etc/hosts
 라라독 실행하기
 
 ```shell
-docker-compose up -d apache2 mysql redis workspace
+docker-compose up -d apache2 mysql workspace
 ```
 
 의존성 패키지 설치하기
@@ -48,7 +48,7 @@ docker-compose exec --user=laradock workspace bash
 ```
 
 ```shell
-cd app.test && composer install
+cd application && composer install
 ```
 
 ```shell
@@ -131,7 +131,7 @@ docker-compose build workspace
 
 ```shell
 docker-compose down
-docker-compose up -d apache2 mysql redis workspace
+docker-compose up -d apache2 mysql workspace
 ```
 
 ```php
