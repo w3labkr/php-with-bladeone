@@ -1,4 +1,4 @@
-# php-ninja
+# php-with-bladeone
 
 This is a starter project using the php mvp pattern without a framework. As it is a starter project, it was implemented in pure php and no css or javascript was used.
 
@@ -11,7 +11,7 @@ The default page is shown below.
 
 ## Table of Contents
 
-- [php-ninja](#php-ninja)
+- [php-with-bladeone](#php-with-bladeone)
   - [Table of Contents](#table-of-contents)
   - [Environment](#environment)
   - [Directory Structure](#directory-structure)
